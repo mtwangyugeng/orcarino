@@ -21,7 +21,6 @@
 </script>
 
 <svg width="409" height="411" viewBox="0 0 409 411" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="409" height="411" fill="white"/>
     {#each holes as {cx, cy, r}, i (i)}
         <circle cx={cx} cy={cy} r={r} fill={holesCover[i]? 'red' : "#D9D9D9"} on:click={handleHole(i)}/>
     {/each}
@@ -45,5 +44,6 @@
 <style>
     circle {
         cursor: pointer;
+        transition: 200ms;
     }
 </style>

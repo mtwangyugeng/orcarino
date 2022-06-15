@@ -38,10 +38,10 @@
 
 <script>
     import Orcarina from "./Orcarina.svelte";
-import SelectNote from "./SelectNote.svelte";
+    import SelectNote from "./SelectNote.svelte";
     let holesCover = Array(12).fill(0);
-    let selectedCover;
-    let currNote;
+    let selectedCover = holesCover.join('');
+    let currNote = formToNote.get(selectedCover);
 
     function handleHole(i) {
         return () => {
@@ -52,23 +52,34 @@ import SelectNote from "./SelectNote.svelte";
     }
 
     function handleSelect (selectedCover) {
-        holesCover = Array.from(selectedCover).map(v => (+v))
+        holesCover = Array.from(selectedCover).map(v => (+v));
+        currNote = formToNote.get(selectedCover);
     }
     
+    import { fly } from 'svelte/transition';
 </script>
 
 
 <span class=Main>
-    <div>
-        {currNote}
-    </div>
+<section>
+    {#key currNote}
+        <div in:fly={{ y: -20 }}>
+            {currNote}
+        </div>
+    {/key}
+    
     <Orcarina holesCover={holesCover} handleHole={handleHole}/>
     <SelectNote selectedCover={selectedCover} handleSelect={handleSelect}/>
+</section>
 </span>
 
 
 <style>
     .Main :global(*) {
         box-sizing: border-box;
+    }
+
+    section {
+        background-color: aliceblue;
     }
 </style>
