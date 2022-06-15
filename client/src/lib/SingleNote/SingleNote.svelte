@@ -1,5 +1,5 @@
 <script context="module">
-    const noteToForm = new Map();
+    export const noteToForm = new Map();
     noteToForm.set("A#", "111110111111");
     noteToForm.set("A", "111111111111");
     noteToForm.set("B", "111101111111");
@@ -38,24 +38,23 @@
 
 <script>
     import Orcarina from "./Orcarina.svelte";
+import SelectNote from "./SelectNote.svelte";
     let holesCover = Array(12).fill(0);
+    let selectedCover;
+    let currNote;
+
     function handleHole(i) {
         return () => {
             holesCover[i] ^= 1
+            selectedCover = holesCover.join('');
+            currNote = formToNote.get(selectedCover);
         }
     }
 
-    let selectedCover;
-
-    let currNote;
-    $: {
-        selectedCover = holesCover.join('');
-        currNote = formToNote.get(selectedCover);
+    function handleSelect (selectedCover) {
+        holesCover = Array.from(selectedCover).map(v => (+v))
     }
-
-    function handleSelect() {
-        holesCover = Array.from(selectedCover).map(v => (+v));
-    }
+    
 </script>
 
 
@@ -64,11 +63,7 @@
         {currNote}
     </div>
     <Orcarina holesCover={holesCover} handleHole={handleHole}/>
-    <select bind:value={selectedCover} on:change={handleSelect}>
-        {#each Array.from(noteToForm.entries()) as [key, value] (key)}
-            <option value={value}>{key}</option>
-        {/each}
-    </select>
+    <SelectNote selectedCover={selectedCover} handleSelect={handleSelect}/>
 </span>
 
 
