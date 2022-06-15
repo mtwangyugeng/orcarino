@@ -4,24 +4,20 @@
         {cx:"257", cy:"146", r:"10"},
         {cx:"324", cy:"95", r:"10"},
         {cx:"293.5", cy:"117.5", r:"12.5"},
-        {cx:"132.5", cy:"247.5", r:"12.5"},
-        {cx:"235.5", cy:"131.5", r:"12.5"},
+        {cx:"132.5", cy:"247.5", r:"7.5"},
+        {cx:"235.5", cy:"131.5", r:"7.5"},
         {cx:"241.5", cy:"186.5", r:"12.5"},
         {cx:"137.5", cy:"190.5", r:"12.5"},
-        {cx:"172", cy:"148", r:"12.5"},
-        {cx:"257", cy:"314", r:"12.5"},
-        {cx:"147", cy:"314", r:"12.5"},
-        {cx:"109", cy:"228", r:"12.5"},
+        {cx:"172", cy:"148", r:"15"},
+        {cx:"257", cy:"314", r:"15"},
+        {cx:"147", cy:"314", r:"15"},
+        {cx:"109", cy:"228", r:"15"},
     ]
 </script>
 
 <script>
-    let holesCover = Array(12).fill(false);
-    function handleHole(i) {
-        return () => {
-            holesCover[i] = !holesCover[i]
-        }
-    }
+    export let holesCover;
+    export let handleHole;
 </script>
 
 <svg width="409" height="411" viewBox="0 0 409 411" fill="none" xmlns="http://www.w3.org/2000/svg">
