@@ -37,39 +37,28 @@
 </script>
 
 <script>
-    import Orcarina from "./Orcarina.svelte";
+    import Orcarina from "../../assets/Components/Orcarina.svelte";
     import SelectNote from "./SelectNote.svelte";
     let holesCover = Array(12).fill(0);
     let selectedCover = holesCover.join('');
-    let currNote = formToNote.get(selectedCover);
-
     function handleHole(i) {
         return () => {
             holesCover[i] ^= 1
             selectedCover = holesCover.join('');
-            currNote = formToNote.get(selectedCover);
         }
     }
 
     function handleSelect (selectedCover) {
         holesCover = Array.from(selectedCover).map(v => (+v));
-        currNote = formToNote.get(selectedCover);
     }
     
-    import { fly } from 'svelte/transition';
 </script>
 
 
 <span class=Main>
 <section>
-    {#key currNote}
-        <div in:fly={{ y: -20 }}>
-            {currNote}
-        </div>
-    {/key}
-    
-    <Orcarina holesCover={holesCover} handleHole={handleHole}/>
     <SelectNote selectedCover={selectedCover} handleSelect={handleSelect}/>
+    <Orcarina holesCover={holesCover} handleHole={handleHole}/>
 </section>
 </span>
 
@@ -81,5 +70,6 @@
 
     section {
         background-color: aliceblue;
+        width: fit-content;
     }
 </style>

@@ -17,7 +17,7 @@
 
 <script>
     export let holesCover;
-    export let handleHole;
+    export let handleHole = (i) => () => {};
 </script>
 
 <svg width="409" height="411" viewBox="0 0 409 411" fill="none" xmlns="http://www.w3.org/2000/svg">

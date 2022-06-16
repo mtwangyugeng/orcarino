@@ -7,8 +7,10 @@ import { noteToForm } from "./SingleNote.svelte";
 
 </script>
 
-<select bind:value={selectedCover} on:change={handleSelect(selectedCover)}>
-    {#each Array.from(noteToForm.entries()) as [key, value] (key)}
-        <option value={value}>{key}</option>
-    {/each}
-</select>
+<div>
+    <select bind:value={selectedCover} on:change={handleSelect(selectedCover)}>
+        {#each Array.from(noteToForm.entries()) as [key, value] (key)}
+            <option value={value}>{key}</option>
+        {/each}
+    </select>
+</div>
