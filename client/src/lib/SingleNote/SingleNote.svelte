@@ -30,7 +30,7 @@
     noteToForm.set("E1", "000000001000");
     noteToForm.set("F1", "000000000000");
 
-    const formToNote = new Map();
+    export const formToNote = new Map();
     for (const [key, value] of noteToForm.entries()) {
         formToNote.set(value, key)
     }
@@ -48,16 +48,13 @@
         }
     }
 
-    function handleSelect (selectedCover) {
-        holesCover = Array.from(selectedCover).map(v => (+v));
-    }
-    
+    $:  holesCover = Array.from(selectedCover).map(v => (+v));
 </script>
 
 
 <span class=Main>
 <section>
-    <SelectNote selectedCover={selectedCover} handleSelect={handleSelect}/>
+    <SelectNote bind:selectedCover={selectedCover}/>
     <Orcarina holesCover={holesCover} handleHole={handleHole}/>
 </section>
 </span>

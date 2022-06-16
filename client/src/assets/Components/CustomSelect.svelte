@@ -1,59 +1,56 @@
 <script>
     import { flip } from 'svelte/animate';
 
-    export let options = [""];
+    export let options;
 
     let isSelecting = false;
-    let selectedOption = null;
+    export let selectedValue = null;
     let hoverOption = null;
 
-    let search = "";
+    export let search = "";
     $: searchRegex = new RegExp(`(^|\\s)${search}.*`, 'i');
-    $: filteredOptions = options.filter(v => searchRegex.test(v) && (!selectedOption || v != selectedOption))
+    $: filteredOptions = options.filter(([key, value]) => searchRegex.test(key) && (!selectedValue || value !== selectedValue))
 
-    const handleOptionClick = (option) => {
+    const handleOptionClick = (key, value) => {
         return () => {
-            selectedOption = option;
+            selectedValue = value;
             isSelecting = false;
         }
     }
 
-    const handleOptionHover = (option) => {
+    const handleOptionHover = (key) => {
         return () => {
-            hoverOption = option;
+            hoverOption = key;
         }
     }
 
-    const handleSearchInput = () => {
-        isSelecting=true
+    const handleInputFocus = () => {
+        isSelecting=true;
+        search = "";
     }
 </script>
 
 <div class="SelectContainer">
     <div >
-        <div class="SelectedIngredient" on:click={()=>isSelecting=!isSelecting}>
-            {isSelecting ? 
-                selectedOption
-            : "Select Ingredient"}
-        </div>
+        <input type="text" bind:value={search} placeholder={selectedValue} on:focus={handleInputFocus}/>
+
+        
         {#if isSelecting}
             <div class="Options" >
-            {#each filteredOptions as option, i (i)}
+            {#each filteredOptions as [key, value], i (key)}
             <span animate:flip="{{duration: 200}}">
-                <div class={"Option " + ((hoverOption) ? "Activated" : "")} on:click={handleOptionClick(option)} 
-                    on:focus={handleOptionHover(option)}
-                    on:mouseover={handleOptionHover(option)}
+                <div class={"Option " + ((hoverOption === key) ? "Activated" : "")} on:click={handleOptionClick(key, value)} 
+                    on:focus={handleOptionHover(key)}
+                    on:mouseover={handleOptionHover(key)}
                     on:blur={()=>hoverOption=null}
                     on:mouseout={()=>hoverOption=null}>
-                    {option}
+                    {key}
                 </div>
             </span>    
             {/each}
             </div>
         {/if}
     </div>
-
-    <input type="text" bind:value={search} placeholder="Search for Ingredient" on:input={handleSearchInput} on:focus={()=>isSelecting=true}/>
 
 </div>
 
