@@ -8,7 +8,8 @@ import SandBox from './lib/SandBox.svelte'
 
 <style>
 
-  main {
-
+  :global(*) {
+    padding: 0;
+    margin: 0;
   }
 </style>

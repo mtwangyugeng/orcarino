@@ -3,52 +3,76 @@
 
     export let options;
 
-    let isSelecting = false;
+    export let isSelecting = false;
     export let selectedValue = null;
-    let hoverOption = null;
+    let hoverValue = null;
 
     export let search = "";
-    $: searchRegex = new RegExp(`(^|\\s)${search}.*`, 'i');
-    $: filteredOptions = options.filter(([key, value]) => searchRegex.test(key) && (!selectedValue || value !== selectedValue))
+    let filteredOptions = options;
 
-    const handleOptionClick = (key, value) => {
+    const renewFilteredOptions = () => {
+        const searchRegex = new RegExp(`(^|\\s)${search}.*`, 'i');
+        filteredOptions = options.filter(([key, value]) => searchRegex.test(key) && (!selectedValue || value !== selectedValue))
+    }
+
+    const handleOptionClick = (value) => {
         return () => {
             selectedValue = value;
             isSelecting = false;
         }
     }
 
-    const handleOptionHover = (key) => {
+    const handleOptionHover = (value) => {
         return () => {
-            hoverOption = key;
+            hoverValue = value;
+            selectedValue = value;
         }
     }
 
+    let prevValue = null;
     const handleInputFocus = () => {
         isSelecting=true;
+        prevValue = selectedValue;
         search = "";
+    }
+
+    const handleOptionOut = () => {
+        if(isSelecting) {
+            selectedValue = prevValue;
+            hoverValue = null;
+        };
+    }
+
+    const handleInput = () => {
+        renewFilteredOptions()
+    }
+
+    const handleOutsideClick = (e) => {
+        isSelecting=false
     }
 </script>
 
-<div class="SelectContainer">
-    <div >
-        <input type="text" bind:value={search} placeholder={selectedValue} on:focus={handleInputFocus}/>
+{#if isSelecting}
+    <div class=SelectCover on:click|self={handleOutsideClick}/>
+{/if}
 
-        
+<div class="SelectContainer" >
+    <div on:blur={handleOptionOut} on:mouseleave={handleOptionOut}>
+        <input type="text" bind:value={search} on:input={handleInput} placeholder={selectedValue} on:focus={handleInputFocus}/>
+
         {#if isSelecting}
-            <div class="Options" >
-            {#each filteredOptions as [key, value], i (key)}
+        <div class="Options">
+            {#each filteredOptions as [key, value] (key)}
             <span animate:flip="{{duration: 200}}">
-                <div class={"Option " + ((hoverOption === key) ? "Activated" : "")} on:click={handleOptionClick(key, value)} 
-                    on:focus={handleOptionHover(key)}
-                    on:mouseover={handleOptionHover(key)}
-                    on:blur={()=>hoverOption=null}
-                    on:mouseout={()=>hoverOption=null}>
+                <div class={"Option " + ((hoverValue === value) ? "Activated" : "")} on:click={handleOptionClick(value)} 
+                    on:focus={handleOptionHover(value)}
+                    on:mousemove={handleOptionHover(value)}
+                >
                     {key}
                 </div>
             </span>    
             {/each}
-            </div>
+        </div>
         {/if}
     </div>
 
@@ -56,31 +80,27 @@
 
 
 <style>
-    .SelectedIngredient {
-        user-select: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        
+    .SelectCover {
+        /* background-color: red; */
+        position: fixed;
+        left: 0;
+        right: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: 2;
     }
-
     .SelectContainer {
         display: flex;
+        background-color: red;
     }
 
     .SelectContainer > div {
         color: #fff;
-        background-color: rgb(179, 86, 0);
         width: 200px;
-        margin: 2px 10px;
         border-radius: 5px;
+        z-index: 3;
     }
 
-    .SelectContainer > div:hover {
-        transition: all 0.2s;
-    }
 
     .Options {
         position: absolute;
@@ -88,16 +108,24 @@
         flex-direction: column;
 
         display: flex;
-        max-height: 100px;
+
         overflow: auto;
         width: 180px;
-        left: 20px;
         text-align: center;
+
+       animation: drop 0.5s;
+
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+        transition: max-height 0.5s;
+        overflow: hidden;
     }
 
-    /* .SearchIngredients input:focus + .Options {
-        display: flex;
-    } */
+    @keyframes drop {
+        from {max-height: 0;}
+        to {max-height: 500px;}
+    }
+
     .Options:hover {
         display: flex;
     }
@@ -111,5 +139,10 @@
     .Activated {
         background-color: rgb(179, 86, 0);
         color: #fff;
+    }
+    input {
+        width: 180px;
+        height: 50px;
+        text-align: center;
     }
 </style>

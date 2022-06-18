@@ -4,16 +4,15 @@ import { noteToForm, formToNote } from "./SingleNote.svelte";
 
 
     export let selectedCover;
-
+    
+    export let isSelecting;
     $: note = formToNote.get(selectedCover)
 </script>
 
-<div>
-    <!-- <select bind:value={selectedCover} on:change={handleSelect(selectedCover)}>
-        {#each Array.from(noteToForm.entries()) as [key, value] (key)}
-            <option value={value}>{key}</option>
-        {/each}
-    </select> -->
+<section>
+    <CustomSelect options={Array.from(noteToForm.entries())} bind:selectedValue={selectedCover} bind:search={note} bind:isSelecting={isSelecting}/>
+</section>
 
-    <CustomSelect options={Array.from(noteToForm.entries())} bind:selectedValue={selectedCover} bind:search={note}/>
-</div>
+<style>
+
+</style>

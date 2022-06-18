@@ -18,9 +18,12 @@
 <script>
     export let holesCover;
     export let handleHole = (i) => () => {};
+
+    export let isSelecting = false;
 </script>
 
-<svg width="409" height="411" viewBox="0 0 409 411" fill="none" xmlns="http://www.w3.org/2000/svg">
+<div>
+<svg class:Minify={isSelecting} viewBox="0 0 409 411" fill="none" xmlns="http://www.w3.org/2000/svg">
     {#each holes as {cx, cy, r}, i (i)}
         <circle cx={cx} cy={cy} r={r} fill={holesCover[i]? 'red' : "#D9D9D9"} on:click={handleHole(i)}/>
     {/each}
@@ -40,10 +43,22 @@
 </filter>
 </defs>
 </svg>
-    
+</div>
 <style>
     circle {
         cursor: pointer;
         transition: 200ms;
+    }
+    svg {
+        transition: 200ms;
+        transform: scale(1, 1);
+    }
+
+    .Minify {
+        transform: scale(0.5, 0.5);
+    }
+
+    div {
+        flex: 1;
     }
 </style>

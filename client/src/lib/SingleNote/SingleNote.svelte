@@ -49,13 +49,17 @@
     }
 
     $:  holesCover = Array.from(selectedCover).map(v => (+v));
+    let isSelecting;
 </script>
 
 
 <span class=Main>
 <section>
-    <SelectNote bind:selectedCover={selectedCover}/>
-    <Orcarina holesCover={holesCover} handleHole={handleHole}/>
+    <SelectNote bind:selectedCover={selectedCover} bind:isSelecting={isSelecting}/>
+    <div class=Bottom>
+        <div class=BotLeft class:BotLeftSelect={isSelecting}></div>
+        <Orcarina holesCover={holesCover} handleHole={handleHole}/>
+    </div>
 </section>
 </span>
 
@@ -68,5 +72,23 @@
     section {
         background-color: aliceblue;
         width: fit-content;
+        position: relative;
+        width: 300px;
+    }
+
+    .Bottom {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 300px
+    }
+    .BotLeft {
+        width: 0px;
+        height: 100px;
+        /* background-color: yellow; */
+        transition: 200ms;
+    }
+    .BotLeftSelect {
+        width: 180px;
     }
 </style>
