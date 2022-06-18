@@ -40,7 +40,7 @@
     import Orcarina from "../../assets/Components/Orcarina.svelte";
     import SelectNote from "./SelectNote.svelte";
     let holesCover = Array(12).fill(0);
-    let selectedCover = holesCover.join('');
+    export let selectedCover = holesCover.join('');
     function handleHole(i) {
         return () => {
             holesCover[i] ^= 1
