@@ -83,12 +83,12 @@
         height: 300px
     }
     .BotLeft {
-        width: 0px;
+        width: 0%;
         height: 100px;
         /* background-color: yellow; */
         transition: 200ms;
     }
     .BotLeftSelect {
-        width: 180px;
+        width: 40%;
     }
 </style>

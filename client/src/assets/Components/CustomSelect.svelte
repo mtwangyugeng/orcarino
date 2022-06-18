@@ -30,9 +30,11 @@
     }
 
     let prevValue = null;
+    let prevSearch = null;
     const handleInputFocus = () => {
         isSelecting=true;
         prevValue = selectedValue;
+        prevSearch = search;
         search = "";
     }
 
@@ -49,6 +51,7 @@
 
     const handleOutsideClick = (e) => {
         isSelecting=false
+        search = prevSearch
     }
 </script>
 
@@ -91,7 +94,10 @@
     }
     .SelectContainer {
         display: flex;
+        position: relative;
         background-color: red;
+        width: 40%;
+        height: 50px;
     }
 
     .SelectContainer > div {
@@ -110,7 +116,7 @@
         display: flex;
 
         overflow: auto;
-        width: 180px;
+        width: 100%;
         text-align: center;
 
        animation: drop 0.5s;
@@ -141,8 +147,8 @@
         color: #fff;
     }
     input {
-        width: 180px;
-        height: 50px;
+        width: 100%;
+        height: 100%;
         text-align: center;
     }
 </style>
