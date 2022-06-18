@@ -60,7 +60,7 @@
 {/if}
 
 <div class="SelectContainer" >
-    <div on:blur={handleOptionOut} on:mouseleave={handleOptionOut}>
+    <div on:blur={handleOptionOut} on:mouseleave={handleOptionOut} class:OnTop={isSelecting}>
         <input type="text" bind:value={search} on:input={handleInput} placeholder={selectedValue} on:focus={handleInputFocus}/>
 
         {#if isSelecting}
@@ -104,9 +104,11 @@
         color: #fff;
         width: 200px;
         border-radius: 5px;
+       
+    }
+    .OnTop {
         z-index: 3;
     }
-
 
     .Options {
         position: absolute;
