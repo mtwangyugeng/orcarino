@@ -1,12 +1,8 @@
 
 <script>
-import MobileBar from "./UserBar/MobileBar.svelte";
+import UserBar from "./UserBar/UserBar.svelte";
 
     let barActive = false;
-
-    function handleBar() {
-        barActive = !barActive;
-    }
 
     let tabs = [
         {icon:null, name:"Community"}, 
@@ -19,11 +15,8 @@ import MobileBar from "./UserBar/MobileBar.svelte";
     <div class=ContentContainer class:ContentContainerActive={barActive}>
     
     </div>
-    <div class=BarContainerDeskTop class:BarContainerDeskTopActive={barActive} on:click={handleBar}>
-        <MobileBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex}/>
-    </div>
-    <div class=BarContainerMobile>
-        <MobileBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex}/>
+    <div class=BarContainer class:BarContainerActive={barActive}>
+        <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive}/>
     </div>
 </section>
 
@@ -38,13 +31,10 @@ import MobileBar from "./UserBar/MobileBar.svelte";
         flex-direction: column;
     }
 
-    .BarContainerMobile {
+    .BarContainer {
         background-color: red;
         height: 60px;
 
-    }
-    .BarContainerDeskTop {
-        display: none;
     }
 
     .ContentContainer {
@@ -57,14 +47,13 @@ import MobileBar from "./UserBar/MobileBar.svelte";
             flex-direction: row-reverse;
             
         }
-        .BarContainerDeskTop {
+        .BarContainer {
             display: block;
             background-color: red;
             width: 50px;
             height: auto;
 
             transition: width 200ms;
-            cursor: pointer;
         }
 
         .ContentContainer {
@@ -72,11 +61,7 @@ import MobileBar from "./UserBar/MobileBar.svelte";
             transition: margin 200ms;
         }
 
-        .BarContainerMobile {
-            display: none;
-        }
-
-        .BarContainerDeskTopActive {
+        .BarContainerActive {
             width: 300px
         }
         .ContentContainerActive {
