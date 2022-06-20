@@ -11,5 +11,6 @@ import SandBox from './lib/SandBox.svelte'
   :global(*) {
     padding: 0;
     margin: 0;
+    box-sizing: border-box;
   }
 </style>
