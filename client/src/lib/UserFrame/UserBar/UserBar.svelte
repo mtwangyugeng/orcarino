@@ -8,10 +8,10 @@
     export let barActive = false;
 </script>
 
-<section>
-    <div class=Top on:click={()=>barActive=!barActive}>click to expand</div>
+<section class:BarActive={barActive}>
+    <button class=Top on:click={()=>barActive=!barActive}>click to expand</button>
 
-    <div class=TabContainer class:TabContainerActive={barActive}>
+    <div class=TabContainer>
     {#each tabs as {icon, name},i (name)}
         <div class=Tab class:TabActivated={activatedTabIndex === i} on:click={() => activatedTabIndex = i}>
             {name}
@@ -44,21 +44,28 @@
     .TabActivated {
         background-color: red;
     }
-    
+    .Top {
+        display: none;
+    }
     @media (min-width: 600px) {
         section {
             flex-direction: column;
+            background-color: transparent;
         }
         .TabContainer {
             flex-direction: column;
             pointer-events: none;
-            /* opacity: 0; */
+            opacity: 0;
             transition: all 200ms;
             overflow: hidden;
         }
-        .TabContainerActive {
+        .BarActive .TabContainer {
             opacity: 1;
             pointer-events: all;
+        }
+
+        .Top {
+            display: block;
         }
     }
 </style>

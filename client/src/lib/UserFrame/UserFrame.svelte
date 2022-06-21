@@ -32,7 +32,7 @@ import UserBar from "./UserBar/UserBar.svelte";
     }
 
     .BarContainer {
-        background-color: red;
+        /* background-color: red; */
         height: 60px;
 
     }
@@ -49,7 +49,6 @@ import UserBar from "./UserBar/UserBar.svelte";
         }
         .BarContainer {
             display: block;
-            background-color: red;
             width: 50px;
             height: auto;
 
