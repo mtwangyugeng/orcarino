@@ -31,6 +31,9 @@
 </script>
 
 <script>
+    export let height = '250px';
+    export let width = '250px';
+
     export let url;
     export let alt = "some image";
     let loaded = false;
@@ -41,13 +44,24 @@
     }
 </script>
 
+<section style={`width:${width}; height:${height}`}>
 {#if !loaded}
     {@html loadSVG}
 {/if}
 <img src={url} 
     style={`
-        display: {loaded ? "block": "none"}
+        display: ${loaded ? "block": "none"}
     `} 
     alt={alt} 
-    onLoad={e => handleLoad(e.target)}
+    on:load={e => handleLoad(e.target)}
     />
+</section>
+
+
+<style>
+    section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>

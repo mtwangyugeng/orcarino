@@ -1,6 +1,7 @@
 <script>
 import MusicSheet from "./MusicSheet/MusicSheet.svelte";
 import SingleNote from "./SingleNote/SingleNote.svelte";
+import UserInfo from "./UserFrame/UserBar/UserInfo.svelte";
 import UserFrame from "./UserFrame/UserFrame.svelte";
 
 </script>
@@ -8,4 +9,6 @@ import UserFrame from "./UserFrame/UserFrame.svelte";
 <!-- <SingleNote /> -->
 <!-- <MusicSheet title="Ode to Joy"/> -->
 
-<UserFrame />
+<!-- <UserFrame /> -->
+
+<UserInfo />

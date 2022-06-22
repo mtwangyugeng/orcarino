@@ -1,5 +1,6 @@
 <script>
-import ImageWithLoading from "src/assets/Components/ImageWithLoading.svelte"
+import ImageWithLoading from "$src/assets/Components/ImageWithLoading.svelte"
+import RippleButton from "$src/assets/Components/RippleButton.svelte"
 
     export let name = "Pink Guy"
     export let account =  "pinkmensch69"
@@ -8,12 +9,70 @@ import ImageWithLoading from "src/assets/Components/ImageWithLoading.svelte"
 </script>
 
 <section>
-    <h2>{name}</h2>
-    <h3>{account}</h3>
-    <div>
+    <div class=ImgContainer>
         <ImageWithLoading url={picUrl} />
     </div>
-    <p>
+    <h2>{name}</h2>
+    <h3>{account}</h3>
+    <span class=EditProfile>
+        <RippleButton>
+            Edit Profile
+        </RippleButton>
+    </span>
+    <p class=Bio>
         {bio}
     </p>
 </section>
+
+<style>
+    section {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: red;
+        padding: 20px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ImgContainer {
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+
+        margin-bottom: 10px;
+    }
+
+    h3 {
+        font-weight: 100;
+        color: grey;
+    }
+    .EditProfile {
+        width: 100%;
+    }
+    .EditProfile :global(button) {
+        font-size: 15px;
+        margin: 10px 0 10px 0;
+        width: 100%;
+        padding: 10px;
+        background-color: rgb(100, 100, 100);
+        color: white;
+        border-radius: 5px;
+        border: rgb(165, 165, 165) 1px solid;
+
+        transition: all 200ms;
+    }
+
+    .EditProfile :global(button):hover {
+        background-color: rgb(121, 121, 121);
+        border: rgb(165, 165, 165) 1px solid;
+    }
+
+    .Bio {
+
+    }
+</style>
