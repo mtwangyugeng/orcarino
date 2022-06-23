@@ -77,7 +77,7 @@ import RippleButton from "$src/assets/Components/RippleButton.svelte"
 <style>
     section {
         font-family: Arial, Helvetica, sans-serif;
-        background-color: red;
+        /* background-color: red; */
         padding: 20px;
         width: 300px;
         display: flex;

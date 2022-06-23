@@ -1,4 +1,7 @@
 <script>
+import ExpandAndRetractButton from "$src/assets/Components/ExpandAndRetractButton.svelte";
+import UserInfo from "./UserInfo.svelte";
+
     export let tabs = [
         {icon:null, name:"Community"}, 
         {icon:null, name:"My Sheets"}, 
@@ -9,9 +12,15 @@
 </script>
 
 <section class:BarActive={barActive}>
-    <button class=Top on:click={()=>barActive=!barActive}>click to expand</button>
-
+    <span class=ExpandAndRetractButton>
+        <ExpandAndRetractButton bind:isExpanded={barActive}/>
+    </span>
     <div class=TabContainer>
+    <span class=Profile>
+        <UserInfo />
+    </span>
+
+    
     {#each tabs as {icon, name},i (name)}
         <div class=Tab class:TabActivated={activatedTabIndex === i} on:click={() => activatedTabIndex = i}>
             {name}
@@ -44,7 +53,7 @@
     .TabActivated {
         background-color: red;
     }
-    .Top {
+    .Profile {
         display: none;
     }
     @media (min-width: 600px) {
@@ -64,8 +73,13 @@
             pointer-events: all;
         }
 
-        .Top {
-            display: block;
+        .ExpandAndRetractButton :global(svg){
+            width: 50px;
+            height: 50px;
         }
+
+        .Profile {
+            display: block;
+        }   
     }
 </style>
