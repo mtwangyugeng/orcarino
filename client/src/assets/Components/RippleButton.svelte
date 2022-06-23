@@ -11,7 +11,8 @@
     }
 </script>
 
-<button on:click={handleRipple}>
+
+<button on:click={handleRipple} on:click>
     <div class=Ripple class:RippleActive={isRippleActive} style={`left:${rX}px;top:${rY}px;`}/>
     <slot />
 </button>
