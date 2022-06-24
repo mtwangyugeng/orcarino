@@ -12,6 +12,8 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
 
     export let views = 20000
     $: viewsDisplay = views >= 1000 ? (views / 1000).toFixed(1) + 'k'  : views + ''
+
+    let isHoveringTitle = false;
 </script>
 
 <section>
@@ -21,14 +23,14 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         </div>
     {/if}
     
-    <div class=Preview>
+    <div class=Preview class:HoverPreview={isHoveringTitle}>
         <ImageWithLoading width=100% height=100% />
     </div>
     <div class=Score>
         <StarsScore score={2} />
         <span>{voteDisplay} votes</span>
     </div>
-    <h3 class=Title>{title}</h3>
+    <h3 class=Title on:mousemove={()=>isHoveringTitle = true} on:mouseleave={()=>isHoveringTitle = false}>{title}</h3>
     <h4 class=Author>{author}</h4>
 
     <p class=Views>{viewsDisplay} views</p>
@@ -66,13 +68,18 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         opacity: 0.7;
     }
 
+    .HoverPreview {
+        opacity: 0.7;
+    }
+
     .Preview {
         transition: 200ms;
         background-color: red;
-        /* width: 200px;
-        height: 230px; */
         border-radius: 10px;
         overflow: hidden;
+
+        max-width: 200px;
+        max-height: 200px;
 
         margin-bottom: 10px;
         margin-top: 10px;
