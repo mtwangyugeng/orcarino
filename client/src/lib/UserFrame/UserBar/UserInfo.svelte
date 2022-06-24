@@ -122,10 +122,10 @@ import RippleButton from "$src/assets/Components/RippleButton.svelte"
         margin: 10px 0 10px 0;
         width: 100%;
         padding: 10px;
-        background-color: rgb(100, 100, 100);
+        background-color: rgb(207, 119, 4);
         color: white;
         border-radius: 5px;
-        border: rgb(165, 165, 165) 1px solid;
+        border: rgb(231, 112, 0) 1px solid;
 
         transition: all 200ms;
     }
@@ -140,14 +140,17 @@ import RippleButton from "$src/assets/Components/RippleButton.svelte"
 
     .EditProfile :global(button):hover {
         filter: brightness(1.2);
-        border: rgb(165, 165, 165) 1px solid;
+        border: rgb(224, 165, 38) 1px solid;
     }
 
     .Bio {
         font-size: 15px;
         width: 100%;
         overflow-wrap: break-word;
-        
+
+        padding: 5px;
+        background-color: rgba(255, 255, 255, 0.26);
+        border-radius: 10px;
     }
 
     *[contenteditable=true] {
