@@ -12,9 +12,9 @@ import UserFrame from "./UserFrame/UserFrame.svelte";
 <!-- <SingleNote /> -->
 <!-- <MusicSheet title="Ode to Joy"/> -->
 
-<!-- <UserFrame /> -->
+<UserFrame />
 <!-- <ExpandAndRetractButton /> -->
 
 <!-- <StarsScore /> -->
 
-<NotePreview />
+<!-- <NotePreview /> -->

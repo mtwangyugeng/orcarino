@@ -8,11 +8,11 @@ import Community from "./Content/Community.svelte";
 import Content from "./Content/Content.svelte";
 import MySheets from "./Content/MySheets.svelte";
 import UserBar from "./UserBar/UserBar.svelte";
-    let barActive = false;
+    let barActive = true;
 
     let tabs = [
-        {icon:CommunityIcon, name:"Community", content: Community}, 
         {icon:MySheetsIcon, name:"My Sheets", content: MySheets}, 
+        {icon:CommunityIcon, name:"Community", content: Community}, 
     ]
     let activatedTabIndex = 0;
 </script>
@@ -63,6 +63,11 @@ import UserBar from "./UserBar/UserBar.svelte";
         .ContentContainer {
             margin-right: 50px;
             transition: margin 200ms;
+            border-radius: 10px;
+            overflow: hidden;
+
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
 
         .BarContainerActive {
@@ -70,7 +75,6 @@ import UserBar from "./UserBar/UserBar.svelte";
         }
         .ContentContainerActive {
             margin-top: 150px;
-            margin-bottom: 150px;
         }
     }
 </style>
