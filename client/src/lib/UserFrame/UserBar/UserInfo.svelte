@@ -46,7 +46,7 @@ import RippleButton from "$src/assets/Components/RippleButton.svelte"
         <input bind:this={fileInput} type="file" accept="image/*" on:change={handleImageUpload} multiple hidden/>
     </div>
 
-    <h2 contenteditable={isEditing} on:input={(e)=> name = getTextContent(e)}>{name}</h2>
+    <h2 contenteditable={isEditing} on:input={(e)=> name = getTextContent(e)} on:keydown={e => (e.key === 'Enter') && e.preventDefault()}>{name}</h2>
     <h3>{account}</h3>
 
     <p class=Bio contenteditable={isEditing} on:input={(e)=> bio = getTextContent(e)}>
@@ -55,19 +55,19 @@ import RippleButton from "$src/assets/Components/RippleButton.svelte"
     
     <div class=ButtonsContainer>
     <span class=EditProfile class:EditProfileEditing={isEditing} on:click={() => isEditing = !isEditing}>
-        <RippleButton on:click={handleSave}>
+        <button on:click={handleSave}>
             {#if !isEditing}
                 Edit Profile
             {:else}
                 Save
             {/if}
-        </RippleButton>    
+        </button>    
     </span>
     {#if isEditing}
         <span class=Cancel on:click={() => isEditing = !isEditing}>
-            <RippleButton on:click={handleCancel}>
-                Cancle
-            </RippleButton>    
+            <button on:click={handleCancel}>
+                Cancel
+            </button>    
         </span>
     {/if}
     </div>
@@ -152,7 +152,7 @@ import RippleButton from "$src/assets/Components/RippleButton.svelte"
 
     *[contenteditable=true] {
         transition: background-color 400MS;
-        background-color: Pink;
+        background-color: rgba(255, 255, 255, 0.548);
         
     }
 </style>

@@ -1,19 +1,25 @@
 
 <script>
-import UserBar from "./UserBar/UserBar.svelte";
+import CommunityIcon from "$src/assets/Icons/CommunityIcon.svelte";
+import MySheetsIcon from "$src/assets/Icons/MySheetsIcon.svelte";
 
+import Community from "./Content/Community.svelte";
+
+import Content from "./Content/Content.svelte";
+import MySheets from "./Content/MySheets.svelte";
+import UserBar from "./UserBar/UserBar.svelte";
     let barActive = false;
 
     let tabs = [
-        {icon:null, name:"Community"}, 
-        {icon:null, name:"My Sheets"}, 
+        {icon:CommunityIcon, name:"Community", content: Community}, 
+        {icon:MySheetsIcon, name:"My Sheets", content: MySheets}, 
     ]
-    let activatedTabIndex;
+    let activatedTabIndex = 0;
 </script>
 
 <section>
     <div class=ContentContainer class:ContentContainerActive={barActive}>
-    
+        <Content currTab={tabs[activatedTabIndex]["content"]}/>
     </div>
     <div class=BarContainer class:BarContainerActive={barActive}>
         <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive}/>
@@ -38,7 +44,6 @@ import UserBar from "./UserBar/UserBar.svelte";
     }
 
     .ContentContainer {
-        background-color: blue;
         flex: 1;
     }
 
