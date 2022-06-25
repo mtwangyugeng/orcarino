@@ -7,6 +7,7 @@ import Community from "./Content/Community.svelte";
 
 import Content from "./Content/Content.svelte";
 import MySheets from "./Content/MySheets.svelte";
+import Search from "./Search/Search.svelte";
 import UserBar from "./UserBar/UserBar.svelte";
     let barActive = true;
 
@@ -18,9 +19,14 @@ import UserBar from "./UserBar/UserBar.svelte";
 </script>
 
 <section>
-    <div class=ContentContainer class:ContentContainerActive={barActive}>
-        <Content currTab={tabs[activatedTabIndex]["content"]}/>
-    </div>
+    <div class=RightSide>
+        <div class=SearchContainer class:SearchContainerActive={barActive}>
+            <Search />
+        </div>
+        <div class=ContentContainer>
+            <Content currTab={tabs[activatedTabIndex]["content"]}/>
+        </div>
+    </div>  
     <div class=BarContainer class:BarContainerActive={barActive}>
         <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive}/>
     </div>
@@ -45,6 +51,7 @@ import UserBar from "./UserBar/UserBar.svelte";
 
     .ContentContainer {
         flex: 1;
+        overflow: auto;
     }
 
     @media (min-width: 600px) {
@@ -60,21 +67,41 @@ import UserBar from "./UserBar/UserBar.svelte";
             transition: width 200ms;
         }
 
-        .ContentContainer {
+        .SearchContainer {
+            height: 0px;
+            transition: height 200ms;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .RightSide {
+            flex: 1;
             margin-right: 50px;
             transition: margin 200ms;
-            border-radius: 10px;
+            
             overflow: hidden;
 
+            margin-left: 20px;
             margin-top: 20px;
             margin-bottom: 20px;
+
+            display: flex;
+            flex-direction: column;
         }
 
+        .ContentContainer {
+            flex: 1;
+            border-radius: 10px;
+            background-color: rgb(122, 86, 19);
+        }   
         .BarContainerActive {
             width: 300px
         }
-        .ContentContainerActive {
-            margin-top: 150px;
+        .SearchContainerActive {
+            height: 200px;
         }
+
+
+        
     }
 </style>
