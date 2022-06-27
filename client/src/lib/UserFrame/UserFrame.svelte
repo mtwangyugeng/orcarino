@@ -15,20 +15,26 @@ import UserBar from "./UserBar/UserBar.svelte";
         {icon:MySheetsIcon, name:"My Sheets", content: MySheets}, 
         {icon:CommunityIcon, name:"Community", content: Community}, 
     ]
+
+    let userTabs = [];
+    let currSheetId = null;
+
     let activatedTabIndex = 0;
+
+    let search = "";
 </script>
 
 <section>
     <div class=RightSide>
         <div class=SearchContainer class:SearchContainerActive={barActive}>
-            <Search />
+            <Search bind:search={search} tabName={tabs[activatedTabIndex]["name"]} tabIcon={tabs[activatedTabIndex]["icon"]} />
         </div>
         <div class=ContentContainer>
-            <Content currTab={tabs[activatedTabIndex]["content"]}/>
+            <Content currTab={tabs[activatedTabIndex]["content"]} currSheetId = currSheetId/>
         </div>
     </div>  
     <div class=BarContainer class:BarContainerActive={barActive}>
-        <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive}/>
+        <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive} bind:currSheetId={currSheetId}/>
     </div>
 </section>
 
@@ -69,10 +75,11 @@ import UserBar from "./UserBar/UserBar.svelte";
 
         .SearchContainer {
             height: 0px;
-            transition: height 200ms;
+            transition: all 200ms;
             display: flex;
             justify-content: center;
             align-items: center;
+            opacity: 0;
         }
         .RightSide {
             flex: 1;
@@ -99,6 +106,7 @@ import UserBar from "./UserBar/UserBar.svelte";
         }
         .SearchContainerActive {
             height: 200px;
+            opacity: 1;
         }
 
 

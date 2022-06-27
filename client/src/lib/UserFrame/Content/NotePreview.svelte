@@ -14,6 +14,9 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
     $: viewsDisplay = views >= 1000 ? (views / 1000).toFixed(1) + 'k'  : views + ''
 
     let isHoveringTitle = false;
+
+    export let goToSheet = () => {}
+    export let goToAuthor = () => {}
 </script>
 
 <section>
@@ -23,15 +26,15 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         </div>
     {/if}
     
-    <div class=Preview class:HoverPreview={isHoveringTitle}>
+    <div class=Preview class:HoverPreview={isHoveringTitle} on:click={goToSheet}>
         <ImageWithLoading width=100% height=100% />
     </div>
     <div class=Score>
         <StarsScore score={2} />
         <span>{voteDisplay} votes</span>
     </div>
-    <h3 class=Title on:mousemove={()=>isHoveringTitle = true} on:mouseleave={()=>isHoveringTitle = false}>{title}</h3>
-    <h4 class=Author>{author}</h4>
+    <h3 class=Title on:click={goToSheet} on:mousemove={()=>isHoveringTitle = true} on:mouseleave={()=>isHoveringTitle = false}>{title}</h3>
+    <h4 class=Author on:click={goToAuthor}>{author}</h4>
 
     <p class=Views>{viewsDisplay} views</p>
 </section>

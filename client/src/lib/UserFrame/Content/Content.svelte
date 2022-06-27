@@ -2,6 +2,7 @@
     import { fly } from 'svelte/transition';
 
     export let currTab;
+    export let currSheetId; // userTab
 </script>
 
 <section>

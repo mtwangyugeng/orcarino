@@ -2,11 +2,14 @@
 import ExpandAndRetractButton from "$src/assets/Components/ExpandAndRetractButton.svelte";
 import TabWithIcon from "$src/assets/Components/TabWithIcon.svelte";
 import UserInfo from "./UserInfo.svelte";
+import UserTabs from "./UserTabs.svelte";
 
     export let tabs;
 
     export let activatedTabIndex;
     export let barActive = false;
+
+    export let currSheetId;
 </script>
 
 <section class:BarActive={barActive}>
@@ -22,6 +25,9 @@ import UserInfo from "./UserInfo.svelte";
     {#each tabs as {icon, name},i (name)}
         <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex = i} />
     {/each}
+
+    <UserTabs bind:currSheetId={currSheetId}/>
+
     </div>
 </section>
 
