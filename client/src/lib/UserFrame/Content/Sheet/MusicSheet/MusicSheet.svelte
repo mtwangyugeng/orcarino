@@ -1,5 +1,5 @@
 <script>
-import SingleNote from "../SingleNote/SingleNote.svelte";
+import SingleNote from "./SingleNote/SingleNote.svelte";
 
     let notes = [];
     $: console.log(notes)

@@ -1,5 +1,5 @@
 <script>
-import CustomSelect from "../../assets/Components/CustomSelect.svelte";
+import CustomSelect from "$src/assets/Components/CustomSelect.svelte";
 import { noteToForm, formToNote } from "./SingleNote.svelte";
 
 

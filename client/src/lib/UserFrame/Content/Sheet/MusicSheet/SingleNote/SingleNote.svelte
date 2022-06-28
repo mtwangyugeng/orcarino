@@ -37,7 +37,7 @@
 </script>
 
 <script>
-    import Orcarina from "../../assets/Components/Orcarina.svelte";
+    import Orcarina from "$src/assets/Components/Orcarina.svelte";
     import SelectNote from "./SelectNote.svelte";
     let holesCover = Array(12).fill(0);
     export let selectedCover = holesCover.join('');

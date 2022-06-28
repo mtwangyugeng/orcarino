@@ -10,6 +10,8 @@ import UserTabs from "./UserTabs.svelte";
     export let barActive = false;
 
     export let currSheetId;
+
+    export let userTabs;
 </script>
 
 <section class:BarActive={barActive}>
@@ -26,7 +28,7 @@ import UserTabs from "./UserTabs.svelte";
         <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex = i} />
     {/each}
 
-    <UserTabs bind:currSheetId={currSheetId}/>
+    <UserTabs bind:currSheetId={currSheetId} userTabs={userTabs}/>
 
     </div>
 </section>
