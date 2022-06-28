@@ -1,16 +1,9 @@
 <script>
-import StarsScore from "$src/assets/Components/StarsScore.svelte";
-import Commentor from "./Commentor.svelte";
+import Comments from "./Comments/Comments.svelte";
+import Description from "./Description/Description.svelte";
 import MusicSheet from "./MusicSheet/MusicSheet.svelte";
-
-    export let currSheetId = 69;
-    export let title = "Ode to Joy"
-
-    export let sheet = null;
-    export let comments = [
-        {content: "Cool sheet dude! I wish it is a bit longer.", postTime: "6/28/2022", score: 8, authorId:1},
-        {content: "Terrible sheet! The notes are off by 10000 miles.", postTime: "6/29/2022",score: null, authorId:1}
-    ]
+import Score from "./Score/Score.svelte";
+import Title from "./Title/Title.svelte";
 </script>
 
 <section>
@@ -19,33 +12,15 @@ import MusicSheet from "./MusicSheet/MusicSheet.svelte";
     </div>
     <div class=RightSideContainer>
         
-        <h2>
-            {title}
-        </h2>
+        <Title />
 
         <div class=ScoreContainer>
-            <StarsScore />
-            <p>(1000)</p>
+            <Score />
         </div>
 
-        <p class=Description>
-            Well just a easy version of ode to joy.
-        </p>
+        <Description />
         
-        <div class=CommentContainer>
-            {#each comments as {content, score, authorId, postTime}}
-                <div class=Comment>
-                    <div>
-                        <Commentor />
-                    </div>
-                    <div>
-                        <StarsScore score={score}/>
-                        <p>posted {postTime}</p>
-                        {content}
-                    </div>
-                </div>
-            {/each}
-        </div>
+        <Comments />
     </div>
 </section>
 
@@ -64,9 +39,5 @@ import MusicSheet from "./MusicSheet/MusicSheet.svelte";
     .RightSideContainer {
         width: 300px;
         height: 100%;
-    }
-
-    .Comment {
-        display: flex;
     }
 </style>

@@ -4,7 +4,7 @@
     let halfStars = Array(10);
 </script>
 
-<section>
+<section class=StarScore>
     {#each halfStars as _, i (i)}
         <span class:reverse={i % 2 === 0} class:filled={i + 1 <= Math.round(score)}>
             <svg viewBox="0 0 95 180" fill="none" xmlns="http://www.w3.org/2000/svg">
