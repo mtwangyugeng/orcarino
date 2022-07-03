@@ -54,8 +54,9 @@
     let holesCover;
     $: if(selectedCover) holesCover = Array.from(selectedCover).map(v => (+v));
     
-    let isSelecting;
+    let isSelecting = false;
 
+    export let deleteThis;
 </script>
 
 
@@ -71,6 +72,7 @@
                 space
             {/if}
         </div>
+        <button on:click={deleteThis}>delete</button>
 </section>
 
 

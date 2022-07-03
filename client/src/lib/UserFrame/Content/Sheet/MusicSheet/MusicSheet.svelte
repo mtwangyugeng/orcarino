@@ -1,33 +1,46 @@
 <script>
-    import SingleNote from "./SingleNote/SingleNote.svelte";
-    export let notes = ["000000000000", null, "000000000100"];
+    import Cursor from "./Cursor.svelte";
+import SingleNote from "./SingleNote/SingleNote.svelte";
+    export let notes = ["000000000000", "space", "000000000100"];
     function deleteNote(i) {
         notes=[...notes.slice(0, i), ...notes.slice(i + 1)];
     }
 
     export let isEditable = true;
 
+    let activatedIndex =0;
 </script>
 
 <section class:NotEditable={!isEditable}>
-    {#each notes as note,i (i)}
-        <div class=SingleNoteContainer>
-            <SingleNote bind:selectedCover={note} />
-
-            <button on:click={()=>deleteNote(i)}>delete</button>
-        </div>
-    {/each}
-
+    
     {#if isEditable}
         <div class=EditContainer>
-            <button on:click={() => notes = [...notes, "000000000000"]}>add note</button>
-            <button on:click={() => notes = [...notes, null]}>add space</button>
+            <button on:click={() => notes = [...notes, "space"]}>Add New</button>
         </div>
     {/if}
+
+    <div class=SingleNotesContainer>
+        <Cursor bind:activatedIndex={activatedIndex} index={-1}/>
+        {#each notes as note,i (i)}
+            <div class=SingleNoteContainer>
+                <SingleNote bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
+                
+            </div>
+            <Cursor bind:activatedIndex={activatedIndex} index={i}/>
+        {/each}
+    </div>
+
+
 </section>
 
 <style>
     section {
+        display: flex;
+        flex-direction: column;
+        background-color: #fff;
+    }
+
+    .SingleNotesContainer {
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
@@ -37,11 +50,12 @@
     .NotEditable {
         pointer-events: none;
     }
-    
+
     .EditContainer {
         display: flex;
         flex-direction: column;
         background-color: red;
+        /* width: 100px; */
     }
 
     .EditContainer > * {
