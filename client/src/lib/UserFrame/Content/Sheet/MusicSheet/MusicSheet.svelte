@@ -37,13 +37,7 @@
     .NotEditable {
         pointer-events: none;
     }
-
-    .Space {
-        width: 400px;
-        height: 400px;
-        background-color: yellow;
-    }
-
+    
     .EditContainer {
         display: flex;
         flex-direction: column;
