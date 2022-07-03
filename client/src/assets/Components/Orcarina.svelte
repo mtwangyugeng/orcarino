@@ -51,7 +51,6 @@
     }
     svg {
         transition: 200ms;
-        transform: scale(1, 1);
     }
 
     .Minify {

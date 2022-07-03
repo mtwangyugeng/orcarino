@@ -87,7 +87,7 @@
         /* background-color: red; */
         position: fixed;
         left: 0;
-        right: 0;
+        top: 0;
         width: 100vw;
         height: 100vh;
         z-index: 2;
@@ -152,5 +152,6 @@
         width: 100%;
         height: 100%;
         text-align: center;
+        border: none
     }
 </style>

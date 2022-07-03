@@ -1,41 +1,41 @@
 <script>
-import SingleNote from "./SingleNote/SingleNote.svelte";
-
-    let notes = [];
-    $: console.log(notes)
-
-    function deleteNote(id) {
-        notes=[...notes.slice(0, id), ...notes.slice(id+1)];
+    import SingleNote from "./SingleNote/SingleNote.svelte";
+    export let notes = ["000000000000", null, "000000000100"];
+    function deleteNote(i) {
+        notes=[...notes.slice(0, i), ...notes.slice(i + 1)];
     }
 
-    export let title = "Ode to Joy";
+    export let isEditable = true;
+
 </script>
 
-<section>
-    <h1>{title}</h1>
-    <div class=NotesContainer>
-        {#each notes as note,i (i)}
-            <div>
-            {#if note}
-                <SingleNote bind:selectedCover={note}/>
-            {:else}
-                <div class=Space>Space</div>
-            {/if}
-            <button on:click={()=>deleteNote(i)}>delete</button>
-            </div>
-        {/each}
+<section class:NotEditable={!isEditable}>
+    {#each notes as note,i (i)}
+        <div class=SingleNoteContainer>
+            <SingleNote bind:selectedCover={note} />
 
-        <div class=ButtonsContainer>
-        <button on:click={() => notes = [...notes, "000000000000"]}>add note</button>
-        <button on:click={() => notes = [...notes, null]}>add space</button>
+            <button on:click={()=>deleteNote(i)}>delete</button>
         </div>
-    </div>
+    {/each}
+
+    {#if isEditable}
+        <div class=EditContainer>
+            <button on:click={() => notes = [...notes, "000000000000"]}>add note</button>
+            <button on:click={() => notes = [...notes, null]}>add space</button>
+        </div>
+    {/if}
 </section>
 
 <style>
-    .NotesContainer {
+    section {
         display: flex;
         flex-wrap: wrap;
+        gap: 10px;
+        padding: 10px;
+    }
+
+    .NotEditable {
+        pointer-events: none;
     }
 
     .Space {
@@ -44,13 +44,13 @@ import SingleNote from "./SingleNote/SingleNote.svelte";
         background-color: yellow;
     }
 
-    .ButtonsContainer {
+    .EditContainer {
         display: flex;
         flex-direction: column;
         background-color: red;
     }
 
-    .ButtonsContainer > * {
+    .EditContainer > * {
         flex: 1;
     }
 

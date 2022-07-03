@@ -13,6 +13,3 @@ import { noteToForm, formToNote } from "./SingleNote.svelte";
     <CustomSelect options={Array.from(noteToForm.entries())} bind:selectedValue={selectedCover} bind:search={note} bind:isSelecting={isSelecting}/>
 </section>
 
-<style>
-
-</style>

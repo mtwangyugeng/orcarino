@@ -105,7 +105,7 @@ import UserBar from "./UserBar/UserBar.svelte";
             width: 300px
         }
         .SearchContainerActive {
-            height: 200px;
+            height: 100px;
             opacity: 1;
         }
 

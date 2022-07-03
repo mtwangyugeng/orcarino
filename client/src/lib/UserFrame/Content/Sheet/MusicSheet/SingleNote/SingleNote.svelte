@@ -30,6 +30,8 @@
     noteToForm.set("E1", "000000001000");
     noteToForm.set("F1", "000000000000");
 
+    noteToForm.set("Space", "space");
+
     export const formToNote = new Map();
     for (const [key, value] of noteToForm.entries()) {
         formToNote.set(value, key)
@@ -39,8 +41,9 @@
 <script>
     import Orcarina from "$src/assets/Components/Orcarina.svelte";
     import SelectNote from "./SelectNote.svelte";
-    let holesCover = Array(12).fill(0);
-    export let selectedCover = holesCover.join('');
+
+
+    export let selectedCover = "000000000100";
     function handleHole(i) {
         return () => {
             holesCover[i] ^= 1
@@ -48,44 +51,50 @@
         }
     }
 
-    $:  holesCover = Array.from(selectedCover).map(v => (+v));
+    let holesCover;
+    $: if(selectedCover) holesCover = Array.from(selectedCover).map(v => (+v));
+    
     let isSelecting;
+
 </script>
 
 
-<span class=Main>
 <section>
-    <SelectNote bind:selectedCover={selectedCover} bind:isSelecting={isSelecting}/>
-    <div class=Bottom>
-        <div class=BotLeft class:BotLeftSelect={isSelecting}></div>
-        <Orcarina holesCover={holesCover} handleHole={handleHole}/>
-    </div>
+        <span class=SelectNoteContainer>
+            <SelectNote bind:selectedCover={selectedCover} bind:isSelecting={isSelecting}/>
+        </span>
+        <div class=Bottom>
+            {#if selectedCover !== "space"}
+                <div class=BotLeft class:BotLeftSelect={isSelecting}></div>
+                <Orcarina holesCover={holesCover} handleHole={handleHole}/>
+            {:else}
+                space
+            {/if}
+        </div>
 </section>
-</span>
 
 
 <style>
-    .Main :global(*) {
-        box-sizing: border-box;
-    }
 
     section {
         background-color: aliceblue;
         width: fit-content;
         position: relative;
-        width: 300px;
+        width: 200px;
+        height: 200px;
+        display: flex;
+        flex-direction: column;
     }
-
+    
     .Bottom {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 300px
+        height: 100px;
+        flex: 1;
     }
     .BotLeft {
         width: 0%;
-        height: 100px;
-        /* background-color: yellow; */
         transition: 200ms;
     }
     .BotLeftSelect {

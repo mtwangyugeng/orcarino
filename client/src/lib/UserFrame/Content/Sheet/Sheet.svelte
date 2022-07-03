@@ -4,6 +4,8 @@ import Description from "./Description/Description.svelte";
 import MusicSheet from "./MusicSheet/MusicSheet.svelte";
 import Score from "./Score/Score.svelte";
 import Title from "./Title/Title.svelte";
+
+export let currSheetId;
 </script>
 
 <section>
