@@ -53,10 +53,11 @@
         isSelecting=false
         search = prevSearch
     }
+
 </script>
 
 {#if isSelecting}
-    <div class=SelectCover on:click|self={handleOutsideClick}/>
+    <div class=SelectCover on:click|self={handleOutsideClick} />
 {/if}
 
 <div class="SelectContainer" >
