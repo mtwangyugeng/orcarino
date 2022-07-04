@@ -9,13 +9,14 @@ import SingleNote from "./SingleNote/SingleNote.svelte";
     export let isEditable = true;
 
     let activatedIndex =0;
+    $:console.log(activatedIndex)
 </script>
 
 <section class:NotEditable={!isEditable}>
     
     {#if isEditable}
         <div class=EditContainer>
-            <button on:click={() => notes = [...notes, "space"]}>Add New</button>
+            <button on:click={() => notes = [...notes.slice(0, activatedIndex + 1), "space", ...notes.slice(activatedIndex + 1)]}>Add New</button>
         </div>
     {/if}
 
