@@ -11,7 +11,6 @@
 </script>
 
 <script>
-    import Cursor from "./Cursor.svelte";
     import SingleNote from "./SingleNote/SingleNote.svelte";
     export let notes = ["000000000000", "space", "000000000100"];
     let {notesWithIndex, nextIndex} = iniNotes(notes)
@@ -21,39 +20,41 @@
         notesWithIndex=[...notesWithIndex.slice(0, i), ...notesWithIndex.slice(i + 1)];
     }
 
-    export let isEditable = true;
+    export let isEditable = false;
 
     let activatedIndex =0;
     $:console.log(activatedIndex)
 
 
-    function addNote() {
-        notesWithIndex = [...notesWithIndex.slice(0, activatedIndex + 1), {index:nextIndex++, note: "space"}, ...notesWithIndex.slice(activatedIndex + 1)]
-        activatedIndex++;
+    function addNote(i) {
+        return () =>
+        notesWithIndex = [...notesWithIndex.slice(0, i + 1), {index:nextIndex++, note: "space"}, ...notesWithIndex.slice(i + 1)]
     }
 
     //animation for note 
     import {flip} from "svelte/animate"
+import AddSingleNote from "./AddSingleNote.svelte";
+import ToolBar from "./ToolBar/ToolBar.svelte";
 </script>
 
-<section class:NotEditable={!isEditable}>
-    
-    {#if isEditable}
-        <div class=EditContainer>
-            <button on:click={addNote}>Add New</button>
-        </div>
-    {/if}
-
+<section>
+    <div class=ToolBarContainer>
+        <ToolBar bind:isEditable={isEditable} />
+    </div>
     <div class=SingleNotesContainer>
-        <Cursor bind:activatedIndex={activatedIndex} index={-1}/>
-        {#each notesWithIndex as {index, note},i (index)}
-            <div class=SingleNoteContainer animate:flip="{{duration: 200}}">
-                <SingleNote bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
-                <Cursor bind:activatedIndex={activatedIndex} index={i}/>
-            </div>
+        <AddSingleNote isEditable={isEditable} on:click={addNote(-1)}/>
+        <div class=SingleNotes>
             
-            
-        {/each}
+           
+            {#each notesWithIndex as {index, note},i (index)}
+                <div class=SingleNoteContainer animate:flip="{{duration: 200}}">
+                    <SingleNote isEditable={isEditable} bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
+                    <AddSingleNote isEditable={isEditable} on:click={addNote(i)}/>
+                
+                </div>
+                
+            {/each}
+        </div>
     </div>
 
 
@@ -62,34 +63,34 @@
 <style>
     section {
         display: flex;
-        flex-direction: column;
-        background-color: #fff;
+        background-color: rgb(168, 168, 168);
+        height: 100%;
+        /* overflow: hidden; */
+    }
+    .ToolBarContainer{
+        width: 100px;
+        background-color: red;
     }
 
     .SingleNotesContainer {
+        overflow: auto;
+        
+    }
+
+    .SingleNotes {
         display: flex;
         flex-wrap: wrap;
         padding: 10px;
+        gap: 5px;
+        align-items: flex-start;
+        width: fit-content;
+        background-color: pink;
     }
 
     .SingleNoteContainer {
-        margin-bottom: 10px;
         display: flex;
-    }
-
-    .NotEditable {
-        pointer-events: none;
-    }
-
-    .EditContainer {
-        display: flex;
-        flex-direction: column;
-        background-color: red;
-        /* width: 100px; */
-    }
-
-    .EditContainer > * {
-        flex: 1;
+        height: fit-content;
+        align-items: center;
     }
 
 </style>

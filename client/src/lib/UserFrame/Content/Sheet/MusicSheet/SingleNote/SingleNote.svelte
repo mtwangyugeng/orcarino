@@ -57,10 +57,11 @@
     let isSelecting = false;
 
     export let deleteThis;
+    export let isEditable;
 </script>
 
 
-<section>
+<section class:NotEditable={!isEditable}>
         <span class=SelectNoteContainer>
             <SelectNote bind:selectedCover={selectedCover} bind:isSelecting={isSelecting}/>
         </span>
@@ -72,7 +73,9 @@
                 space
             {/if}
         </div>
-        <button on:click={deleteThis}>delete</button>
+        {#if isEditable}
+            <button class=DeleteButton on:click={deleteThis}>delete</button>
+        {/if}
 </section>
 
 
@@ -101,5 +104,22 @@
     }
     .BotLeftSelect {
         width: 40%;
+    }
+
+    .DeleteButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        transition: 200ms;
+        opacity: 0.5;
+    }
+
+   .DeleteButton:hover{
+        opacity: 1;
+    }
+
+    .NotEditable {
+        pointer-events: none;
     }
 </style>

@@ -85,7 +85,7 @@
 
 <style>
     .SelectCover {
-        background-color: red;
+        /* background-color: red; */
         position: fixed;
         left: 0;
         top: 0;
