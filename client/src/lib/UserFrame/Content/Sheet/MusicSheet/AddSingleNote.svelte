@@ -1,12 +1,13 @@
 <script>
 import RippleButton from "$src/assets/Components/RippleButton.svelte";
+import AddNoteIcon from "$src/assets/Icons/AddNoteIcon.svelte";
 
     export let isEditable=false;
 </script>
 
 <section class=AddSingleNote class:Editing={isEditable} title="Insert note.">
     <RippleButton on:click>
-        +
+        <AddNoteIcon />
     </RippleButton>
 </section>
 

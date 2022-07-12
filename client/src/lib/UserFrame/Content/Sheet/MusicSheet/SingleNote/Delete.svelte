@@ -1,6 +1,5 @@
 <script>
-import Close from "$src/assets/Icons/Close.svelte";
-
+import Close from "$src/assets/Icons/CloseIcon.svelte";
 </script>
 
 <button on:click>
