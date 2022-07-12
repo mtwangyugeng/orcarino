@@ -104,7 +104,8 @@
         color: #fff;
         width: 200px;
         border-radius: 5px;
-       
+        width: 100%;
+        height: 100%;
     }
     .OnTop {
         z-index: 4;

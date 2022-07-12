@@ -40,6 +40,7 @@
 
 <script>
     import Orcarina from "$src/assets/Components/Orcarina.svelte";
+import Delete from "./Delete.svelte";
     import SelectNote from "./SelectNote.svelte";
 
 
@@ -74,7 +75,9 @@
             {/if}
         </div>
         {#if isEditable}
-            <button class=DeleteButton on:click={deleteThis}>delete</button>
+            <span class=DeleteButton>
+                <Delete on:click={deleteThis}/>
+            </span>
         {/if}
 </section>
 
@@ -89,6 +92,14 @@
         height: 200px;
         display: flex;
         flex-direction: column;
+        border-radius: 10px;
+    }
+    .SelectNoteContainer{
+        height: 40px;
+        width: 40%;
+    }
+    .SelectNoteContainer > :global(*){
+        height: 100%;
     }
     
     .Bottom {
