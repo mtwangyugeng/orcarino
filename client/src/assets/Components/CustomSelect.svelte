@@ -96,9 +96,8 @@
     .SelectContainer {
         display: flex;
         position: relative;
-        background-color: red;
-        width: 40%;
-        height: 50px;
+        width: 100%;
+        height: 100%;
     }
 
     .SelectContainer > div {
@@ -153,6 +152,7 @@
         width: 100%;
         height: 100%;
         text-align: center;
-        border: none
+        border: none;
+        background-color: transparent;
     }
 </style>

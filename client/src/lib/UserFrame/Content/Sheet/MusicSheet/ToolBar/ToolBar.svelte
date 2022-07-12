@@ -1,5 +1,7 @@
 <script>
 import Edit from "./Edit/Edit.svelte";
+import Fork from "./Fork/Fork.svelte";
+import Share from "./Share/Share.svelte";
 
 
     export let isEditable = false;
@@ -7,6 +9,8 @@ import Edit from "./Edit/Edit.svelte";
 
 <section>
     <Edit bind:isEditable={isEditable} />
+    <Fork />
+    <Share />
 </section>
 
 <style>

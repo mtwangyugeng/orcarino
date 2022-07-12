@@ -2,11 +2,9 @@
     export let isEditable = false;
 </script>
 
-<section>
-    <button class:Save={isEditable} class=EditButton on:click={() => isEditable = !isEditable}>
-        {isEditable ? 'Save' : 'Edit'}
-    </button>
-</section>
+<button class:Save={isEditable} class=EditButton on:click={() => isEditable = !isEditable}>
+    {isEditable ? 'Save' : 'Edit'}
+</button>
 
 <style>
    button {
