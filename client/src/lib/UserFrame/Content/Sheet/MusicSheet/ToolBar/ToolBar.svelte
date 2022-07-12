@@ -15,11 +15,12 @@ import Share from "./Share/Share.svelte";
 
 <style>
     section {
-        background-color: blue;
+        background-color: rgb(255, 102, 0);
         display: flex;
         flex-direction: column;
         align-items: center;
         height: 100%;
         padding: 10px;
+        font-family: Arial, Helvetica, sans-serif;
     }
 </style>
