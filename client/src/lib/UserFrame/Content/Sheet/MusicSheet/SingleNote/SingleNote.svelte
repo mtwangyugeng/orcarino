@@ -93,10 +93,13 @@ import Delete from "./Delete.svelte";
         display: flex;
         flex-direction: column;
         border-radius: 10px;
+        overflow: hidden
     }
     .SelectNoteContainer{
         height: 40px;
-        width: 40%;
+        width: 50%;
+        background-color: orange;
+        transition: all 200ms;
     }
     .SelectNoteContainer > :global(*){
         height: 100%;
@@ -114,7 +117,7 @@ import Delete from "./Delete.svelte";
         transition: 200ms;
     }
     .BotLeftSelect {
-        width: 40%;
+        width: 50%;
     }
 
     .DeleteButton {
@@ -132,5 +135,8 @@ import Delete from "./Delete.svelte";
 
     .NotEditable {
         pointer-events: none;
+    }
+    .NotEditable .SelectNoteContainer{
+        background-color: transparent;
     }
 </style>
