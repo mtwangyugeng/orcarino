@@ -1,10 +1,3 @@
-<script context="module">
-    const states = [
-        {name: "Edit", icon: EditIcon},
-        {name: "Save", icon: SaveIcon},
-    ]
-</script>
-
 <script>
     import RippleButton from "$src/assets/Components/RippleButton.svelte";
     import EditIcon from "$src/assets/Icons/EditIcon.svelte";
@@ -29,6 +22,10 @@
         border-radius: 10px;
         overflow: hidden;
         font-weight: bold;
+   }
+
+   section:hover {
+    background-color: rgba(255, 255, 255, 0.5);
    }
 
    section > :global(.RippleButton) {
