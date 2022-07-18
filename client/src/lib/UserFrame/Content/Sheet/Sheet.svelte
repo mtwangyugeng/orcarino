@@ -30,7 +30,7 @@ export let currSheetId;
     section {
         width: 100%;
         height: 100%;
-        background-color: white;
+        background-color: rgb(252, 224, 204);
         display: flex;
     }
     .MusicSheetContainer {

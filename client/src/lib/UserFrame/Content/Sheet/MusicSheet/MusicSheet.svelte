@@ -63,13 +63,13 @@ import ToolBar from "./ToolBar/ToolBar.svelte";
 <style>
     section {
         display: flex;
-        background-color: rgb(168, 168, 168);
+        background-color: rgb(250, 137, 44);
         height: 100%;
         /* overflow: hidden; */
     }
     .ToolBarContainer{
         width: 100px;
-        background-color: red;
+        /* background-color: red; */
     }
 
     .SingleNotesContainer {
@@ -84,7 +84,6 @@ import ToolBar from "./ToolBar/ToolBar.svelte";
         gap: 5px;
         align-items: flex-start;
         width: fit-content;
-        background-color: pink;
     }
 
     .SingleNoteContainer {

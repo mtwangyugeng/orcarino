@@ -98,7 +98,7 @@ import Delete from "./Delete.svelte";
     .SelectNoteContainer{
         height: 40px;
         width: 50%;
-        background-color: orange;
+        background-color: rgb(255, 242, 218);
         transition: all 200ms;
     }
     .SelectNoteContainer > :global(*){
