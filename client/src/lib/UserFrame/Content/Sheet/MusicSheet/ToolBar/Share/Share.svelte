@@ -1,3 +1,7 @@
+<script>
+import ShareIcon from "$src/assets/Icons/ShareIcon.svelte";
+
+</script>
 <button>
-    Share
+    <ShareIcon />
 </button>
