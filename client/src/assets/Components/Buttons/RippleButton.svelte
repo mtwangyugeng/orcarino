@@ -9,10 +9,12 @@
         isRippleActive = true;
         setTimeout(() => isRippleActive = false, 500)
     }
+
+    export let style = ``;
 </script>
 
 
-<button class=RippleButton on:click={handleRipple} on:click>
+<button class=RippleButton on:click={handleRipple} on:click style={style}>
     <div class=Ripple class:RippleActive={isRippleActive} style={`left:${rX}px;top:${rY}px;`}/>
     <slot />
 </button>
