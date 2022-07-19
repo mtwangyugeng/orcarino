@@ -1,6 +1,5 @@
 <script>
 import ImageWithLoading from "$src/assets/Components/ImageWithLoading.svelte"
-import RippleButton from "$src/assets/Components/RippleButton.svelte"
 
     export let name = "Pink Guy"
     export let account =  "pinkmensch69"

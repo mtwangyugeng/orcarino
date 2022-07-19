@@ -1,5 +1,5 @@
 <script>
-import RippleButton from "$src/assets/Components/RippleButton.svelte";
+import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 import AddNoteIcon from "$src/assets/Icons/AddNoteIcon.svelte";
 
     export let isEditable=false;
