@@ -93,12 +93,13 @@ import Delete from "./Delete.svelte";
         display: flex;
         flex-direction: column;
         border-radius: 10px;
-        overflow: hidden
+        /* overflow: hidden */
     }
     .SelectNoteContainer{
         height: 40px;
         width: 50%;
         background-color: rgb(255, 242, 218);
+        border-radius: 10px 0 0 0;
         transition: all 200ms;
     }
     .SelectNoteContainer > :global(*){
