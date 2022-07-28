@@ -7,6 +7,6 @@ import ForkIcon from "$src/assets/Icons/ForkIcon.svelte";
 </svelte>
 
 
-<button>
+<button title="Fork it">
     <ForkIcon/>
 </button>
