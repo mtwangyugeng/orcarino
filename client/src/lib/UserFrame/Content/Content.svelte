@@ -3,14 +3,15 @@
 import Sheet from './Sheet/Sheet.svelte';
 
     export let currTab;
-    export let currSheetId; // userTab
+
+    import { currSheetId } from '$src/api/UserTabs';
 </script>
 
 <section>
-    {#if currSheetId}
-        {#key currSheetId}
+    {#if $currSheetId}
+        {#key $currSheetId}
             <span style="display: inline-block" in:fly={{ x: -20 }}>
-                <Sheet currSheetId={currSheetId} />
+                <Sheet currSheetId={$currSheetId} />
             </span>
         {/key}
     {:else}

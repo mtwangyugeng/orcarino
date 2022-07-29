@@ -17,7 +17,6 @@ import UserBar from "./UserBar/UserBar.svelte";
     ]
 
     let userTabs=[{title: "Ode to Joy", id:69}, {title: "Obito theme", id:22}];
-    let currSheetId = null;
 
     let activatedTabIndex = 0;
 
@@ -30,11 +29,11 @@ import UserBar from "./UserBar/UserBar.svelte";
             <Search bind:search={search} tabName={tabs[activatedTabIndex]["name"]} tabIcon={tabs[activatedTabIndex]["icon"]} />
         </div>
         <div class=ContentContainer>
-            <Content currTab={tabs[activatedTabIndex]["content"]} currSheetId = {currSheetId}/>
+            <Content currTab={tabs[activatedTabIndex]["content"]}/>
         </div>
     </div>  
     <div class=BarContainer class:BarContainerActive={barActive}>
-        <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive} bind:currSheetId={currSheetId} userTabs={userTabs}/>
+        <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive} userTabs={userTabs}/>
     </div>
 </section>
 
