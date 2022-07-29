@@ -1,4 +1,5 @@
 <script>
+import CloseMin from "./CloseMin/CloseMin.svelte";
 import Comments from "./Comments/Comments.svelte";
 import Description from "./Description/Description.svelte";
 import MusicSheet from "./MusicSheet/MusicSheet.svelte";
@@ -24,6 +25,10 @@ export let currSheetId;
         
         <Comments />
     </div>
+
+    <div class=CloseMinContainer>
+        <CloseMin />
+    </div>
 </section>
 
 <style>
@@ -32,6 +37,7 @@ export let currSheetId;
         height: 100%;
         background-color: rgb(252, 224, 204);
         display: flex;
+        position: relative;
     }
     .MusicSheetContainer {
         flex: 1;
@@ -41,5 +47,11 @@ export let currSheetId;
     .RightSideContainer {
         width: 300px;
         height: 100%;
+    }
+
+    .CloseMinContainer {
+        position: absolute;
+        right: 5px;
+        top: 5px;
     }
 </style>
