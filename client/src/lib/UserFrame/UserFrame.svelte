@@ -16,7 +16,6 @@ import UserBar from "./UserBar/UserBar.svelte";
         {icon:CommunityIcon, name:"Community", content: Community}, 
     ]
 
-    let userTabs=[{title: "Ode to Joy", id:69}, {title: "Obito theme", id:22}];
 
     let activatedTabIndex = 0;
 
@@ -33,7 +32,7 @@ import UserBar from "./UserBar/UserBar.svelte";
         </div>
     </div>  
     <div class=BarContainer class:BarContainerActive={barActive}>
-        <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive} userTabs={userTabs}/>
+        <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive}/>
     </div>
 </section>
 
