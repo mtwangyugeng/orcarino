@@ -1,5 +1,7 @@
 <script>
 import ImageWithLoading from "$src/assets/Components/ImageWithLoading.svelte"
+import EditIcon from "$src/assets/Icons/EditIcon.svelte"
+import SaveIcon from "$src/assets/Icons/SaveIcon.svelte";
 
     export let name = "Pink Guy"
     export let account =  "pinkmensch69"
@@ -56,9 +58,9 @@ import ImageWithLoading from "$src/assets/Components/ImageWithLoading.svelte"
     <span class=EditProfile class:EditProfileEditing={isEditing} on:click={() => isEditing = !isEditing}>
         <button on:click={handleSave}>
             {#if !isEditing}
-                Edit Profile
+                <EditIcon /> Edit Profile
             {:else}
-                Save
+                <SaveIcon /> Save
             {/if}
         </button>    
     </span>
@@ -112,6 +114,17 @@ import ImageWithLoading from "$src/assets/Components/ImageWithLoading.svelte"
         display: flex;
         width: 100%;
         transition: all 200ms;
+    }
+    .EditProfile button {
+        display: flex;
+        justify-content: center;
+        gap: 5px;
+    }
+
+    .EditProfile :global(svg){
+        width: 20px;
+        height: 20px;
+        fill: white;
     }
     .Cancel {
         width: 30%;
