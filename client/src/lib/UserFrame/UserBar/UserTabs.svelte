@@ -1,6 +1,7 @@
 <script>
 import TitleWithLineOnTwoSides from "$src/assets/Components/TitleWithLineOnTwoSides.svelte";
-import { setCurrSheetId, userTabs } from "$src/api/UserTabs";
+import { setCurrSheetId, userTabs, closeTab } from "$src/api/UserTabs";
+import CloseIcon from "$src/assets/Icons/CloseIcon.svelte";
     
 </script>
 
@@ -10,8 +11,11 @@ import { setCurrSheetId, userTabs } from "$src/api/UserTabs";
     </TitleWithLineOnTwoSides>
 
     {#each $userTabs as {title, id} (id)}
-        <button on:click={() => setCurrSheetId(id)}>
+        <button class=Tab on:click|self={() => setCurrSheetId(id)}>
             {title}
+            <button class=Close on:click={() => closeTab(id)}>
+                <CloseIcon />
+            </button>
         </button>
     {/each}
 
@@ -21,5 +25,32 @@ import { setCurrSheetId, userTabs } from "$src/api/UserTabs";
     section {
         display: flex;
         flex-direction: column;
+        gap: 10px;
+    }
+
+    .Tab {
+        background-color: rgba(255,255,255,0.5);
+        display:flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px 20px;
+
+        border-radius: 10px;
+        transition: all 200ms;
+    }
+
+    .Tab:hover {
+        background-color: rgba(255,255,255,1);
+    }
+
+    .Close :global(svg){
+        width: 20px;
+        height: 20px;
+        opacity: 0.7;
+    }
+
+    .Close:hover :global(svg){
+        opacity: 1;
+        transition: all 200ms;
     }
 </style>

@@ -15,7 +15,7 @@ export let currSheetId;
     </div>
     <div class=RightSideContainer>
         
-        <Title />
+        <Title currSheetId={currSheetId}/>
 
         <div class=ScoreContainer>
             <Score />
