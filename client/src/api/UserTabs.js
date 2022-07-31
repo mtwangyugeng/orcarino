@@ -13,6 +13,9 @@ export const closeTab = (targetId) => {
     userTabs.update(prev => {
         return prev.filter(v => v.id !== targetId);
     })
+    if(targetId === get(currSheetId)) {
+        currSheetId.set(null);
+    }
 }
 
 // TODO
