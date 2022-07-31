@@ -1,6 +1,6 @@
 <script>
 import TitleWithLineOnTwoSides from "$src/assets/Components/TitleWithLineOnTwoSides.svelte";
-import { setCurrSheetId, userTabs, closeTab } from "$src/api/UserTabs";
+import { setCurrSheetId, userTabs, closeTab, currSheetId } from "$src/api/UserTabs";
 import CloseIcon from "$src/assets/Icons/CloseIcon.svelte";
     
 </script>
@@ -11,7 +11,7 @@ import CloseIcon from "$src/assets/Icons/CloseIcon.svelte";
     </TitleWithLineOnTwoSides>
 
     {#each $userTabs as {title, id} (id)}
-        <button class=Tab on:click|self={() => setCurrSheetId(id)}>
+        <button class=Tab class:Active={$currSheetId === id} on:click|self={() => setCurrSheetId(id)}>
             {title}
             <button class=Close on:click={() => closeTab(id)}>
                 <CloseIcon />
@@ -53,4 +53,9 @@ import CloseIcon from "$src/assets/Icons/CloseIcon.svelte";
         opacity: 1;
         transition: all 200ms;
     }
+
+    .Active {
+        background-color: rgba(255,255,255,1);
+        padding: 15px 20px;
+;    }
 </style>
