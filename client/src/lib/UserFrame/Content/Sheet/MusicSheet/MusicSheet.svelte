@@ -64,10 +64,6 @@ import AddSingleNote from "./AddSingleNote.svelte";
         height: 100%;
         /* overflow: hidden; */
     }
-    .ToolBarContainer{
-        width: 100px;
-        /* background-color: red; */
-    }
 
     .SingleNotesContainer {
         overflow: auto;
