@@ -1,35 +1,15 @@
-<script context="module">
-
-    // gives the notes a proper index in order for svelte to track the proper state to update
-    function iniNotes(notes) {
-        let nextIndex = 0;
-        const notesWithIndex = notes.map(note => {
-            return {index: nextIndex++, note}
-        })
-        return {notesWithIndex, nextIndex};
-    }
-</script>
 
 <script>
     import SingleNote from "./SingleNote/SingleNote.svelte";
-    export let notes = ["000000000000", "space", "000000000100"];
-    let {notesWithIndex, nextIndex} = iniNotes(notes)
+    import {notesWithIndex, deleteNote, addNote} from "$src/api/Sheet"
     $:console.log(notesWithIndex)
 
-    function deleteNote(i) {
-        notesWithIndex=[...notesWithIndex.slice(0, i), ...notesWithIndex.slice(i + 1)];
-    }
 
     export let isEditable = false;
 
     let activatedIndex =0;
     $:console.log(activatedIndex)
 
-
-    function addNote(i) {
-        return () =>
-        notesWithIndex = [...notesWithIndex.slice(0, i + 1), {index:nextIndex++, note: "space"}, ...notesWithIndex.slice(i + 1)]
-    }
 
     //animation for note 
     import {flip} from "svelte/animate"
@@ -39,14 +19,14 @@ import AddSingleNote from "./AddSingleNote.svelte";
 <section>
 
     <div class=SingleNotesContainer>
-        <AddSingleNote isEditable={isEditable} on:click={addNote(-1)}/>
+        <AddSingleNote isEditable={isEditable} on:click={() => addNote(-1)}/>
         <div class=SingleNotes>
             
            
-            {#each notesWithIndex as {index, note},i (index)}
+            {#each $notesWithIndex as {index, note},i (index)}
                 <div class=SingleNoteContainer animate:flip="{{duration: 200}}">
                     <SingleNote isEditable={isEditable} bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
-                    <AddSingleNote isEditable={isEditable} on:click={addNote(i)}/>
+                    <AddSingleNote isEditable={isEditable} on:click={() => addNote(i)}/>
                 
                 </div>
                 

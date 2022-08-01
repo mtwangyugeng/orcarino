@@ -1,10 +1,10 @@
 <script>
-    export let title = "A Title";
-    export let currSheetId = "-1";
+    import {currSheetId} from "$src/api/UserTabs"
+    import {title} from "$src/api/Sheet"
 </script>
 
 <h2 class=Title>
-    No.{currSheetId + ": " + title}
+    No.{$currSheetId + ": " + $title}
 </h2>
 
 

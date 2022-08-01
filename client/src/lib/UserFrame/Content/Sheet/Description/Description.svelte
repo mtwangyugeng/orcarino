@@ -1,10 +1,10 @@
 <script>
-    export let description = "Some text for description";
+    import {description} from "$src/api/Sheet"
 </script>
 
 
 <p class=Description>
-    {description}
+    {$description}
 </p>
 
 <style>

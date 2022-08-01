@@ -1,15 +1,11 @@
 <script>
     import StarsScore from "$src/assets/Components/StarsScore.svelte";
-
-    export let score = 9;
-    export let numberOfVote = 10020;
-    $: numberOfVoteDisplay = numberOfVote >= 1000 ? Math.round(numberOfVote / 1000) + 'k' :
-                             numberOfVote
+    import {score, numberOfVoteDisplay} from "$src/api/Sheet"
 </script>
 
 <section class=Score>
-    <StarsScore score={score}/>
-    <p>({numberOfVoteDisplay})</p>
+    <StarsScore score={$score}/>
+    <p>({$numberOfVoteDisplay})</p>
 </section>
 
 

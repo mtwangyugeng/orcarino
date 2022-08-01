@@ -22,7 +22,7 @@ let isEditable = false;
     </div>
     <div class=RightSideContainer>
         
-        <Title currSheetId={currSheetId}/>
+        <Title/>
 
         <div class=ScoreContainer>
             <Score />
