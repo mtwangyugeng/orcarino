@@ -5,13 +5,20 @@ import Description from "./Description/Description.svelte";
 import MusicSheet from "./MusicSheet/MusicSheet.svelte";
 import Score from "./Score/Score.svelte";
 import Title from "./Title/Title.svelte";
+import ToolBar from "./ToolBar/ToolBar.svelte";
 
 export let currSheetId;
+
+let isEditable = false;
 </script>
 
 <section>
+    <div class=ToolBarContainer>
+        <ToolBar bind:isEditable={isEditable} />
+    </div>
+
     <div class=MusicSheetContainer>
-        <MusicSheet />
+        <MusicSheet isEditable={isEditable}/>
     </div>
     <div class=RightSideContainer>
         

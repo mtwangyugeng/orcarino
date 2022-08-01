@@ -34,13 +34,10 @@
     //animation for note 
     import {flip} from "svelte/animate"
 import AddSingleNote from "./AddSingleNote.svelte";
-import ToolBar from "./ToolBar/ToolBar.svelte";
 </script>
 
 <section>
-    <div class=ToolBarContainer>
-        <ToolBar bind:isEditable={isEditable} />
-    </div>
+
     <div class=SingleNotesContainer>
         <AddSingleNote isEditable={isEditable} on:click={addNote(-1)}/>
         <div class=SingleNotes>
