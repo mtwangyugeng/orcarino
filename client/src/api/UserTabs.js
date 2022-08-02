@@ -1,11 +1,12 @@
 import {writable, get} from 'svelte/store'
+import { user } from './_User';
 
 // !userTabs
 export const userTabs = writable([]);
 export const setUserTabs = (target) => {
     userTabs.set(target);
 }
-export const readUserTabs = () => {
+export const readUserTabs = (uid) => {
     return userTabs.set([{title: "Ode to Joy", id:69}, {title: "Obito theme", id:22}]);
 }
 
@@ -19,7 +20,11 @@ export const closeTab = (targetId) => {
 }
 
 // TODO
-readUserTabs();
+user.subscribe(uid => {
+    if(!uid) return;
+    readUserTabs(uid);
+})
+
 
 // !currSheetId
 export const currSheetId = writable(null);
