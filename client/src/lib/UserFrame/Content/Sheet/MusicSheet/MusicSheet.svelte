@@ -1,8 +1,23 @@
+<script context="module">
+    function iniNotes(notes) {
+        let nextIndex = 0;
+        const notesWithIndex = notes.map(note => {
+            return {index: nextIndex++, note}
+        })
+        return {notesWithIndex, nextIndex};
+    }
+</script>
 
 <script>
     import SingleNote from "./SingleNote/SingleNote.svelte";
-    import {notesWithIndex, deleteNote, addNote} from "$src/api/Sheet"
-    $:console.log(notesWithIndex)
+    import {notes} from "$src/api/Sheet";
+    let {notesWithIndex, nextIndex} = iniNotes($notes)
+    function deleteNote(i) {
+        notesWithIndex=[...notesWithIndex.slice(0, i), ...notesWithIndex.slice(i + 1)];
+    }
+    function addNote(i) {
+        notesWithIndex = [...notesWithIndex.slice(0, i + 1), {index:nextIndex++, note: "space"}, ...notesWithIndex.slice(i + 1)]
+    }
 
 
     export let isEditable = false;
@@ -23,7 +38,7 @@ import AddSingleNote from "./AddSingleNote.svelte";
         <div class=SingleNotes>
             
            
-            {#each $notesWithIndex as {index, note},i (index)}
+            {#each notesWithIndex as {index, note},i (index)}
                 <div class=SingleNoteContainer animate:flip="{{duration: 200}}">
                     <SingleNote isEditable={isEditable} bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
                     <AddSingleNote isEditable={isEditable} on:click={() => addNote(i)}/>
