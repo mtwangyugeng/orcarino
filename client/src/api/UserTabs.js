@@ -10,13 +10,20 @@ export const readUserTabs = (uid) => {
     return userTabs.set([{title: "Ode to Joy", id:69}, {title: "Obito theme", id:22}]);
 }
 
-export const closeTab = (targetId) => {
+export function closeTab(targetId) {
     userTabs.update(prev => {
         return prev.filter(v => v.id !== targetId);
     })
     if(targetId === get(currSheetId)) {
         currSheetId.set(null);
     }
+}
+
+export function addUserTab(sheetId, title) {
+    userTabs.update(prev => {
+        if(prev.find(v => v.id === sheetId)) return prev;
+        return [...prev, {title: title, id: sheetId}]
+    })
 }
 
 // TODO

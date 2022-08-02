@@ -8,7 +8,7 @@ import Sheet from './Sheet/Sheet.svelte';
 </script>
 
 <section>
-    {#if $currSheetId}
+    {#if $currSheetId !== null}
         {#key $currSheetId}
             <span style="display: inline-block" in:fly={{ x: -20 }}>
                 <Sheet currSheetId={$currSheetId} />

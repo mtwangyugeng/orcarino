@@ -1,4 +1,6 @@
 <script>
+import { setCurrSheetId, addUserTab } from "$src/api/UserTabs";
+
 import ImageWithLoading from "$src/assets/Components/ImageWithLoading.svelte";
 import StarsScore from "$src/assets/Components/StarsScore.svelte";
 
@@ -15,8 +17,12 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
 
     let isHoveringTitle = false;
 
-    export let goToSheet = () => {}
-    export let goToAuthor = () => {}
+    export let id;
+    const goToSheet = () => {
+        setCurrSheetId(id);
+        addUserTab(id, title)
+    }
+    let goToAuthor = () => {}
 </script>
 
 <section>

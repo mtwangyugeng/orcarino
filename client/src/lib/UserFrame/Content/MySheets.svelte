@@ -1,15 +1,13 @@
 <script>
 import NotePreview from "./NotePreview.svelte";
-
-let previews = Array(13);
-
+import {previews} from "$src/api/MySheet"
 </script>
 
 <section>
     <div class=PreviewContainer>
-        {#each previews as _,i (i) }
+        {#each $previews as preview (preview.id) }
         <span>
-            <NotePreview />
+            <NotePreview {...preview}/>
         </span>
         {/each}
     </div>
