@@ -1,6 +1,6 @@
 <script>
     import {fly} from 'svelte/transition'
-    export let search = '';
+    import {searchMySheets, searchCommunity} from '$src/api/Search'
     export let tabIcon = null;
     export let tabName = '';
 </script>
@@ -13,7 +13,11 @@
             </span>
         {/key}
         
-        <input bind:value={search} placeholder={`Search in ${tabName}`}/>
+        {#if tabName === 'My Sheets'}
+            <input bind:value={$searchMySheets} placeholder={`Search in ${tabName}`}/>
+        {:else if tabName === 'Community'}
+            <input bind:value={$searchCommunity} placeholder={`Search in ${tabName}`}/>
+        {/if}
     </div>
 </section>
 

@@ -19,13 +19,12 @@ import UserBar from "./UserBar/UserBar.svelte";
 
     let activatedTabIndex = 0;
 
-    let search = "";
 </script>
 
 <section>
     <div class=RightSide>
         <div class=SearchContainer class:SearchContainerActive={barActive}>
-            <Search bind:search={search} tabName={tabs[activatedTabIndex]["name"]} tabIcon={tabs[activatedTabIndex]["icon"]} />
+            <Search tabName={tabs[activatedTabIndex]["name"]} tabIcon={tabs[activatedTabIndex]["icon"]} />
         </div>
         <div class=ContentContainer>
             <Content currTab={tabs[activatedTabIndex]["content"]}/>
