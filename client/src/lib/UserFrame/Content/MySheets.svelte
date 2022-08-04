@@ -32,7 +32,9 @@ import {previews} from "$src/api/MySheet"
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        background-color: blue;
+        background-color: rgb(236, 136, 22);
+
+        padding: 10px;
     }
 
     .PreviewContainer > span{
