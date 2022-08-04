@@ -10,6 +10,12 @@ import {previews} from "$src/api/MySheet"
             <NotePreview {...preview}/>
         </span>
         {/each}
+        {#each Array(8) as _}
+            <span>
+                <div class=Decoy />
+            </span>
+        {/each}
+        
     </div>
 </section>
 
@@ -19,8 +25,7 @@ import {previews} from "$src/api/MySheet"
         height: 100%;
         background-color: pink;
         overflow: auto;
-        
-        padding: 20px;
+    
     }
 
     .PreviewContainer {
@@ -33,6 +38,11 @@ import {previews} from "$src/api/MySheet"
     .PreviewContainer > span{
         flex: 1;
         display: flex;
+        justify-content: center;
+    }
+
+    .Decoy {
+        width: 220px;
     }
 
 </style>

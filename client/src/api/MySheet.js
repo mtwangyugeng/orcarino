@@ -5,7 +5,7 @@ let n = 0;
 export const previews = writable([]);
 
 let neo = []
-for (let i = 0; i < 17; i++) {
+for (let i = 0; i < 16; i++) {
     neo.push({
         id: n++,
         isPrivate: true,
