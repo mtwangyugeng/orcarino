@@ -1,6 +1,7 @@
 <script>
 import NotePreview from "./NotePreview.svelte";
 import {previews} from "$src/api/MySheet"
+import AddSheet from "./AddSheet.svelte";
 </script>
 
 <section>
@@ -10,6 +11,10 @@ import {previews} from "$src/api/MySheet"
             <NotePreview {...preview}/>
         </span>
         {/each}
+        <span>
+            <AddSheet />
+        </span>
+
         {#each Array(8) as _}
             <span>
                 <div class=Decoy />

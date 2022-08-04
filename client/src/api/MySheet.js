@@ -18,3 +18,6 @@ for (let i = 0; i < 16; i++) {
 
 previews.set(neo)
 
+export function addSheet() {
+    console.log("Adding Sheet")
+}
