@@ -28,7 +28,7 @@ import AddSheet from "./AddSheet.svelte";
     section {
         width: 100%;
         height: 100%;
-        background-color: pink;
+        background-color: rgb(236, 136, 22);
         overflow: auto;
     
     }
@@ -37,7 +37,7 @@ import AddSheet from "./AddSheet.svelte";
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        background-color: rgb(236, 136, 22);
+        
 
         padding: 10px;
     }
