@@ -3,7 +3,7 @@
 import CommunityIcon from "$src/assets/Icons/CommunityIcon.svelte";
 import MySheetsIcon from "$src/assets/Icons/MySheetsIcon.svelte";
 
-import Community from "./Content/Community.svelte";
+import Community from "./Content/Community/Community.svelte";
 
 import Content from "./Content/Content.svelte";
 import MySheets from "./Content/MySheets.svelte";
