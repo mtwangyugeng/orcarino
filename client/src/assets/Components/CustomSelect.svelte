@@ -54,18 +54,19 @@
         search = prevSearch
     }
 
+    export let isUpsideDown = false;
 </script>
 
 {#if isSelecting}
     <div class=SelectCover on:click|self={handleOutsideClick} />
 {/if}
 
-<div class="SelectContainer" >
+<div class="SelectContainer">
     <div on:blur={handleOptionOut} on:mouseleave={handleOptionOut} class:OnTop={isSelecting}>
         <input type="text" bind:value={search} on:input={handleInput} placeholder={selectedValue} on:focus={handleInputFocus}/>
 
         {#if isSelecting}
-        <div class="Options">
+        <div class="Options" class:UpsideDownOption={isUpsideDown}>
             {#each filteredOptions as [key, value] (key)}
             <span animate:flip="{{duration: 200}}">
                 <div class={"Option " + ((hoverValue === value) ? "Activated" : "")} on:click={handleOptionClick(value)} 
@@ -128,6 +129,10 @@
         animation-fill-mode: forwards;
         transition: max-height 0.5s;
         overflow: hidden;
+    }
+
+    .UpsideDownOption {
+        bottom: 100%;
     }
 
     @keyframes drop {
