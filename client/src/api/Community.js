@@ -1,7 +1,13 @@
-import { writable } from "svelte/store"
+import { writable, get } from "svelte/store"
 
 export const numOfPages = writable(10);
-export const currPage = writable(0);
+export const currPage = writable(1);
+export function toLeft () {
+    currPage.update(prev => Math.max(1, prev - 1))
+}
+export function toRight () {
+    currPage.update(prev => Math.min(get(numOfPages), prev + 1))
+}
 
 
 let n = 0;
@@ -20,3 +26,4 @@ for (let i = 0; i < 10; i++) {
 }
 
 previews.set(neo)
+
