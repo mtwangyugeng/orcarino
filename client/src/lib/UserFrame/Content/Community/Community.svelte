@@ -1,12 +1,13 @@
 <script>
 import PageNav from "./PageNav.svelte";
+import Preview from "./Preview.svelte";
 
 </script>
 
 
 <section>
     <div class=PreviewContainer>
-
+        <Preview />
     </div>
 
     <div class=PageNavContainer>
@@ -26,6 +27,7 @@ import PageNav from "./PageNav.svelte";
 
     .PreviewContainer {
         flex: 1;
+        overflow: auto;
     }
 
     .PageNavContainer {

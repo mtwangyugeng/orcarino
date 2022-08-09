@@ -14,10 +14,10 @@ let n = 0;
 export const previews = writable([]);
 
 let neo = []
-for (let i = 0; i < 10; i++) {
+for (let i = 0; i < 100; i++) {
     neo.push({
         id: n++,
-        isPrivate: true,
+        isPrivate: false,
         votes: 2500,
         title: "Salamanderman Theme",
         author: "Salanmander man",
