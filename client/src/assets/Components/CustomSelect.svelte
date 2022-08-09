@@ -55,6 +55,8 @@
     }
 
     export let isUpsideDown = false;
+
+    import {fly} from "svelte/transition"
 </script>
 
 {#if isSelecting}
@@ -63,7 +65,12 @@
 
 <div class="SelectContainer">
     <div on:blur={handleOptionOut} on:mouseleave={handleOptionOut} class:OnTop={isSelecting}>
-        <input type="text" bind:value={search} on:input={handleInput} placeholder={selectedValue} on:focus={handleInputFocus}/>
+        
+        {#key selectedValue}
+            <span style="display: inline-block; height:100%" in:fly={{ y: -20 }}>
+                <input type="text" bind:value={search} on:input={handleInput} placeholder={selectedValue} on:focus={handleInputFocus}/>
+            </span>
+        {/key}
 
         {#if isSelecting}
         <div class="Options" class:UpsideDownOption={isUpsideDown}>
