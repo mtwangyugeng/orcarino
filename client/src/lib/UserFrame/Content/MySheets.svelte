@@ -2,18 +2,21 @@
 import NotePreview from "./NotePreview.svelte";
 import {previews} from "$src/api/MySheet"
 import AddSheet from "./AddSheet.svelte";
+
+import {flip} from "svelte/animate"
 </script>
 
 <section>
     <div class=PreviewContainer>
-        {#each $previews as preview (preview.id) }
-        <span>
-            <NotePreview {...preview}/>
-        </span>
+        {#each [...$previews, {id:-1}] as preview (preview.id) }
+            <span animate:flip="{{duration: 200}}">
+                {#if preview.id !== -1}
+                    <NotePreview {...preview}/>
+                {:else}
+                    <AddSheet />
+                {/if}
+            </span>
         {/each}
-        <span>
-            <AddSheet />
-        </span>
 
         {#each Array(8) as _}
             <span>
