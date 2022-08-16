@@ -34,4 +34,10 @@ import Sheet from './Sheet/Sheet.svelte';
         height: 100%;
         width: 100%;
     }
+
+    section :global(.Card) {
+        height: 270px;
+        width: 220px;
+        border-radius: 10px;
+    }
 </style>

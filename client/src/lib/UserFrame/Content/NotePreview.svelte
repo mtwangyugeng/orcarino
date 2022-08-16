@@ -25,7 +25,7 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
     let goToAuthor = () => {}
 </script>
 
-<section>
+<section class=Card>
     {#if isPrivate}
         <div class='Tag Private'>
             Private
@@ -64,10 +64,7 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-height: 300px;
-        width: 220px;
         padding: 10px;
-        border-radius: 10px;
         user-select: none;
         position: relative;
     }

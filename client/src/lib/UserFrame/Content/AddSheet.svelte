@@ -2,15 +2,13 @@
     import {addSheet} from '$src/api/MySheet'
 </script>
 
-<section on:click={() => addSheet()}>
+<section class=Card on:click={() => addSheet()}>
     <div>+</div>
 </section>
 
 
 <style>
     section {
-        max-height: 300px;
-        width: 220px;
         background-color: #f5f5f5;
         border-radius: 10px;
         cursor: pointer;
