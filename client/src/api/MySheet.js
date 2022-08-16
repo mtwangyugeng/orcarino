@@ -1,4 +1,5 @@
 import { writable } from "svelte/store";
+import {searchMySheetsRegex} from "./Search"
 
 let n = 0;
 
@@ -17,6 +18,10 @@ for (let i = 0; i < 16; i++) {
 }
 
 previews.set(neo)
+
+searchMySheetsRegex.subscribe((regex) => {
+    previews.set(neo.filter(v => regex.test(v.title)))
+})
 
 export function addSheet() {
     console.log("Adding Sheet")
