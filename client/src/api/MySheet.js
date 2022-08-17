@@ -16,6 +16,14 @@ for (let i = 0; i < 16; i++) {
         views: 20000
     })
 }
+neo.push({
+    id: n++,
+    isPrivate: false,
+    votes: 2500,
+    title: "Chinchin Theme",
+    author: "Salanmander man",
+    views: 20000
+})
 
 previews.set(neo)
 

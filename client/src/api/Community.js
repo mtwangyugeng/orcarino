@@ -14,7 +14,7 @@ let n = 0;
 export const previews = writable([]);
 
 let neo = []
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 30; i++) {
     neo.push({
         id: n++,
         isPrivate: false,
@@ -24,6 +24,15 @@ for (let i = 0; i < 100; i++) {
         views: 20000
     })
 }
+
+neo.push({
+    id: n++,
+    isPrivate: false,
+    votes: 2500,
+    title: "Chinchin Theme",
+    author: "Salanmander man",
+    views: 20000
+})
 
 previews.set(neo)
 

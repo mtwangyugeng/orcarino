@@ -16,16 +16,16 @@ import UserTabs from "./UserTabs.svelte";
         <ExpandAndRetractButton bind:isExpanded={barActive}/>
     </span>
     <div class=TabContainer>
-    <span class=Profile>
-        <UserInfo />
-    </span>
+        <span class=Profile>
+            <UserInfo />
+        </span>
 
-    
-    {#each tabs as {icon, name},i (name)}
-        <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex = i} />
-    {/each}
+        
+        {#each tabs as {icon, name},i (name)}
+            <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex = i} />
+        {/each}
 
-    <UserTabs/>
+        <UserTabs/>
 
     </div>
 </section>
