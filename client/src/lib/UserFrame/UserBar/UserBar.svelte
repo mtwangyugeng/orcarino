@@ -1,6 +1,8 @@
 <script>
+import { user } from "$src/api/_User";
 import ExpandAndRetractButton from "$src/assets/Components/ExpandAndRetractButton.svelte";
 import TabWithIcon from "$src/assets/Components/TabWithIcon.svelte";
+import AskLogin from "./AskLogin.svelte";
 import UserInfo from "./UserInfo.svelte";
 import UserTabs from "./UserTabs.svelte";
 
@@ -16,16 +18,20 @@ import UserTabs from "./UserTabs.svelte";
         <ExpandAndRetractButton bind:isExpanded={barActive}/>
     </span>
     <div class=TabContainer>
-        <span class=Profile>
-            <UserInfo />
-        </span>
+        {#if user === null}
+            <span class=Profile>
+                <UserInfo />
+            </span>
+            <UserTabs/>
+        {:else}
+            <AskLogin />
+        {/if}
 
-        
         {#each tabs as {icon, name},i (name)}
             <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex = i} />
         {/each}
 
-        <UserTabs/>
+        
 
     </div>
 </section>
