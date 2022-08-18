@@ -2,7 +2,7 @@
     const loadSVG = `
         <svg x="0px" y="0px"
         viewBox="0 0 100 100" enableBackground="new 0 0 0 0" width="50px" height="50px">
-        <circle fill="#fff" stroke="none" cx="6" cy="50" r="6">
+        <circle fill="#fff" stroke="none" cx="30" cy="50" r="6">
             <animate
             attributeName="opacity"
             dur="1s"
@@ -10,7 +10,7 @@
             repeatCount="indefinite"
             begin="0.1"/>    
         </circle>
-        <circle fill="#fff" stroke="none" cx="26" cy="50" r="6">
+        <circle fill="#fff" stroke="none" cx="50" cy="50" r="6">
             <animate
             attributeName="opacity"
             dur="1s"
@@ -18,7 +18,7 @@
             repeatCount="indefinite" 
             begin="0.2"/>       
         </circle>
-        <circle fill="#fff" stroke="none" cx="46" cy="50" r="6">
+        <circle fill="#fff" stroke="none" cx="70" cy="50" r="6">
             <animate
             attributeName="opacity"
             dur="1s"
@@ -64,5 +64,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    section :global(svg) {
+        width: 60%;
+        height: 60%;
     }
 </style>
