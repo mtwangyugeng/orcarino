@@ -94,6 +94,8 @@
         margin-bottom: 10px;
         cursor: pointer;
         user-select: none;
+
+        background-color: rgba(255,255,255, 0.5);
     }
 
     h3 {
