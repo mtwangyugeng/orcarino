@@ -1,13 +1,14 @@
 <script>
-import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
+import { isLoggingIn } from "$src/api/_User";
 
+import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 </script>
 <section>
     <div>
         You haven't logged in yet.
     </div>
     <span>
-        <RippleButton>
+        <RippleButton on:click={()=>isLoggingIn.set(true)}>
             Login
         </RippleButton>
     </span>
