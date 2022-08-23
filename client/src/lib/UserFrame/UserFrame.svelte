@@ -1,9 +1,8 @@
 
 <script>
-import { isLoggingIn } from "$src/api/_User";
-import DropdownWindow from "$src/assets/Components/DropdownWindow.svelte";
 import CommunityIcon from "$src/assets/Icons/CommunityIcon.svelte";
 import MySheetsIcon from "$src/assets/Icons/MySheetsIcon.svelte";
+import Login from "../DropDowns/Login.svelte";
 
 import Community from "./Content/Community/Community.svelte";
 
@@ -36,9 +35,7 @@ import UserBar from "./UserBar/UserBar.svelte";
         <UserBar tabs={tabs} bind:activatedTabIndex={activatedTabIndex} bind:barActive={barActive}/>
     </div>
     
-    {#if $isLoggingIn === true}
-        <DropdownWindow on:close={() => isLoggingIn.set(false)}/>
-    {/if}
+    <Login />
 </section>
 
 
