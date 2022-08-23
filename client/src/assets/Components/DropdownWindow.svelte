@@ -1,6 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     import CloseIcon from '../Icons/CloseIcon.svelte';
+import LoadingOverlay from './LoadingOverlay.svelte';
         const dispatch = createEventDispatcher();
         function handleClose() {
             dispatch('close');
@@ -9,11 +10,14 @@
 
     export let isShaking = false;
     $: if(isShaking) setTimeout(() => isShaking = false, 500)
+
+    export let isLoading = false;
 </script>
 
 <section>
     <div class=WindowContainer >
         <div class=Window class:Shake={isShaking}>
+            
             <div class=TopBar>
                 <div class=Title>
                     {title}
@@ -24,6 +28,9 @@
             </div>
             <div class=Content>
                 <slot />
+                {#if isLoading}
+                    <LoadingOverlay />
+                {/if}
             </div>
         </div>
     </div>
@@ -91,6 +98,11 @@
         width: 20px;
         margin-right: 5px;
         cursor: pointer;
+    }
+
+    .Content {
+        position: relative;
+        flex: 1;
     }
 
 
