@@ -20,7 +20,9 @@
                     <CloseIcon />
                 </div>
             </div>
-        </div>
+            <div class=Content>
+                <slot />
+            </div>
     </div>
 
 </section>
