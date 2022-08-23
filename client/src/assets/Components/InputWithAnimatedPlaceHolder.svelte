@@ -1,0 +1,43 @@
+<script>
+    export let value = '';
+    $: isFilled = (value !== '');
+
+    let isFocused = false;
+    export let placeholder = "Placeholder";
+</script>
+
+<span>
+    <input bind:value={value} on:focus={()=>isFocused = true} on:blur={()=>isFocused = false}/>
+    <div class=Placeholder class:Lifted={isFocused || isFilled}>{placeholder}</div>
+</span>
+
+<style>
+    span {
+        width: 100%;
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+
+    .Placeholder {
+        position: absolute;
+        margin-left: 10px;
+        transition: 200ms;
+    }
+
+    .Lifted {
+        font-size: 70%;
+        transform: translateY(-20px);
+        background-color: white;
+    }
+
+    input {
+        height: 40px;
+    }
+
+</style>
+
+
+
+
