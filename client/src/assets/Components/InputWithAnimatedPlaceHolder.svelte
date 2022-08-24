@@ -1,6 +1,10 @@
 <script>
+import { onDestroy } from "svelte";
+
+
     export let value = '';
     $: isFilled = (value !== '');
+    console.log(value)
 
     let isFocused = false;
 
@@ -10,6 +14,10 @@
     function handleInput(e) {
         value = e.target.value;
     }
+
+    onDestroy(()=>{
+        value = '';
+    })
 </script>
 
 <span>
