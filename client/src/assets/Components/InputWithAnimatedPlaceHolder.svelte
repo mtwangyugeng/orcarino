@@ -3,11 +3,17 @@
     $: isFilled = (value !== '');
 
     let isFocused = false;
+
     export let placeholder = "Placeholder";
+    export let type = "text";
+
+    function handleInput(e) {
+        value = e.target.value;
+    }
 </script>
 
 <span>
-    <input bind:value={value} on:focus={()=>isFocused = true} on:blur={()=>isFocused = false}/>
+    <input on:input={handleInput} on:focus={()=>isFocused = true} on:blur={()=>isFocused = false} type={type}/>
     <div class=Placeholder class:Lifted={isFocused || isFilled}>{placeholder}</div>
 </span>
 
