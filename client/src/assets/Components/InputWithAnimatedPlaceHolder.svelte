@@ -14,7 +14,7 @@
 
 <span>
     <input on:input={handleInput} on:focus={()=>isFocused = true} on:blur={()=>isFocused = false} type={type}/>
-    <div class=Placeholder class:Lifted={isFocused || isFilled}>{placeholder}</div>
+    <div class=Placeholder class:Lifted={isFocused || isFilled} class:Focused={isFocused}>{placeholder}</div>
 </span>
 
 <style>
@@ -30,13 +30,17 @@
         position: absolute;
         margin-left: 10px;
         transition: 200ms;
-        pointer-events: none
+        pointer-events: none;
     }
 
     .Lifted {
         font-size: 70%;
         transform: translateY(-20px);
         background-color: white;
+    }
+
+    .Focused {
+        color: rgb(26, 26, 250);
     }
 
     input {
