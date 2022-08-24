@@ -31,6 +31,8 @@
         margin-left: 10px;
         transition: 200ms;
         pointer-events: none;
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgb(95, 95, 95);
     }
 
     .Lifted {
