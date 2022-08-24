@@ -76,8 +76,8 @@ import LoadingOverlay from './LoadingOverlay.svelte';
 
     .Window {
         background-color: white;
-        width: 300px;
-        height: 200px;
+        width: 400px;
+        min-height: 200px;
 
         display: flex;
         flex-direction: column
