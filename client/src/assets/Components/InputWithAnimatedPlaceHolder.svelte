@@ -30,6 +30,7 @@
         position: absolute;
         margin-left: 10px;
         transition: 200ms;
+        pointer-events: none
     }
 
     .Lifted {
