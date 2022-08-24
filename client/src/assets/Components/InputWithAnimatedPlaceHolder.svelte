@@ -13,7 +13,7 @@
 
 <style>
     span {
-        width: 100%;
+        height: 40px;
         position: relative;
         display: flex;
         align-items: center;
@@ -33,7 +33,8 @@
     }
 
     input {
-        height: 40px;
+        height: 100%;
+        width: 100%;
     }
 
 </style>
