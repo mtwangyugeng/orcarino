@@ -15,7 +15,7 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     let isShowingPassword = false;
     $: passwordType = isShowingPassword? "text" : "password";
     let isCreatingAccount = false;
-
+    $: windowTitle = isCreatingAccount ? "Create Account" : "Login";
 
     function handleSubmit() {
         console.log(username)
@@ -23,7 +23,7 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 </script>
 
 {#if $isLoggingIn === true}
-    <DropdownWindow on:close={() => isLoggingIn.set(false)} title="Log In" bind:isShaking={isThereError} bind:isLoading={isLoading}>
+    <DropdownWindow on:close={() => isLoggingIn.set(false)} title={windowTitle} bind:isShaking={isThereError} bind:isLoading={isLoading}>
 
 
             <form on:submit|preventDefault={handleSubmit}>
@@ -47,7 +47,7 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
                 
                 <RippleButton>
                     <input type=submit hidden/>
-                    Login
+                    {windowTitle}
                 </RippleButton>
             </form>
     </DropdownWindow>   
@@ -73,6 +73,12 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
         background-color: orange;
         padding: 15px;
         font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+        color: white;
+    }
+
+    form :global(.RippleButton):hover {
+        background-color: rgb(255, 171, 60);
     }
 
     .Options {
