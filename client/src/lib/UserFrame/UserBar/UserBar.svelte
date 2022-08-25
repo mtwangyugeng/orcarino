@@ -18,7 +18,7 @@ import UserTabs from "./UserTabs.svelte";
         <ExpandAndRetractButton bind:isExpanded={barActive}/>
     </span>
     <div class=TabContainer>
-        {#if user === null}
+        {#if $user !== null}
             <span class=Profile>
                 <UserInfo />
             </span>
