@@ -74,6 +74,7 @@ import UserTabs from "./UserTabs.svelte";
         }
         .ExpandAndRetractButton{
             position: absolute;
+            z-index: 2;
         }
 
         .Profile {
