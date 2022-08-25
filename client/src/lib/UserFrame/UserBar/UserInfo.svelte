@@ -4,6 +4,7 @@
     import SaveIcon from "$src/assets/Icons/SaveIcon.svelte";
 
     import {name, account, picUrl, bio} from "$src/api/UserInfo"
+import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 
     function handleImageUpload() {
 
@@ -69,6 +70,11 @@
     {/if}
     </div>
 
+    <span class=LogOut>
+        <RippleButton>
+            Log Out
+        </RippleButton>
+    </span>
 </section>
 
 <style>
@@ -80,6 +86,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        position: relative;
     }
 
     .ImgContainer {
@@ -167,5 +174,19 @@
         transition: background-color 400MS;
         background-color: rgba(255, 255, 255, 0.548);
         
+    }
+
+    .LogOut {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+    .LogOut :global(.RippleButton){
+        padding: 10px;
+        background-color: rgb(253, 135, 0);
+        border-radius: 5px;
+        font-weight: bold;
+        color: #fff;
     }
 </style>
