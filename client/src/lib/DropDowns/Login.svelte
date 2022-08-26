@@ -1,5 +1,5 @@
 <script>
-    import {isLoggingIn, user} from "$src/api/_User";
+    import {isLoggingIn, logIn, createAccount} from "$src/api/_User";
 import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     import DropdownWindow from "$src/assets/Components/DropdownWindow.svelte";
     import InputWithAnimatedPlaceHolder from "$src/assets/Components/InputWithAnimatedPlaceHolder.svelte";
@@ -10,23 +10,40 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     let password = "";
     let confirmPassword = "";
 
-
+    let statusMessage;
+    let messageColor;
 
     let isShowingPassword = false;
     $: passwordType = isShowingPassword? "text" : "password";
     let isCreatingAccount = false;
     $: windowTitle = isCreatingAccount ? "Create Account" : "Login";
+    
+    $: {statusMessage = isCreatingAccount ? "Please enter your intended username and password, then confirm your password, then press the Create Account button" : "Please enter your username and password, then press the Login button";
+        messageColor = "rgb(79, 101, 223)";
+    }
+    
+    async function handleSubmit() {
+        isLoading = true;
+        let err = null;
+        if(isCreatingAccount) {
+            err = await createAccount(username, password)
+        } else {
+            err = await logIn(username, password)
+        }
 
-    function handleSubmit() {
-        console.log("log in")
-        user.set(4);
-        isLoggingIn.set(false);
+        if (err !== null) {
+            isThereError = true;
+            messageColor = "red";
+            statusMessage = err;
+        }
+
+        isLoading = false;
     }
 </script>
 
 {#if $isLoggingIn === true}
     <DropdownWindow on:close={() => isLoggingIn.set(false)} title={windowTitle} bind:isShaking={isThereError} bind:isLoading={isLoading}>
-
+            <div class=StatusMessage style={`color: ${messageColor};`}>{statusMessage}</div>
 
             <form on:submit|preventDefault={handleSubmit}>
                 <InputWithAnimatedPlaceHolder bind:value={username} placeholder="User Name"/>
@@ -69,6 +86,10 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
         display: flex;
         flex-direction: column;
         gap: 10px;
+    }
+
+    .StatusMessage {
+        padding: 10px;
     }
 
     form :global(.RippleButton) {
