@@ -4,6 +4,7 @@ import { writable } from "svelte/store";
 export const user = writable(null);
 
 export const isLoggingIn = writable(false);
+export const isLoggingOut = writable(false);
 
 export async function logOut() {
     user.set(null);

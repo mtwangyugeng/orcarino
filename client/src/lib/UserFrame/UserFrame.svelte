@@ -3,6 +3,7 @@
 import CommunityIcon from "$src/assets/Icons/CommunityIcon.svelte";
 import MySheetsIcon from "$src/assets/Icons/MySheetsIcon.svelte";
 import Login from "../DropDowns/Login.svelte";
+import LogOut from "../DropDowns/LogOut.svelte";
 
 import Community from "./Content/Community/Community.svelte";
 
@@ -36,6 +37,7 @@ import UserBar from "./UserBar/UserBar.svelte";
     </div>
     
     <Login />
+    <LogOut />
 </section>
 
 

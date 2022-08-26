@@ -3,7 +3,7 @@ import { user } from "$src/api/_User";
 import ExpandAndRetractButton from "$src/assets/Components/ExpandAndRetractButton.svelte";
 import TabWithIcon from "$src/assets/Components/TabWithIcon.svelte";
 import AskLogin from "./AskLogin.svelte";
-import UserInfo from "./UserInfo.svelte";
+import UserInfo from "./UserInfo/UserInfo.svelte";
 import UserTabs from "./UserTabs.svelte";
 
     export let tabs;

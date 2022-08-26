@@ -4,7 +4,7 @@
     import SaveIcon from "$src/assets/Icons/SaveIcon.svelte";
 
     import {name, account, picUrl, bio} from "$src/api/UserInfo"
-import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
+import LogOut from "./LogOut.svelte";
 
     function handleImageUpload() {
 
@@ -70,10 +70,8 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     {/if}
     </div>
 
-    <span class=LogOut>
-        <RippleButton>
-            Log Out
-        </RippleButton>
+    <span class=LogOutContainer>
+        <LogOut />
     </span>
 </section>
 
@@ -176,17 +174,11 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
         
     }
 
-    .LogOut {
+    .LogOutContainer {
         position: absolute;
         top: 5px;
         right: 5px;
     }
 
-    .LogOut :global(.RippleButton){
-        padding: 10px;
-        background-color: rgb(253, 135, 0);
-        border-radius: 5px;
-        font-weight: bold;
-        color: #fff;
-    }
+    
 </style>
