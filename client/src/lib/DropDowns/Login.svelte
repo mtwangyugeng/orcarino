@@ -1,5 +1,5 @@
 <script>
-    import {isLoggingIn} from "$src/api/_User";
+    import {isLoggingIn, user} from "$src/api/_User";
 import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     import DropdownWindow from "$src/assets/Components/DropdownWindow.svelte";
     import InputWithAnimatedPlaceHolder from "$src/assets/Components/InputWithAnimatedPlaceHolder.svelte";
@@ -18,7 +18,9 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     $: windowTitle = isCreatingAccount ? "Create Account" : "Login";
 
     function handleSubmit() {
-        console.log(username)
+        console.log("log in")
+        user.set(4);
+        isLoggingIn.set(false);
     }
 </script>
 
