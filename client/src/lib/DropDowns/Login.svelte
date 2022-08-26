@@ -1,3 +1,8 @@
+<script context="module">
+    const LOGIN_MESSAGE = "Please enter your username and password, then press the Login button";
+    const CREAT_ACCOUNT_MESSAGE = "Please enter your intended username and password, then confirm your password, then press the Create Account button"
+</script>
+
 <script>
     import {isLoggingIn, logIn, createAccount} from "$src/api/_User";
 import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
@@ -18,7 +23,8 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     let isCreatingAccount = false;
     $: windowTitle = isCreatingAccount ? "Create Account" : "Login";
     
-    $: {statusMessage = isCreatingAccount ? "Please enter your intended username and password, then confirm your password, then press the Create Account button" : "Please enter your username and password, then press the Login button";
+    $: {
+        statusMessage = isCreatingAccount ? CREAT_ACCOUNT_MESSAGE : LOGIN_MESSAGE;
         messageColor = "rgb(79, 101, 223)";
     }
     
@@ -39,10 +45,16 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 
         isLoading = false;
     }
+
+    function handleClose() {
+        statusMessage = LOGIN_MESSAGE;
+        isLoggingIn.set(false);
+        messageColor = "rgb(79, 101, 223)";
+    }
 </script>
 
 {#if $isLoggingIn === true}
-    <DropdownWindow on:close={() => isLoggingIn.set(false)} title={windowTitle} bind:isShaking={isThereError} bind:isLoading={isLoading}>
+    <DropdownWindow on:close={handleClose} title={windowTitle} bind:isShaking={isThereError} bind:isLoading={isLoading}>
             <div class=StatusMessage style={`color: ${messageColor};`}>{statusMessage}</div>
 
             <form on:submit|preventDefault={handleSubmit}>
