@@ -17,13 +17,16 @@ $: console.log($isLoggingOut)
             </div>
 
             <div class=ButtonsContainer>
-                <RippleButton>
-                    Yes
-                </RippleButton>
-
-                <RippleButton>
-                    No
-                </RippleButton>
+                <span class=Yes>
+                    <RippleButton>
+                        Yes
+                    </RippleButton>
+                </span>
+                <span class=No>
+                    <RippleButton>
+                        No
+                    </RippleButton>
+                </span>
             </div>
         </section>
     </DropdownWindow>
@@ -35,6 +38,7 @@ $: console.log($isLoggingOut)
         display: flex;
         flex-direction: column;
         height: 150px;
+        padding: 10px
     }
 
     .Message {
@@ -44,5 +48,28 @@ $: console.log($isLoggingOut)
         flex: 1;
 
         font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .ButtonsContainer {
+        display: flex;
+        justify-content: space-around;
+    }
+    .ButtonsContainer :global(.RippleButton) {
+       height: 40px;
+       width: 60px;
+       border-radius: 10px;
+       transition: 200ms;
+    }
+
+    .ButtonsContainer :global(.RippleButton):hover {
+       opacity: 0.7;
+    }
+
+    .Yes :global(.RippleButton) {
+        background-color: green;
+    }
+
+    .No :global(.RippleButton) {
+        background-color: red;
     }
 </style>
