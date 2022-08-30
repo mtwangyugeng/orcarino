@@ -1,7 +1,7 @@
 import { writable } from "svelte/store";
 
 // todo
-export const user = writable(null);
+export const user = writable(4);
 
 export const isLoggingIn = writable(false);
 export const isLoggingOut = writable(false);

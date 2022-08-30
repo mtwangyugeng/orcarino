@@ -2,6 +2,7 @@
 <script>
 import CommunityIcon from "$src/assets/Icons/CommunityIcon.svelte";
 import MySheetsIcon from "$src/assets/Icons/MySheetsIcon.svelte";
+import AddSheet from "../DropDowns/AddSheet.svelte";
 import Login from "../DropDowns/Login.svelte";
 import LogOut from "../DropDowns/LogOut.svelte";
 
@@ -38,6 +39,7 @@ import UserBar from "./UserBar/UserBar.svelte";
     
     <Login />
     <LogOut />
+    <AddSheet />
 </section>
 
 

@@ -31,6 +31,8 @@ searchMySheetsRegex.subscribe((regex) => {
     previews.set(neo.filter(v => regex.test(v.title)))
 })
 
+export const isAddingSheet = writable(true);
+
 export function addSheet() {
     console.log("Adding Sheet")
 }

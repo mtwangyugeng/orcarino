@@ -1,8 +1,11 @@
 <script>
-    import {addSheet} from '$src/api/MySheet'
+import { isAddingSheet } from "$src/api/MySheet";
+
+
+
 </script>
 
-<section class=Card on:click={() => addSheet()}>
+<section class=Card on:click={() => isAddingSheet.set(true)}>
     <div>+</div>
 </section>
 
