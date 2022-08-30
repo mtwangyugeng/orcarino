@@ -33,6 +33,8 @@ searchMySheetsRegex.subscribe((regex) => {
 
 export const isAddingSheet = writable(true);
 
-export function addSheet() {
-    console.log("Adding Sheet")
+export function addSheet(title) {
+    if (title === "") return "Title can't be empty."
+    
+    return null;
 }

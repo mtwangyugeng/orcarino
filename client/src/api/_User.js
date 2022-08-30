@@ -18,7 +18,7 @@ export async function logIn(username, password) {
     return "Incorrect username or password"
 }
 
-export async function createAccount(username, password) {
+export async function createAccount(username, password, confirmPassword) {
     return null
 }
 

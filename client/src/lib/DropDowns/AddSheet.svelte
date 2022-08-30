@@ -1,40 +1,31 @@
 <script context="module">
-    const AUTH_OPTIONS = ["private", "public"]
+    const NORMAL_MSG = "Please enter a title for the sheet."
 </script>
 
 <script>
 
-    import { isAddingSheet } from "$src/api/MySheet";
+    import { addSheet, isAddingSheet } from "$src/api/MySheet";
     import DropdownWindow from "$src/assets/Components/DropdownWindow.svelte";
     import InputWithAnimatedPlaceHolder from "$src/assets/Components/InputWithAnimatedPlaceHolder.svelte";
 import InputForm from "./_InputForm.svelte";
 
     let sheetTitle = "";
-    let selectedAuthOption = AUTH_OPTIONS[0];
+    let isShaking = false;
+    let statusMessage = NORMAL_MSG;
 
-    function handleSubmit() {
 
-    }
+    let isLoading = false;
 </script>
 {#if $isAddingSheet}
-    <DropdownWindow title="Add Sheet" on:close={() => isAddingSheet.set(false)}>
-        <InputForm on:submit submitButtonText="Add New Sheet" >
-            <InputWithAnimatedPlaceHolder bind:value={sheetTitle} placeholder="Sheet Title"/>
-            <div class=Options >
-                {#each AUTH_OPTIONS as authOption (authOption)}
-                <label class=OptionLable>
-                    <input type=radio bind:group={selectedAuthOption} name="scoops" value={authOption}>
-                    {authOption}
-                </label>
-                {/each}
-            </div>
+    <DropdownWindow title="Add Sheet" on:close={() => isAddingSheet.set(false)} bind:isShaking={isShaking} isLoading={isLoading}>
+        <InputForm 
+            submitFunc={()=>addSheet(sheetTitle)} 
+            submitButtonText="Add New Sheet" 
+            bind:isShaking={isShaking}
+            bind:statusMessage={statusMessage}
+            >
+                <InputWithAnimatedPlaceHolder bind:value={sheetTitle} placeholder="Sheet Title"/>
         </InputForm>
     </DropdownWindow>
 {/if}
 
-
-<style>
-    .OptionLable {
-        cursor: pointer;
-    }
-</style>

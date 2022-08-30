@@ -29,24 +29,6 @@
         isThereError = false;
     }
     
-    async function handleSubmit() {
-        isLoading = true;
-        let err = null;
-        if(isCreatingAccount) {
-            err = await createAccount(username, password)
-        } else {
-            err = await logIn(username, password)
-        }
-
-        if (err !== null) {
-            isThereError = true;
-            isShaking = true;
-            statusMessage = err;
-        }
-
-        isLoading = false;
-    }
-
     function handleClose() {
         statusMessage = LOGIN_MESSAGE;
         isLoggingIn.set(false);
@@ -55,12 +37,13 @@
 </script>
 
 {#if $isLoggingIn === true}
-    <DropdownWindow on:close={handleClose} title={windowTitle} bind:isShaking={isShaking} bind:isLoading={isLoading}>
+    <DropdownWindow on:close={handleClose} title={windowTitle} bind:isShaking={isShaking} isLoading={isLoading}>
             <InputForm 
-                isThereError = {isThereError} 
-                statusMessage = {statusMessage}
                 submitButtonText = {windowTitle}
-                on:submit={handleSubmit}
+                submitFunc = {isCreatingAccount ? () => createAccount(username, password, confirmPassword) : () => logIn(username, password)}
+                bind:isShaking={isShaking}
+                bind:statusMessage={statusMessage}
+                bind:isThereError={isThereError}
                 >
                     <InputWithAnimatedPlaceHolder bind:value={username} placeholder="User Name"/>
                     <InputWithAnimatedPlaceHolder bind:value={password} placeholder="Password" type={passwordType}/>
