@@ -5,10 +5,12 @@
 
 <script>
     import {isLoggingIn, logIn, createAccount} from "$src/api/_User";
-import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     import DropdownWindow from "$src/assets/Components/DropdownWindow.svelte";
     import InputWithAnimatedPlaceHolder from "$src/assets/Components/InputWithAnimatedPlaceHolder.svelte";
+    import InputForm from "./_InputForm.svelte";
+
     let isThereError = false;
+    let isShaking = false;
     let isLoading = false;
 
     let username = "";
@@ -16,7 +18,6 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     let confirmPassword = "";
 
     let statusMessage;
-    let messageColor;
 
     let isShowingPassword = false;
     $: passwordType = isShowingPassword? "text" : "password";
@@ -25,7 +26,7 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     
     $: {
         statusMessage = isCreatingAccount ? CREAT_ACCOUNT_MESSAGE : LOGIN_MESSAGE;
-        messageColor = "rgb(79, 101, 223)";
+        isThereError = false;
     }
     
     async function handleSubmit() {
@@ -39,7 +40,7 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 
         if (err !== null) {
             isThereError = true;
-            messageColor = "red";
+            isShaking = true;
             statusMessage = err;
         }
 
@@ -49,38 +50,37 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     function handleClose() {
         statusMessage = LOGIN_MESSAGE;
         isLoggingIn.set(false);
-        messageColor = "rgb(79, 101, 223)";
+        isThereError = false;
     }
 </script>
 
 {#if $isLoggingIn === true}
-    <DropdownWindow on:close={handleClose} title={windowTitle} bind:isShaking={isThereError} bind:isLoading={isLoading}>
-            <div class=StatusMessage style={`color: ${messageColor};`}>{statusMessage}</div>
+    <DropdownWindow on:close={handleClose} title={windowTitle} bind:isShaking={isShaking} bind:isLoading={isLoading}>
+            <InputForm 
+                isThereError = {isThereError} 
+                statusMessage = {statusMessage}
+                submitButtonText = {windowTitle}
+                on:submit={handleSubmit}
+                >
+                    <InputWithAnimatedPlaceHolder bind:value={username} placeholder="User Name"/>
+                    <InputWithAnimatedPlaceHolder bind:value={password} placeholder="Password" type={passwordType}/>
 
-            <form on:submit|preventDefault={handleSubmit}>
-                <InputWithAnimatedPlaceHolder bind:value={username} placeholder="User Name"/>
-                <InputWithAnimatedPlaceHolder bind:value={password} placeholder="Password" type={passwordType}/>
+                    {#if isCreatingAccount}
+                        <InputWithAnimatedPlaceHolder bind:value={confirmPassword} placeholder="Confirm Password" type={passwordType}/>
+                    {/if}
 
-                {#if isCreatingAccount}
-                    <InputWithAnimatedPlaceHolder bind:value={confirmPassword} placeholder="Confirm Password" type={passwordType}/>
-                {/if}
+                    <div class=Options>
+                        <label class="ShowPassword">
+                            <input type="checkbox" bind:checked={isShowingPassword} />
+                            Show Password
+                        </label>
 
-                <div class=Options>
-                    <label class="ShowPassword">
-                        <input type="checkbox" bind:checked={isShowingPassword} />
-                        Show Password
-                    </label>
-
-                    <div class=SwitchMode on:click={() => isCreatingAccount = !isCreatingAccount}>
-                        {isCreatingAccount ? "Login" : "Create Account"}
+                        <div class=SwitchMode on:click={() => isCreatingAccount = !isCreatingAccount}>
+                            {isCreatingAccount ? "Login" : "Create Account"}
+                        </div>
                     </div>
-                </div>
-                
-                <RippleButton>
-                    <input type=submit hidden/>
-                    {windowTitle}
-                </RippleButton>
-            </form>
+            </InputForm>
+           
     </DropdownWindow>   
 {/if}
 
@@ -93,28 +93,6 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
         color: black;
     }
 
-    form {
-        padding: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .StatusMessage {
-        padding: 10px;
-    }
-
-    form :global(.RippleButton) {
-        background-color: orange;
-        padding: 15px;
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
-        color: white;
-    }
-
-    form :global(.RippleButton):hover {
-        background-color: rgb(255, 171, 60);
-    }
 
     .Options {
         display: flex;
