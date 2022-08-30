@@ -3,10 +3,20 @@
 </script>
 
 <script>
-import { isLoggingOut } from "$src/api/_User";
+import { isLoggingOut, user } from "$src/api/_User";
 import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 import DropdownWindow from "$src/assets/Components/DropdownWindow.svelte";
 $: console.log($isLoggingOut)
+
+
+function handleYes() {
+    user.set(null);
+    isLoggingOut.set(false);
+}
+
+function handleNo() {
+    isLoggingOut.set(false)
+}
 </script>
 
 {#if $isLoggingOut === true}
@@ -18,12 +28,12 @@ $: console.log($isLoggingOut)
 
             <div class=ButtonsContainer>
                 <span class=Yes>
-                    <RippleButton>
+                    <RippleButton on:click={handleYes}>
                         Yes
                     </RippleButton>
                 </span>
                 <span class=No>
-                    <RippleButton>
+                    <RippleButton on:click={handleNo}>
                         No
                     </RippleButton>
                 </span>
