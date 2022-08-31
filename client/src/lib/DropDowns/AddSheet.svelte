@@ -12,12 +12,15 @@ import InputForm from "./_InputForm.svelte";
     let sheetTitle = "";
     let isShaking = false;
     let statusMessage = NORMAL_MSG;
-    $: if($isAddingSheet) statusMessage = NORMAL_MSG;
-
     let isLoading = false;
+
+    function handleClose() {
+        isAddingSheet.set(false);
+        statusMessage = NORMAL_MSG;
+    }
 </script>
 {#if $isAddingSheet}
-    <DropdownWindow title="Add Sheet" on:close={() => isAddingSheet.set(false)} bind:isShaking={isShaking} isLoading={isLoading}>
+    <DropdownWindow title="Add Sheet" on:close={handleClose} bind:isShaking={isShaking} isLoading={isLoading}>
         <InputForm 
             submitFunc={()=>addSheet(sheetTitle)} 
             submitButtonText="Add New Sheet" 
