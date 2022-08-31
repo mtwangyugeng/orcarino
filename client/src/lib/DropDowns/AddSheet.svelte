@@ -12,7 +12,7 @@ import InputForm from "./_InputForm.svelte";
     let sheetTitle = "";
     let isShaking = false;
     let statusMessage = NORMAL_MSG;
-
+    $: if($isAddingSheet) statusMessage = NORMAL_MSG;
 
     let isLoading = false;
 </script>
