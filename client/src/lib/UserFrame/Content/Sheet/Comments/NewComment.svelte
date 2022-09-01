@@ -2,8 +2,8 @@
 import { title } from "$src/api/Sheet";
 import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 import StarsScoreEditable from "$src/assets/Components/StarsScore_editable.svelte";
+import CommentorPicture from "./Commentor/CommentorPicture.svelte";
 
-import Commentor from "./Comment/Commentor.svelte";
 
 let score = 0;
 </script>
@@ -13,7 +13,7 @@ let score = 0;
     <div class=StatusMessage> Please remember to be nice. </div>
 
     <div class=MidContainer>
-        <Commentor />
+        <CommentorPicture />
         <textarea class=CommentField/>
     </div>
 
@@ -65,8 +65,8 @@ let score = 0;
     @media (min-width: 600px) {
         .MidContainer {
             display: flex;
-            background-color: red;
             margin: 5px 0 5px 0;
+            gap: 5px;
         }
         .BottomContainer {
             width: 100%;
