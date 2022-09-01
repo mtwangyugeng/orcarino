@@ -56,6 +56,7 @@ import { onDestroy } from "svelte";
     input {
         height: 100%;
         width: 100%;
+        padding-left: 5px;
     }
 
 </style>
