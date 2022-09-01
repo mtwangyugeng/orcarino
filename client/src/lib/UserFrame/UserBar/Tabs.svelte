@@ -1,26 +1,12 @@
-<script context="module">
-    import CommunityIcon from "$src/assets/Icons/CommunityIcon.svelte";
-    import MySheetsIcon from "$src/assets/Icons/MySheetsIcon.svelte";
-    import Community from "../Content/Community/Community.svelte";
-    import MySheets from "../Content/MySheets.svelte";
-
-    import {writable} from "svelte/store"
-
-    export const TABS = [
-        {icon:CommunityIcon, name:"Community", content: Community, isLoginContent: false}, 
-        {icon:MySheetsIcon, name:"My Sheets", content: MySheets, isLoginContent: true}, 
-    ]
-    export const activatedTabIndex = writable(0);
-</script>
-
 <script>
     import TabWithIcon from "$src/assets/Components/TabWithIcon.svelte";
-
+    import { TABS } from "../UserFrame.svelte";
+    export let activatedTabIndex = 0;
 </script>
 
 <section>
     {#each TABS as {icon, name},i (name)}
-        <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={$activatedTabIndex} on:click={()=>activatedTabIndex.set(i)} />
+        <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex =i} />
     {/each}
 </section>
 
@@ -28,7 +14,7 @@
 
     @media (min-width: 600px){
         section {
-            margin-top: 20px;
+            margin-top: 10px;
         }
     }
     

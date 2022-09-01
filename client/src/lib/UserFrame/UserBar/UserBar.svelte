@@ -8,7 +8,7 @@ import UserInfo from "./UserInfo/UserInfo.svelte";
 import UserTabs from "./UserTabs.svelte";
 
     export let barActive = false;
-
+    export let activatedTabIndex = 0;
 </script>
 
 <section class:BarActive={barActive}>
@@ -25,11 +25,7 @@ import UserTabs from "./UserTabs.svelte";
             <AskLogin />
         {/if}
 
-        <!-- {#each tabs as {icon, name},i (name)}
-            <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex = i} />
-        {/each} -->
-
-        <Tabs />
+        <Tabs bind:activatedTabIndex={activatedTabIndex}/>
 
     </div>
 </section>

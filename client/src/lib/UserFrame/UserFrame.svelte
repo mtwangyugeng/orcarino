@@ -1,3 +1,14 @@
+<script context="module">
+    import CommunityIcon from "$src/assets/Icons/CommunityIcon.svelte";
+    import MySheetsIcon from "$src/assets/Icons/MySheetsIcon.svelte";
+    import Community from "./Content/Community/Community.svelte";
+    import MySheets from "./Content/MySheets.svelte";
+
+    export const TABS = [
+        {icon:CommunityIcon, name:"Community", content: Community, isLoginContent: false}, 
+        {icon:MySheetsIcon, name:"My Sheets", content: MySheets, isLoginContent: true}, 
+    ]
+</script>
 
 <script>
 import AddSheet from "../DropDowns/AddSheet.svelte";
@@ -6,24 +17,22 @@ import LogOut from "../DropDowns/LogOut.svelte";
 
 import Content from "./Content/Content.svelte";
 import Search from "./Search/Search.svelte";
-import { activatedTabIndex, TABS } from "./UserBar/Tabs.svelte";
 import UserBar from "./UserBar/UserBar.svelte";
     let barActive = true;
-
-
+    let activatedTabIndex = 0;
 </script>
 
 <section>
     <div class=RightSide>
         <div class=SearchContainer class:SearchContainerActive={barActive}>
-            <Search tabName={TABS[$activatedTabIndex]["name"]} tabIcon={TABS[$activatedTabIndex]["icon"]} />
+            <Search tabName={TABS[activatedTabIndex]["name"]} tabIcon={TABS[activatedTabIndex]["icon"]} />
         </div>
         <div class=ContentContainer>
-            <Content currTab={TABS[$activatedTabIndex]["content"]}/>
+            <Content currTab={TABS[activatedTabIndex]["content"]}/>
         </div>
     </div>  
     <div class=BarContainer class:BarContainerActive={barActive}>
-        <UserBar bind:barActive={barActive}/>
+        <UserBar bind:barActive={barActive} bind:activatedTabIndex={activatedTabIndex}/>
     </div>
     
     <Login />
