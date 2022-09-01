@@ -3,12 +3,10 @@ import { user } from "$src/api/_User";
 import ExpandAndRetractButton from "$src/assets/Components/ExpandAndRetractButton.svelte";
 import TabWithIcon from "$src/assets/Components/TabWithIcon.svelte";
 import AskLogin from "./AskLogin.svelte";
+import Tabs from "./Tabs.svelte";
 import UserInfo from "./UserInfo/UserInfo.svelte";
 import UserTabs from "./UserTabs.svelte";
 
-    export let tabs;
-
-    export let activatedTabIndex;
     export let barActive = false;
 
 </script>
@@ -27,11 +25,11 @@ import UserTabs from "./UserTabs.svelte";
             <AskLogin />
         {/if}
 
-        {#each tabs as {icon, name},i (name)}
+        <!-- {#each tabs as {icon, name},i (name)}
             <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex = i} />
-        {/each}
+        {/each} -->
 
-        
+        <Tabs />
 
     </div>
 </section>
