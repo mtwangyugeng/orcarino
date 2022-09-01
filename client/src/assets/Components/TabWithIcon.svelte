@@ -17,7 +17,6 @@
         background-color: rgb(252, 90, 26);
         height: 50px;
         width: 100%;
-        margin-bottom: 10px;
         /* border-radius: 50%; */
         display: flex;
         align-items: center;
