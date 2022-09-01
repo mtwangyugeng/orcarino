@@ -33,8 +33,32 @@ searchMySheetsRegex.subscribe((regex) => {
 
 export const isAddingSheet = writable(true);
 
-export function addSheet(title) {
+export async function addSheet(title) {
     if (title === "") return "Title can't be empty."
+    /**
+     * if input are valid:
+     * 1. send post request
+     * 2. if get valid response from server: 
+     *  - update the user  
+     *  - open new user tab of the newly created Sheet
+    **/
+   // TODO
+    let res = {success: true,  loadout: {
+        id: n++,
+        isPrivate: false,
+        votes: 0,
+        title: title,
+        author: "Salanmander man",
+        views: 0
+    }};
+    // TODO
+    if (!res.success) return "Server Error, please try again later";
     
+    previews.update(v => {
+        return [...v, res.loadout]
+    })
+
+    isAddingSheet.set(false);
+
     return null;
 }
