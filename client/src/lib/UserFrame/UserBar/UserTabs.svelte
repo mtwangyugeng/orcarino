@@ -10,14 +10,16 @@ import CloseIcon from "$src/assets/Icons/CloseIcon.svelte";
         User Tabs
     </TitleWithLineOnTwoSides>
 
-    {#each $userTabs as {title, id} (id)}
-        <button class=Tab class:Active={$currSheetId === id} on:click|self={() => setCurrSheetId(id)}>
-            {title}
-            <button class=Close on:click={() => closeTab(id)}>
-                <CloseIcon />
+    <div class=UserTabsContainer>
+        {#each $userTabs as {title, id} (id)}
+            <button class=Tab class:Active={$currSheetId === id} on:click|self={() => setCurrSheetId(id)}>
+                {title}
+                <button class=Close on:click={() => closeTab(id)}>
+                    <CloseIcon />
+                </button>
             </button>
-        </button>
-    {/each}
+        {/each}
+    </div>
 
 </section>
 
@@ -26,6 +28,14 @@ import CloseIcon from "$src/assets/Icons/CloseIcon.svelte";
         display: flex;
         flex-direction: column;
         gap: 10px;
+    }
+
+    .UserTabsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 250px;
+        overflow: auto;
     }
 
     .Tab {
