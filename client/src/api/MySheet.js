@@ -31,7 +31,7 @@ searchMySheetsRegex.subscribe((regex) => {
     previews.set(neo.filter(v => regex.test(v.title)))
 })
 
-export const isAddingSheet = writable(true);
+export const isAddingSheet = writable(false);
 
 export async function addSheet(title) {
     if (title === "") return "Title can't be empty."
