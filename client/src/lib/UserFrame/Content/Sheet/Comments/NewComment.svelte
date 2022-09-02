@@ -1,10 +1,10 @@
 <script>
 import { title } from "$src/api/Sheet";
+import { picUrl } from "$src/api/UserInfo";
+import { isLoggingIn, user } from "$src/api/_User";
 import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 import StarsScoreEditable from "$src/assets/Components/StarsScore_editable.svelte";
 import CommentorPicture from "./Commentor/CommentorPicture.svelte";
-
-
 let score = 0;
 </script>
 
@@ -13,7 +13,7 @@ let score = 0;
     <div class=StatusMessage> Please remember to be nice. </div>
 
     <div class=MidContainer>
-        <CommentorPicture />
+        <CommentorPicture picUrl={$picUrl}/>
         <textarea class=CommentField/>
     </div>
 
@@ -31,6 +31,12 @@ let score = 0;
             </RippleButton>
         </span>
     </div>
+
+    {#if $user === null}
+        <div class=LoginMessage>
+            <button on:click={()=>isLoggingIn.set(true)}> Login </button>&nbsp;to leave a review.
+        </div>
+    {/if}
 </section>
 
 <style>
@@ -39,7 +45,26 @@ let score = 0;
         padding: 10px;
         margin: 5px;
         border-radius: 5px;
+        position: relative;
+    }
 
+    .LoginMessage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+
+        color: white;
+        background-color: rgba(0,0,0,0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .LoginMessage button {
+        text-decoration: underline;
+        font-weight: bold;
     }
 
     .StarScore {
