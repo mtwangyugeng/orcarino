@@ -39,13 +39,21 @@ import AddSingleNote from "./AddSingleNote.svelte";
             
            
             {#each notesWithIndex as {index, note},i (index)}
-                <div class=SingleNoteContainer animate:flip="{{duration: 200}}">
-                    <SingleNote isEditable={isEditable} bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
-                    <AddSingleNote isEditable={isEditable} on:click={() => addNote(i)}/>
-                
-                </div>
-                
+                <span animate:flip="{{duration: 200}}">
+                    <div class=SingleNoteContainer >
+                        <SingleNote isEditable={isEditable} bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
+                        <AddSingleNote isEditable={isEditable} on:click={() => addNote(i)}/>
+                    
+                    </div>
+                </span>
             {/each}
+
+            {#each Array(8) as _}
+                <span>
+                    <div class="SingleNoteDecoy">
+                    </div>
+                </span>
+            {/each} 
         </div>
     </div>
 
@@ -70,8 +78,6 @@ import AddSingleNote from "./AddSingleNote.svelte";
         flex-wrap: wrap;
         padding: 10px;
         gap: 5px;
-        align-items: flex-start;
-        width: fit-content;
     }
 
     .SingleNoteContainer {
@@ -80,4 +86,13 @@ import AddSingleNote from "./AddSingleNote.svelte";
         align-items: center;
     }
 
+    .SingleNoteDecoy {
+        width: 200px;
+    }
+
+    .SingleNotes > span{
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
 </style>
