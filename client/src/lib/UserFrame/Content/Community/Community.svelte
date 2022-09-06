@@ -1,17 +1,21 @@
 <script>
+import AnimatedSwitchScreen from "$src/assets/Components/AnimatedSwitchScreen.svelte";
 import PageNav from "./PageNav.svelte";
 import Preview from "./Preview.svelte";
 
+
+let insertRight;
+let insertLeft;
 </script>
 
 
 <section>
     <div class=PreviewContainer>
-        <Preview />
+        <AnimatedSwitchScreen currentContent={{component:Preview, props:{}}} bind:insertRight={insertRight} bind:insertLeft={insertLeft}/>
     </div>
 
     <div class=PageNavContainer>
-        <PageNav />
+        <PageNav insertRight={insertRight} insertLeft={insertLeft}/>
     </div>
 </section>
 

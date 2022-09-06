@@ -2,16 +2,42 @@
 import { currPage, numOfPages, toLeft, toRight } from "$src/api/Community";
 import ArrowWithAnimation from "$src/assets/Components/ArrowWithAnimation.svelte";
 import CustomSelect from "$src/assets/Components/CustomSelect.svelte";
+import Preview from "./Preview.svelte";
 
 $:options = Array($numOfPages).fill(null).map((_, i) => [(i + 1)+"", i+1])
 
+export let insertRight;
+export let insertLeft;
+
+function handleRight() {
+    toRight();
+    insertRight({component: Preview, props:{}})();
+}
+
+function handleLeft() {
+    toLeft();
+    insertLeft({component: Preview, props:{}})();
+}
+
+let prevPage = $currPage;
+$: {
+    if (prevPage > $currPage) {
+        insertLeft({component: Preview, props:{}})();
+    }
+
+    if (prevPage < $currPage) {
+        insertRight({component: Preview, props:{}})();
+    }
+
+    prevPage = $currPage;
+};
 
 </script>
 
 <section>
     <div class=LeftArrowContainer>
         {#if $currPage > 1}
-            <ArrowWithAnimation on:click={toLeft}/>
+            <ArrowWithAnimation on:click={handleLeft}/>
         {/if}
     </div>
     <div class=SelectContainer>
@@ -19,7 +45,7 @@ $:options = Array($numOfPages).fill(null).map((_, i) => [(i + 1)+"", i+1])
     </div>
     <div class=RightArrowContainer >
         {#if $currPage < $numOfPages}
-            <ArrowWithAnimation on:click={toRight}/>
+            <ArrowWithAnimation on:click={handleRight}/>
         {/if}
     </div>
 </section>

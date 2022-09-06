@@ -3,8 +3,6 @@
 </script>
 
 <script>
-import Community from "$src/lib/UserFrame/Content/Community/Community.svelte";
-
     export let scrollDuration = 400;
     export let currentContent = {component: null, props: {}};
 
@@ -66,18 +64,15 @@ import Community from "$src/lib/UserFrame/Content/Community/Community.svelte";
 
 <style>
     section {
-        width: 500px;
-        height: 100vh;
-        overflow: hidden;
-        position: relative;
-        background-color: red;
-       
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        position: relative;       
     }
 
     .Scroll {
         width: 200%;
-        height: 90%;
-        
+        height: 100%;
         display: flex;
     }
 
