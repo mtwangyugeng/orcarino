@@ -1,55 +1,72 @@
+<script context="module">
+    const EMPTYCONTENT = {component: null, props:{}, id: 0};
+</script>
+
 <script>
 import Community from "$src/lib/UserFrame/Content/Community/Community.svelte";
 
-import MySheets from "$src/lib/UserFrame/Content/MySheets.svelte";
+    export let scrollDuration = 400;
+    export let currentContent = {component: null, props: {}};
 
+    let scrollComponents = [{...currentContent, id: 1}, EMPTYCONTENT];
 
-
-    let scrollComponents = [{scrollComponent: Community, id: 1}, {scrollComponent: null, id: 0}];
+    let n = 2;
 
     let isScrollingLeft = false;
-
     export function insertRight(toInsert) {
         return () => {
+            if (isScrollingLeft || isScrollingRight) return;
+
             isScrollingLeft = true;
-            scrollComponents[1] = {scrollComponent: toInsert, id:2};
+            scrollComponents[1] = {...toInsert, id:n++};
+            
             setTimeout(() => {
                 isScrollingLeft = false;
-                scrollComponents = [scrollComponents[1], null]
-                console.log(scrollComponents.length)
-            }, 1000)
+                scrollComponents = [scrollComponents[1], EMPTYCONTENT]
+            }, scrollDuration)
         }
     }
 
-    function insertLeft() {
+    let isScrollingRight = false;
+    export function insertLeft(toInsert) {
+        return () => {
+            if (isScrollingLeft || isScrollingRight) return;
 
+            isScrollingRight = true;
+            scrollComponents[1] = {...toInsert, id:n++};
+            
+            setTimeout(() => {
+                isScrollingRight = false;
+                scrollComponents = [scrollComponents[1], EMPTYCONTENT]
+            }, scrollDuration)
+        }
     }
 
 </script>
 
 
 <section>
-    <div class=Scroll class:ScrollLeft={isScrollingLeft}>
-        {#each scrollComponents as {scrollComponent, id} (id)}
+    <div class=Scroll class:ScrollLeft={isScrollingLeft} class:ScrollRight={isScrollingRight} style={`animation-duration: ${scrollDuration}ms`}>
+        {#each scrollComponents as {component, id} (id)}
             <div class=ScrollComponent>
-                <svelte:component this={scrollComponent} />
+                <svelte:component this={component} />
             </div>
         {/each}
         
     </div>
 
-    <button on:click={insertLeft}>
+    <!-- <button on:click={insertLeft(Community)}>
         left
     </button>
     <button on:click={insertRight(MySheets)}>
         right
-    </button>
+    </button> -->
 </section>
 
 
 <style>
     section {
-        width: 100vw;
+        width: 500px;
         height: 100vh;
         overflow: hidden;
         position: relative;
@@ -71,8 +88,30 @@ import MySheets from "$src/lib/UserFrame/Content/MySheets.svelte";
     }
 
     .ScrollLeft {
-        transition: transform 1s;
-        transform: translateX(-50%);
+        animation: scrollLeft;
+    }
+
+    @keyframes scrollLeft {
+        from {
+            transform: translateX(0%);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
+
+    .ScrollRight {
+        flex-direction: row-reverse;
+        animation: scrollright;
+    }
+
+    @keyframes scrollright {
+        from {
+            transform: translateX(-50%);
+        }
+        to {
+            transform: translateX(0%);
+        }
     }
 
 
