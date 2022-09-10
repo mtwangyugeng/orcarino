@@ -34,13 +34,28 @@
         isLoggingIn.set(false);
         isThereError = false;
     }
+
+    async function handleSubmit() {
+        let status = null;
+
+        if (isCreatingAccount) {
+            status = await createAccount(username, password, confirmPassword)
+        }
+
+        status = await logIn(username, password)
+        if (status === null) {
+            handleClose()
+        }
+
+        return status
+    }
 </script>
 
 {#if $isLoggingIn === true}
     <DropdownWindow on:close={handleClose} title={windowTitle} bind:isShaking={isShaking} isLoading={isLoading}>
             <InputForm 
                 submitButtonText = {windowTitle}
-                submitFunc = {isCreatingAccount ? () => createAccount(username, password, confirmPassword) : () => logIn(username, password)}
+                submitFunc = {handleSubmit}
                 bind:isShaking={isShaking}
                 bind:statusMessage={statusMessage}
                 bind:isThereError={isThereError}
