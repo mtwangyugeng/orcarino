@@ -1,0 +1,1 @@
+This folder is for server Mockups to test the frontend.
