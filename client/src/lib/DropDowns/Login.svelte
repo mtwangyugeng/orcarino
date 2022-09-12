@@ -36,6 +36,7 @@
     }
 
     async function handleSubmit() {
+        isLoading = true;
         let status = null;
 
         if (isCreatingAccount) {
@@ -47,6 +48,7 @@
             handleClose()
         }
 
+        isLoading = false;
         return status
     }
 </script>
