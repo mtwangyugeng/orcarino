@@ -1,9 +1,6 @@
+import { checkUsername, checkPassword, checkePasswordAndConfirmPassword } from '../_checkers';
 import {delay, findInCsvArray} from '../_server'
 
-const MAX_USERNAME = 12;
-const MIN_USERNAME = 6;
-const MAX_PASSWORD = 12;
-const MIN_PASSWORD = 6;
 
 const userData = [
     ['username', 'password', 'id'], 
@@ -11,21 +8,42 @@ const userData = [
     ['bob456', 'asdfgh', '2134134asdSADWED'],
     ];
 
+function checkLogin(username, password) {
+    return checkUsername(username) + checkPassword(password);
+}
+
+function checkCreateAccount(username, password, confirmPassword) {
+    return checkUsername(username) + checkPassword(password) + checkePasswordAndConfirmPassword(password, confirmPassword);
+}
+
 /**
  * 
  * @param {string} username 
  * @param {string} password 
  */
 export async function serverLogIn(username, password) {
-    console.log("serverLogIn")
     await delay();
-    if (username.length > MAX_USERNAME) return `The username is too long. max: ${MAX_USERNAME}`;
-    if (username.length < MIN_USERNAME) return `The username is too short. min: ${MIN_USERNAME}`;
-    if (password.length > MAX_PASSWORD) return `The password is too long. max: ${MAX_PASSWORD}`;
-    if (password.length < MIN_PASSWORD) return `The password is too short. min: ${MIN_PASSWORD}`;
+
+    const checker = checkLogin(username, password);
+    if (checker !== "") return {success:false, err: checker};
 
     const userIndex = findInCsvArray(userData, "username", username);
-    if (userIndex < 0) return "Wrong username or password.";
+    if (userIndex < 0) return {success:false, err: "Username does not exist."};
     
-    return null;
+    const isPasswordMatch = userData[userIndex][1] === password;
+    if (!isPasswordMatch) return {success:false, err: "Wrong username or password."};
+
+    return {success:true, userCode: userData[userIndex][2]};
+}
+
+export async function serverCreateAccount(username, password, confirmPassword) {
+    await delay();
+    const checker = checkCreateAccount(username, password, confirmPassword);
+    if (checker !== "") return {success:false, err: checker};
+
+    const userIndex = findInCsvArray(userData, "username", username);
+    if (userIndex >= 0) return {success:false, err: "the username already exists."}; 
+
+    userData.push([username, password, username + 'asdSADWED']);
+    return {success:true, userCode: username + 'asdSADWED'};;
 }
