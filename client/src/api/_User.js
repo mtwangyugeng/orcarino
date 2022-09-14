@@ -14,7 +14,7 @@ export async function logIn(username, password) {
     const res = await serverLogIn(username, password);
     if (res.success === false) return res.err;
     //TODO
-    user.set(res.userCode)
+    user.set(res.id)
     return null
 }
 
@@ -24,7 +24,7 @@ export async function createAccount(username, password, confirmPassword) {
     const res = await serverCreateAccount(username, password, confirmPassword)
     if (res.success === false) return res.err;
 
-    user.set(res.userCode)
+    user.set(res.id)
     return null
 }
 

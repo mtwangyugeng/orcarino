@@ -33,7 +33,7 @@ export async function serverLogIn(username, password) {
     const isPasswordMatch = userData[userIndex][1] === password;
     if (!isPasswordMatch) return {success:false, err: "Wrong username or password."};
 
-    return {success:true, userCode: userData[userIndex][2]};
+    return {success:true, id: userData[userIndex][2]};
 }
 
 export async function serverCreateAccount(username, password, confirmPassword) {
@@ -45,5 +45,5 @@ export async function serverCreateAccount(username, password, confirmPassword) {
     if (userIndex >= 0) return {success:false, err: "the username already exists."}; 
 
     userData.push([username, password, username + 'asdSADWED']);
-    return {success:true, userCode: username + 'asdSADWED'};;
+    return {success:true, id: username + 'asdSADWED'};;
 }
