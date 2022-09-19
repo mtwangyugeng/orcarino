@@ -1,3 +1,4 @@
+import { serverGetCommunityByPage, serverGetNumberOfPages } from "$src/server/community/Community.server";
 import { writable, get } from "svelte/store"
 
 export const numOfPages = writable(10);
@@ -13,26 +14,19 @@ export function toRight () {
 let n = 0;
 export const previews = writable([]);
 
-let neo = []
-for (let i = 0; i < 30; i++) {
-    neo.push({
-        id: n++,
-        isPrivate: false,
-        votes: 2500,
-        title: "Salamanderman Theme",
-        author: "Salanmander man",
-        views: 20000
-    })
+
+async function getNumberOfPages() {
+    const res = await serverGetNumberOfPages();
+    if(!res.success) return;
+    numOfPages.set(res.loadout);
 }
 
-neo.push({
-    id: n++,
-    isPrivate: false,
-    votes: 2500,
-    title: "Chinchin Theme",
-    author: "Salanmander man",
-    views: 20000
-})
+async function getCommunityByPage (pageNumber) {
+    const res = await serverGetCommunityByPage(pageNumber);
+    if (!res.success) return;
+    previews.set(res.community)
+}
 
-previews.set(neo)
 
+getCommunityByPage(1)
+getNumberOfPages()

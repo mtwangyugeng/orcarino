@@ -6,7 +6,7 @@
 <section>
     {#each $previews as preview (preview.id) }
     <span>
-        <NotePreview {...preview}/>
+        <NotePreview {...preview} isPrivate={false}/>
     </span>
     {/each}
 

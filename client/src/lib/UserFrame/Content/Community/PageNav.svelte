@@ -5,7 +5,7 @@ import CustomSelect from "$src/assets/Components/CustomSelect.svelte";
 import Preview from "./Preview.svelte";
 
 $:options = Array($numOfPages).fill(null).map((_, i) => [(i + 1)+"", i+1])
-
+$:console.log(options)
 export let insertRight;
 export let insertLeft;
 

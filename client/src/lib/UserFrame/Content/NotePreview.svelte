@@ -11,6 +11,7 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
 
     export let title = "Salamanderman Theme"
     export let author = "Salanmander man"
+    export let picUrl = null;
 
     export let views = 20000
     $: viewsDisplay = views >= 1000 ? (views / 1000).toFixed(1) + 'k'  : views + ''
@@ -33,7 +34,7 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
     {/if}
     
     <div class=Preview class:HoverPreview={isHoveringTitle} on:click={goToSheet}>
-        <ImageWithLoading width=100% height=100% />
+        <ImageWithLoading width=100% height=100% url={picUrl}/>
     </div>
     <div class=Score>
         <StarsScore score={2} />

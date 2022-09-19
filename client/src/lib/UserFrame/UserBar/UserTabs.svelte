@@ -11,9 +11,9 @@ import CloseIcon from "$src/assets/Icons/CloseIcon.svelte";
     </TitleWithLineOnTwoSides>
 
     <div class=UserTabsContainer>
-        {#each $userTabs as {name, id} (id)}
+        {#each $userTabs as {title, id} (id)}
             <button class=Tab class:Active={$currSheetId === id} on:click|self={() => setCurrSheetId(id)}>
-                {name}
+                {title}
                 <button class=Close on:click={() => closeTab(id)}>
                     <CloseIcon />
                 </button>
