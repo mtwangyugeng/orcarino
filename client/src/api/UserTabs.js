@@ -1,4 +1,4 @@
-import { serverGetUserTabs } from '$src/server/user-tabs/UserTabs.server';
+import { serverGetUserTabs, serverUpdateUserTabs } from '$src/server/user-tabs/UserTabs.server';
 import {writable, get} from 'svelte/store'
 import { user } from './_User';
 
@@ -38,6 +38,11 @@ user.subscribe(uid => {
     readUserTabs(uid);
 })
 
+userTabs.subscribe(v => {
+    console.log("update usertabs", v)
+    serverUpdateUserTabs(get(user), v)
+}
+);
 
 // !currSheetId
 export const currSheetId = writable(null);

@@ -21,3 +21,12 @@ export async function serverGetUserTabs(id) {
     console.log(finale)
     return {success:true, userTabs: finale}
 }
+
+export async function serverUpdateUserTabs(id, neo) {
+    const index = findInCsvArray(userTabsData, 'id', id)
+    if (index < 0) return {success:false, err: "User id does not exist."};
+
+    userTabsData[index][1] = neo;
+    return {success:true}
+
+}
