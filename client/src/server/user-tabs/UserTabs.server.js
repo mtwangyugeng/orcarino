@@ -15,9 +15,9 @@ export async function serverGetUserTabs(id) {
     const tabsString = userTabsData[index][1];
     const tabArr = tabsString.split(';');
 
-    const finale = tabArr.map(tabId => {
+    const finale = tabArr.map( tabId => {
         return innerGetCommunityById(tabId);
     });
-
+    console.log(finale)
     return {success:true, userTabs: finale}
 }

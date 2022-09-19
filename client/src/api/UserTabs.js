@@ -1,3 +1,4 @@
+import { serverGetUserTabs } from '$src/server/user-tabs/UserTabs.server';
 import {writable, get} from 'svelte/store'
 import { user } from './_User';
 
@@ -6,8 +7,12 @@ export const userTabs = writable([]);
 export const setUserTabs = (target) => {
     userTabs.set(target);
 }
-export const readUserTabs = (uid) => {
-    return userTabs.set([{title: "Ode to Joy", id:69}, {title: "Obito theme", id:22}]);
+export const readUserTabs = async (uid) => {
+    const res = await serverGetUserTabs(uid);
+    if(!res.success) return;
+
+    console.log(res.userTabs)
+    return userTabs.set(res.userTabs);
 }
 
 export function closeTab(targetId) {
@@ -29,6 +34,7 @@ export function addUserTab(sheetId, title) {
 // TODO
 user.subscribe(uid => {
     if(!uid) return;
+    console.log("uid", uid)
     readUserTabs(uid);
 })
 
