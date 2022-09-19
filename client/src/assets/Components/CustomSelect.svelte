@@ -8,7 +8,7 @@
     let hoverValue = null;
 
     export let search = "";
-    let filteredOptions = options;
+    $: filteredOptions = options;
 
     const renewFilteredOptions = () => {
         const searchRegex = new RegExp(`(^|\\s)${search}.*`, 'i');
