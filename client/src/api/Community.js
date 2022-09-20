@@ -1,5 +1,6 @@
-import { serverGetCommunityByPage, serverGetNumberOfPages } from "$src/server/community/Community.server";
+import { serverGetCommunityByKeyword, serverGetCommunityByPage, serverGetNumberOfPages } from "$src/server/community/Community.server";
 import { writable, get } from "svelte/store"
+import { searchCommunity } from "./Search";
 
 export const numOfPages = writable(10);
 export const currPage = writable(1);
@@ -27,3 +28,16 @@ export async function getCommunityByPage (pageNumber) {
     previews.set(res.community)
 }
 
+export async function getSearchCommunity (keyword, pageNumber) {
+    const res = await serverGetCommunityByKeyword(keyword, pageNumber);
+    if (!res.success) return;
+    previews.set(res.community)
+}
+
+currPage.subscribe(v => {
+    if(get(searchCommunity)) {
+        getSearchCommunity(get(searchCommunity), v)
+    } else {
+        getCommunityByPage(v)
+    }
+});

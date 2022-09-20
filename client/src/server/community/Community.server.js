@@ -13,17 +13,15 @@ export async function serverGetNumberOfPages() {
     return {success: true, loadout: Math.ceil(communityData.length / ITEMS_PER_PAGE)};
 }
 
-
-export async function serverGetCommunityByPage(pageNumber) {
-    await delay();
+function getArrByPage(arr, pageNumber) {
     const start = (pageNumber - 1) * ITEMS_PER_PAGE + 1;
     const end = start + ITEMS_PER_PAGE;
 
     const finale = [];
 
     let index = start;
-    while (index < end && index < communityData.length) {
-        const c = communityData[index]
+    while (index < end && index < arr.length) {
+        const c = arr[index]
         finale.push(
             {
                 id: c[0],
@@ -37,8 +35,22 @@ export async function serverGetCommunityByPage(pageNumber) {
         )
         index ++;
     }
+    return finale
+}
+
+export async function serverGetCommunityByPage(pageNumber) {
+    await delay();
+    const finale = getArrByPage(communityData, pageNumber)
 
     return {success: true, community: finale}
+}
+
+export async function serverGetCommunityByKeyword(keyword, pageNumber) {
+    await delay();
+    const regex = new RegExp(`(^|\\s)${keyword}.*`, 'i');
+    const filterCommunityData = communityData.filter(v => regex.test(v[1]));
+    const finale = getArrByPage(filterCommunityData, pageNumber)
+    return {success:true, community: finale}
 }
 
 export function innerGetCommunityById(id) {
