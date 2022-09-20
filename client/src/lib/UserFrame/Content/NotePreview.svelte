@@ -9,6 +9,8 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
     export let votes = 2500;
     $: voteDisplay = votes >= 1000 ? (votes / 1000).toFixed(1) + 'k'  : votes + ''
 
+    export let score = 2;
+
     export let title = "Salamanderman Theme"
     export let author = "Salanmander man"
     export let picUrl = null;
@@ -37,7 +39,7 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         <ImageWithLoading width=100% height=100% url={picUrl}/>
     </div>
     <div class=Score>
-        <StarsScore score={2} />
+        <StarsScore score={score} />
         <span>{voteDisplay} votes</span>
     </div>
     <h3 class=Title on:click={goToSheet} on:mousemove={()=>isHoveringTitle = true} on:mouseleave={()=>isHoveringTitle = false}>{title}</h3>
