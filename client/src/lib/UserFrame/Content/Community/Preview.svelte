@@ -1,9 +1,14 @@
 <script>
-    import {previews} from '$src/api/Community';
+    import {currPage, getCommunityByPage, previews} from '$src/api/Community';
+    import LoadingOverlay from '$src/assets/Components/LoadingOverlay.svelte';
     import NotePreview from '../NotePreview.svelte';
 </script>
 
 <section>
+    {#await getCommunityByPage($currPage)}
+      <LoadingOverlay />  
+    {/await}
+
     {#each $previews as preview (preview.id) }
     <span>
         <NotePreview {...preview} isPrivate={false}/>

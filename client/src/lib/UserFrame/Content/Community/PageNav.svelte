@@ -1,7 +1,8 @@
 <script>
-import { currPage, numOfPages, toLeft, toRight } from "$src/api/Community";
+import { currPage, getNumberOfPages, numOfPages, toLeft, toRight } from "$src/api/Community";
 import ArrowWithAnimation from "$src/assets/Components/ArrowWithAnimation.svelte";
 import CustomSelect from "$src/assets/Components/CustomSelect.svelte";
+    import LoadingOverlay from "$src/assets/Components/LoadingOverlay.svelte";
 import Preview from "./Preview.svelte";
 
 $:options = Array($numOfPages).fill(null).map((_, i) => [(i + 1)+"", i+1])
@@ -35,6 +36,10 @@ $: {
 </script>
 
 <section>
+    {#await getNumberOfPages()}
+        <LoadingOverlay />
+        
+    {/await}
     <div class=LeftArrowContainer>
         {#if $currPage > 1}
             <ArrowWithAnimation on:click={handleLeft}/>
@@ -57,6 +62,7 @@ $: {
         align-items: center;
         height: 100%;
         gap: 10px;
+        position: relative;
     }
 
     .SelectContainer {

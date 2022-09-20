@@ -15,18 +15,15 @@ let n = 0;
 export const previews = writable([]);
 
 
-async function getNumberOfPages() {
+export async function getNumberOfPages() {
     const res = await serverGetNumberOfPages();
     if(!res.success) return;
     numOfPages.set(res.loadout);
 }
 
-async function getCommunityByPage (pageNumber) {
+export async function getCommunityByPage (pageNumber) {
     const res = await serverGetCommunityByPage(pageNumber);
     if (!res.success) return;
     previews.set(res.community)
 }
 
-
-getCommunityByPage(1)
-getNumberOfPages()
