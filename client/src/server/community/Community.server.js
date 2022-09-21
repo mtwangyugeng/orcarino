@@ -14,7 +14,8 @@ export async function serverGetNumberOfPages() {
 }
 
 function getArrByPage(arr, pageNumber) {
-    const start = (pageNumber - 1) * ITEMS_PER_PAGE + 1;
+    let start = (pageNumber - 1) * ITEMS_PER_PAGE;
+    if (start < arr.length && arr[start][0] === 'id') start += 1;
     const end = start + ITEMS_PER_PAGE;
 
     const finale = [];
@@ -35,13 +36,13 @@ function getArrByPage(arr, pageNumber) {
         )
         index ++;
     }
+    console.log("finale", finale)
     return finale
 }
 
 export async function serverGetCommunityByPage(pageNumber) {
     await delay();
     const finale = getArrByPage(communityData, pageNumber)
-
     return {success: true, community: finale}
 }
 
@@ -49,6 +50,7 @@ export async function serverGetCommunityByKeyword(keyword, pageNumber) {
     await delay();
     const regex = new RegExp(`(^|\\s)${keyword}.*`, 'i');
     const filterCommunityData = communityData.filter(v => regex.test(v[1]));
+    console.log("filter", filterCommunityData)
     const finale = getArrByPage(filterCommunityData, pageNumber)
     return {success:true, community: finale}
 }

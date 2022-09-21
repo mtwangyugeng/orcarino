@@ -1,13 +1,15 @@
 <script>
-    import {currPage, getCommunityByPage, previews} from '$src/api/Community';
+    import {currPage, getCommunityByPage, isLoadingPreviews, previews} from '$src/api/Community';
     import LoadingOverlay from '$src/assets/Components/LoadingOverlay.svelte';
     import NotePreview from '../NotePreview.svelte';
+
+    getCommunityByPage($currPage)
 </script>
 
 <section>
-    {#await getCommunityByPage($currPage)}
+    {#if $isLoadingPreviews}
       <LoadingOverlay />  
-    {/await}
+    {/if}
 
     {#each $previews as preview (preview.id) }
     <span>

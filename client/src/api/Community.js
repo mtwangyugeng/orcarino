@@ -14,6 +14,7 @@ export function toRight () {
 
 let n = 0;
 export const previews = writable([]);
+export const isLoadingPreviews = writable(false);
 
 
 export async function getNumberOfPages() {
@@ -23,16 +24,29 @@ export async function getNumberOfPages() {
 }
 
 export async function getCommunityByPage (pageNumber) {
+    isLoadingPreviews.set(true);
+
     const res = await serverGetCommunityByPage(pageNumber);
     if (!res.success) return;
     previews.set(res.community)
+    
+    isLoadingPreviews.set(false);
 }
 
 export async function getSearchCommunity (keyword, pageNumber) {
+    isLoadingPreviews.set(true);
     const res = await serverGetCommunityByKeyword(keyword, pageNumber);
     if (!res.success) return;
     previews.set(res.community)
+
+    isLoadingPreviews.set(false)
 }
+
+searchCommunity.subscribe(v => {
+    
+    getSearchCommunity(v, 1);
+
+}) 
 
 currPage.subscribe(v => {
     if(get(searchCommunity)) {
