@@ -47,3 +47,8 @@ export async function serverCreateAccount(username, password, confirmPassword) {
     userData.push([username, password, username + 'asdSADWED']);
     return {success:true, id: username + 'asdSADWED'};;
 }
+
+export function getUsernameByUid(uid) {
+    const userIndex = findInCsvArray(userData, "id", uid);
+    return userData[userIndex][0]
+}

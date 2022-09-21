@@ -13,7 +13,7 @@
 
     {#each $previews as preview (preview.id) }
     <span>
-        <NotePreview {...preview} isPrivate={false}/>
+        <NotePreview {...preview}/>
     </span>
     {/each}
 

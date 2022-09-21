@@ -4,7 +4,7 @@ import { setCurrSheetId, addUserTab } from "$src/api/UserTabs";
 import ImageWithLoading from "$src/assets/Components/ImageWithLoading.svelte";
 import StarsScore from "$src/assets/Components/StarsScore.svelte";
 
-    export let isPrivate = true;
+    export let isPrivate = 'true';
 
     export let votes = 2500;
     $: voteDisplay = votes >= 1000 ? (votes / 1000).toFixed(1) + 'k'  : votes + ''
@@ -29,7 +29,7 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
 </script>
 
 <section class=Card>
-    {#if isPrivate}
+    {#if isPrivate === 'true'}
         <div class='Tag Private'>
             Private
         </div>
