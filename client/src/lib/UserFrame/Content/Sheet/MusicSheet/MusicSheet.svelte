@@ -12,6 +12,13 @@
     import SingleNote from "./SingleNote/SingleNote.svelte";
     import {notes} from "$src/api/Sheet";
     let {notesWithIndex, nextIndex} = iniNotes($notes)
+    notes.subscribe(v=>{
+        const t = iniNotes(v)
+        notesWithIndex = t.notesWithIndex
+        nextIndex = t.nextIndex
+    }
+    )
+
     function deleteNote(i) {
         notesWithIndex=[...notesWithIndex.slice(0, i), ...notesWithIndex.slice(i + 1)];
     }
