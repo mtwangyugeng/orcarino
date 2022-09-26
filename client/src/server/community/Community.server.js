@@ -8,7 +8,7 @@ const allData = [
     ['4', 'Obito Theme', 'bob456', '1500', '8', '180', "data:image/jpeg;base64,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", 'true']
 ]
 
-
+const communityData = allData.filter(v => v[7] === 'false')
 
 const ITEMS_PER_PAGE = 10;
 export async function serverGetNumberOfPages() {
@@ -48,14 +48,14 @@ function getArrByPage(arr, pageNumber) {
 
 export async function serverGetCommunityByPage(pageNumber) {
     await delay();
-    const communityData = allData.filter(v => v[7] === 'false')
+    // const communityData = allData.filter(v => v[7] === 'false')
     const finale = getArrByPage(communityData, pageNumber)
     return {success: true, community: finale}
 }
 
 export async function serverGetCommunityByKeyword(keyword, pageNumber) {
     await delay();
-    const communityData = allData.filter(v => v[7] === 'false')
+    // const communityData = allData.filter(v => v[7] === 'false')
     const regex = new RegExp(`(^|\\s)${keyword}.*`, 'i');
     const filterCommunityData = communityData.filter(v => regex.test(v[1]));
     console.log("filter", filterCommunityData)

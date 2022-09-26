@@ -1,5 +1,7 @@
+import { serverGetNotes } from "$src/server/sheet/MusicSheet.server";
 import { writable, get } from "svelte/store";
 import {currSheetId} from "./UserTabs"
+import { sendReq } from "./_serverHelper";
 
 
 export const id = writable(null);
@@ -29,7 +31,16 @@ currSheetId.subscribe(v => {
         {id:2, content: "Terrible sheet! The notes are off by 10000 miles.", postTime: "6/29/2022",score: null, authorId:1}
     ]);
 
-    notes.set(["000000000000", "space", "000000000100"]);
+    getNotes(v)
     score.set(8)
     numberOfVote.set(20000)
 });
+
+function getNotes(sheetId) {
+    console.log("!!!!!!!!Shetid: ", sheetId);
+    sendReq(serverGetNotes(sheetId), notes);
+}
+
+notes.subscribe(v =>{
+    console.log("!!!!!!!!notes: ", v)
+})
