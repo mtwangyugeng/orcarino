@@ -11,6 +11,8 @@ export const description = writable("Description placeholder");
 export const comments = writable([]);
 
 export const notes = writable([]);
+export const isLoadingNotes = writable(false);
+
 export const score = writable(0);
 export const numberOfVote = writable(0)
 
@@ -36,9 +38,13 @@ currSheetId.subscribe(v => {
     numberOfVote.set(20000)
 });
 
-function getNotes(sheetId) {
+async function getNotes(sheetId) {
     console.log("!!!!!!!!Shetid: ", sheetId);
-    sendReq(serverGetNotes(sheetId), notes);
+    isLoadingNotes.set(true);
+    console.log("Loading Notes...");
+    await sendReq(serverGetNotes(sheetId), notes);
+    console.log("Finishing Loading Notes...");
+    isLoadingNotes.set(false);
 }
 
 notes.subscribe(v =>{

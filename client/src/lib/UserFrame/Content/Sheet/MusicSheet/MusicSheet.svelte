@@ -10,7 +10,7 @@
 
 <script>
     import SingleNote from "./SingleNote/SingleNote.svelte";
-    import {notes} from "$src/api/Sheet";
+    import {isLoadingNotes, notes} from "$src/api/Sheet";
     let {notesWithIndex, nextIndex} = iniNotes($notes)
     notes.subscribe(v=>{
         const t = iniNotes(v)
@@ -36,34 +36,38 @@
     //animation for note 
     import {flip} from "svelte/animate"
 import AddSingleNote from "./AddSingleNote.svelte";
+    import LoadingOverlay from "$src/assets/Components/LoadingOverlay.svelte";
 </script>
 
 <section>
-
-    <div class=SingleNotesContainer>
-        <AddSingleNote isEditable={isEditable} on:click={() => addNote(-1)}/>
-        <div class=SingleNotes>
+    {#if $isLoadingNotes}
+        <LoadingOverlay />
+    
+    {:else}
+        <div class=SingleNotesContainer>
+            <AddSingleNote isEditable={isEditable} on:click={() => addNote(-1)}/>
+            <div class=SingleNotes>
+                
             
-           
-            {#each notesWithIndex as {index, note},i (index)}
-                <span animate:flip="{{duration: 200}}">
-                    <div class=SingleNoteContainer >
-                        <SingleNote isEditable={isEditable} bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
-                        <AddSingleNote isEditable={isEditable} on:click={() => addNote(i)}/>
-                    
-                    </div>
-                </span>
-            {/each}
+                {#each notesWithIndex as {index, note},i (index)}
+                    <span animate:flip="{{duration: 200}}">
+                        <div class=SingleNoteContainer >
+                            <SingleNote isEditable={isEditable} bind:selectedCover={note} deleteThis={()=>deleteNote(i)} />
+                            <AddSingleNote isEditable={isEditable} on:click={() => addNote(i)}/>
+                        
+                        </div>
+                    </span>
+                {/each}
 
-            {#each Array(8) as _}
-                <span>
-                    <div class="SingleNoteDecoy">
-                    </div>
-                </span>
-            {/each} 
+                {#each Array(8) as _}
+                    <span>
+                        <div class="SingleNoteDecoy">
+                        </div>
+                    </span>
+                {/each} 
+            </div>
         </div>
-    </div>
-
+    {/if}
 
 </section>
 
@@ -73,6 +77,7 @@ import AddSingleNote from "./AddSingleNote.svelte";
         background-color: rgb(250, 137, 44);
         height: 100%;
         /* overflow: hidden; */
+        position: relative;
     }
 
     .SingleNotesContainer {
