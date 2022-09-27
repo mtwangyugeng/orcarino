@@ -1,7 +1,7 @@
 import { serverLogIn, serverCreateAccount } from "$src/server/users/users.server";
 import { writable } from "svelte/store";
 
-export const user = writable(null);
+export const user = writable('2134134asdSADWED');
 
 export const isLoggingIn = writable(false);
 export const isLoggingOut = writable(false);

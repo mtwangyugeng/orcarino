@@ -25,7 +25,7 @@ export async function getNumberOfPages() {
 
 export async function getCommunityByPage (pageNumber) {
     isLoadingPreviews.set(true);
-
+    console.log("getCommunityByPage")
     const res = await serverGetCommunityByPage(pageNumber);
     if (!res.success) return;
     previews.set(res.community)

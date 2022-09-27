@@ -1,5 +1,5 @@
-import { serverGetMySheets } from "$src/server/community/Community.server";
-import { writable } from "svelte/store";
+import { serverGetMySheets, serverPostNewSheet } from "$src/server/community/Community.server";
+import { writable, get } from "svelte/store";
 import {searchMySheetsRegex} from "./Search"
 import { user } from "./_User";
 
@@ -39,23 +39,22 @@ export async function addSheet(title) {
      *  - update the user  
      *  - open new user tab of the newly created Sheet
     **/
-   // TODO
-    let res = {success: true,  loadout: {
-        id: n++,
-        isPrivate: false,
-        votes: 0,
-        title: title,
-        author: "Salanmander man",
-        views: 0
-    }};
-    // TODO
+
+    let res = await serverPostNewSheet(title, get(user));
     if (!res.success) return "Server Error, please try again later";
-    
+
     previews.update(v => {
-        return [...v, res.loadout]
+        return [...v, {
+            id: n++,
+            isPrivate: 'true',
+            votes: 0,
+            title: res.loadout[1],
+            author: res.loadout[2],
+            views: 0
+        }]
     })
 
     isAddingSheet.set(false);
-
+    
     return null;
 }
