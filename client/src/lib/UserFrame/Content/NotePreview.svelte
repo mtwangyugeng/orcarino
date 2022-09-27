@@ -3,6 +3,7 @@ import { setCurrSheetId, addUserTab } from "$src/api/UserTabs";
 
 import ImageWithLoading from "$src/assets/Components/ImageWithLoading.svelte";
 import StarsScore from "$src/assets/Components/StarsScore.svelte";
+    import MySheetsIcon from "$src/assets/Icons/MySheetsIcon.svelte";
 
     export let isPrivate = 'true';
 
@@ -36,7 +37,11 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
     {/if}
     
     <div class=Preview class:HoverPreview={isHoveringTitle} on:click={goToSheet}>
-        <ImageWithLoading width=100% height=100% url={picUrl}/>
+        {#if picUrl}
+            <ImageWithLoading width=100% height=100% url={picUrl}/>
+        {:else}
+            <MySheetsIcon />
+        {/if}
     </div>
     <div class=Score>
         <StarsScore score={score} />
@@ -83,15 +88,22 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
 
     .Preview {
         transition: 200ms;
-        background-color: red;
+        background-color: rgb(24, 185, 172);
         border-radius: 10px;
         overflow: hidden;
 
         max-width: 200px;
         max-height: 200px;
 
+        min-width: 100px;
+        min-height: 100px;
+
         margin-bottom: 10px;
         margin-top: 10px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
     .Score {
         display: flex;

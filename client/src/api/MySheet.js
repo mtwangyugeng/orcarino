@@ -47,10 +47,11 @@ export async function addSheet(title) {
         return [...v, {
             id: n++,
             isPrivate: 'true',
+            scores: 0,
             votes: 0,
             title: res.loadout[1],
             author: res.loadout[2],
-            views: 0
+            views: 0,
         }]
     })
 
