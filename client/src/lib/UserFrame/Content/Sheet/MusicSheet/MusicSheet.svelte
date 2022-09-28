@@ -1,4 +1,5 @@
 <script context="module">
+    import {get} from 'svelte/store'
     function iniNotes(notes) {
         let nextIndex = 0;
         const notesWithIndex = notes.map(note => {
@@ -6,11 +7,16 @@
         })
         return {notesWithIndex, nextIndex};
     }
+
+    function saveNotes(notesWithIndex) {
+        const notes = notesWithIndex.map(v => v.note);
+        postSaveNotes(get(currSheetId), notes);
+    }
 </script>
 
 <script>
     import SingleNote from "./SingleNote/SingleNote.svelte";
-    import {isLoadingNotes, notes} from "$src/api/Sheet";
+    import {isLoadingNotes, notes, postSaveNotes} from "$src/api/Sheet";
     let {notesWithIndex, nextIndex} = iniNotes($notes)
     notes.subscribe(v=>{
         const t = iniNotes(v)
@@ -18,6 +24,7 @@
         nextIndex = t.nextIndex
     }
     )
+
 
     function deleteNote(i) {
         notesWithIndex=[...notesWithIndex.slice(0, i), ...notesWithIndex.slice(i + 1)];
@@ -28,15 +35,20 @@
 
 
     export let isEditable = false;
+    let isEditable_prev = false;
+    $: {
+        if (!isEditable && isEditable_prev) {
+            console.log("Saved")
+            saveNotes(notesWithIndex)
+        }
 
-    let activatedIndex =0;
-    $:console.log(activatedIndex)
-
-
+        isEditable_prev = isEditable;
+    }
     //animation for note 
     import {flip} from "svelte/animate"
 import AddSingleNote from "./AddSingleNote.svelte";
     import LoadingOverlay from "$src/assets/Components/LoadingOverlay.svelte";
+    import { currSheetId } from "$src/api/UserTabs";
 </script>
 
 <section>

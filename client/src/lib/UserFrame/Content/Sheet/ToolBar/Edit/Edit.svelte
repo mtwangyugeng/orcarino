@@ -1,5 +1,4 @@
 <script>
-    import { saveNotes } from "$src/api/Sheet";
     import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
     import EditIcon from "$src/assets/Icons/EditIcon.svelte";
     import SaveIcon from "$src/assets/Icons/SaveIcon.svelte";

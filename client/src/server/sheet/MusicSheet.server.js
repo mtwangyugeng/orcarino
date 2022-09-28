@@ -19,3 +19,11 @@ async function _helper(allData, colNum, target, rColNum) {
 export function serverGetNotes(sheetId) {
     return _helper(allData, 0, sheetId, 1)
 }
+
+export async function serverSaveNotes(sheetId, notes) {
+    await delay();
+    const index = findInCsvArray(allData, "id", sheetId);
+    if (index < 0) return {success: false};
+    allData[index][1] = notes;
+    return {success: true, loadout: allData[index][1]}
+}

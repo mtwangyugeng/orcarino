@@ -1,4 +1,4 @@
-import { serverGetNotes } from "$src/server/sheet/MusicSheet.server";
+import { serverGetNotes, serverSaveNotes } from "$src/server/sheet/MusicSheet.server";
 import { writable, get } from "svelte/store";
 import {currSheetId} from "./UserTabs"
 import { sendReq } from "./_serverHelper";
@@ -16,9 +16,6 @@ export const isLoadingNotes = writable(false);
 export const score = writable(0);
 export const numberOfVote = writable(0)
 
-export function saveNotes(notes) {
-    
-}
 
 currSheetId.subscribe(v => {
     if(v === null) return;
@@ -45,6 +42,10 @@ async function getNotes(sheetId) {
     await sendReq(serverGetNotes(sheetId), notes);
     console.log("Finishing Loading Notes...");
     isLoadingNotes.set(false);
+}
+
+export async function postSaveNotes(sheetId, nts) {
+    await sendReq(serverSaveNotes(sheetId, nts), notes);
 }
 
 notes.subscribe(v =>{
