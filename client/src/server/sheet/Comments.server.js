@@ -1,19 +1,24 @@
+import { innerGetUserInfo } from "../user-info/UserInfo.server";
 import { delay } from "../_server";
 
 const allData = [
     ['id', 'sheetId', 'uId', 'comment', 'postTime', 'score'],
-    ['1', '4', '2134134asdSADWED', "Hey... That's pretty cool.", "6/28/2022", '2'],
-    ['2', '4', '2134134asdSADWED', "Hey... I can comment again", "6/28/2022", '9'],
-    ['3', '4', '2134134asdSADWED', "And again???", "6/29/2022", '5'],
+    ['1', '2', '2134134asdSADWED', "Hey... That's pretty cool.", "6/28/2022", '2'],
+    ['2', '2', 'qweWQDAS21DAqww', "Hey... I can comment again", "6/28/2022", '9'],
+    ['3', '2', '2134134asdSADWED', "And again???", "6/29/2022", '5'],
 ]
 
 let nextId = 4;
 
 function turnObj(colNames, row) {
-    return row.reduce((res, curr, i) => {
+    const temp = row.reduce((res, curr, i) => {
         res[colNames[i]] = curr;
         return res;
     }, {})
+    const userinfo = innerGetUserInfo(temp.uId)
+    temp.username = userinfo.account;
+    temp.picUrl = userinfo.picUrl;
+    return temp;
 }
 
 export async function serverPostComment(uId, sheetId, comment) {

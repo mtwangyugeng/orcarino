@@ -5,15 +5,18 @@ import CommentorPicture from "./Commentor/CommentorPicture.svelte";
 export let score = 8;
 export let comment = "Cool sheet bro.";
 export let postTime = "6/20/2022"
+
+export let username;
+export let picUrl
 </script>
 
 
 <section class=Comment>
     <div>
-        <CommentorPicture />
+        <CommentorPicture picUrl={picUrl}/>
     </div>
     <div>
-        <CommentorName />
+        <CommentorName name={username} />
         <StarsScore score={score}/>
         <p>posted {postTime}</p>
         {comment}
