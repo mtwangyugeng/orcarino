@@ -6,6 +6,10 @@ import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 import StarsScoreEditable from "$src/assets/Components/StarsScore_editable.svelte";
 import CommentorPicture from "./Commentor/CommentorPicture.svelte";
 let score = 0;
+let comment = "";
+function handleSend() {
+    // server(comment)
+}
 </script>
 
 <section>
@@ -14,7 +18,7 @@ let score = 0;
 
     <div class=MidContainer>
         <CommentorPicture picUrl={$picUrl}/>
-        <textarea class=CommentField/>
+        <textarea class=CommentField bind:value={comment} />
     </div>
 
     <div class=BottomContainer>
@@ -26,7 +30,7 @@ let score = 0;
         </div>
 
         <span class=SendButton>
-            <RippleButton>
+            <RippleButton on:click={handleSend}>
                 Send
             </RippleButton>
         </span>

@@ -3,7 +3,7 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
 import CommentorName from "./Commentor/CommentorName.svelte";
 import CommentorPicture from "./Commentor/CommentorPicture.svelte";
 export let score = 8;
-export let content = "Cool sheet bro.";
+export let comment = "Cool sheet bro.";
 export let postTime = "6/20/2022"
 </script>
 
@@ -16,7 +16,7 @@ export let postTime = "6/20/2022"
         <CommentorName />
         <StarsScore score={score}/>
         <p>posted {postTime}</p>
-        {content}
+        {comment}
     </div>
 </section>
 
