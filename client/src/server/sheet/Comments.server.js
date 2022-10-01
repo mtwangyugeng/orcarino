@@ -21,18 +21,18 @@ function turnObj(colNames, row) {
     return temp;
 }
 
-export async function serverPostComment(uId, sheetId, comment) {
+export async function serverPostComment(uId, sheetId, comment, score) {
     await delay();
     const postTime = new Date().toLocaleDateString()
-    const neo =  [nextId++, sheetId, uId, comment, postTime]
+    const neo =  [nextId++, sheetId, uId, comment, postTime, score]
     allData.push(neo);
 
-    return {success: true, loadout: neo}
+    return {success: true, loadout: turnObj(allData[0], neo)}
 }
 
 export async function serverGetComments(SheetId) {
     await delay();
     const filteredArr = allData.filter(v => v[1] == SheetId).map(v => turnObj(allData[0], v));
-
+    console.log(filteredArr)
     return {success: true, loadout: filteredArr}
 }

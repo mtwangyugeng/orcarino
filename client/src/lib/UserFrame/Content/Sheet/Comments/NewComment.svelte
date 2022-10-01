@@ -1,14 +1,22 @@
 <script>
 import { title } from "$src/api/Sheet";
 import { picUrl } from "$src/api/UserInfo";
+    import { currSheetId } from "$src/api/UserTabs";
 import { isLoggingIn, user } from "$src/api/_User";
 import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
 import StarsScoreEditable from "$src/assets/Components/StarsScore_editable.svelte";
+    import { serverPostComment } from "$src/server/sheet/Comments.server";
+    import { comments } from "./Comment";
 import CommentorPicture from "./Commentor/CommentorPicture.svelte";
 let score = 0;
 let comment = "";
-function handleSend() {
+async function handleSend() {
     // server(comment)
+    console.log("handleSend", $user, $currSheetId, comment, score)
+    if(comment === "") return;
+    const res = await serverPostComment($user, $currSheetId, comment, score)
+    if(res.success) comments.update(v=>[res.loadout, ...v])
+    console.log($comments)
 }
 </script>
 

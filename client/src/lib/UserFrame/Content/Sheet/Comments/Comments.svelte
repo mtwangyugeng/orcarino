@@ -10,13 +10,15 @@
     import { currSheetId } from "$src/api/UserTabs";
     import { serverGetComments } from "$src/server/sheet/Comments.server";
     import LoadingOverlay from "$src/assets/Components/LoadingOverlay.svelte";
-    let comments = []
+    import {comments} from "./Comment"
     async function getComment() {
         const res = await serverGetComments($currSheetId);
         if(!res.success) return
-        comments = res.loadout
-        console.log(comments)
+        comments.set(res.loadout)
+        console.log($comments)
     }
+
+    comments.subscribe(v=>console.log("reeeeeeeee", v))
 </script>
 
 <section class=Comments>
@@ -26,7 +28,7 @@
     {#await getComment()}
      <LoadingOverlay />
     {:then}
-        {#each comments as comment (comment.id)}
+        {#each $comments as comment (comment.id)}
             <Comment {...comment} />
         {/each}
     {/await}
