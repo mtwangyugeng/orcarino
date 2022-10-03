@@ -78,7 +78,7 @@
 
     .ScrollComponent {
         width: 100%;
-        height: 50%;
+        height: 100%;
         flex-basis: 100%;
     }
 

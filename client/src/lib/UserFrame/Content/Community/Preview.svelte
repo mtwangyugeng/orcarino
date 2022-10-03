@@ -31,8 +31,8 @@
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
-        
-
+        position: relative;
+        height: 100%;
         padding: 10px;
     }
 

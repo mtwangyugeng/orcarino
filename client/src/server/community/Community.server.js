@@ -11,7 +11,7 @@ const allData = [
 
 // const communityData = allData.filter(v => v[7] === 'false')
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 1;
 export async function serverGetNumberOfPages() {
     await delay();
     const communityData = allData.filter(v => v[7] === 'false')
