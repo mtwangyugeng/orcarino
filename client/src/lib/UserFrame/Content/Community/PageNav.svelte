@@ -23,11 +23,11 @@ function handleLeft() {
 let prevPage = $currPage;
 $: {
     if (prevPage > $currPage) {
-        insertLeft({component: Preview, props:{}})();
+        insertLeft({component: Preview, props:{curPage: $currPage}})();
     }
 
     if (prevPage < $currPage) {
-        insertRight({component: Preview, props:{}})();
+        insertRight({component: Preview, props:{curPage: $currPage}})();
     }
 
     prevPage = $currPage;

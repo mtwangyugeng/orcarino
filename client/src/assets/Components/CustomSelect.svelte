@@ -116,7 +116,7 @@
         height: 100%;
     }
     .OnTop {
-        z-index: 4;
+        z-index: 99999999;
     }
 
     .Options {
