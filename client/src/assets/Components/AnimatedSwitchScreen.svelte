@@ -3,6 +3,8 @@
 </script>
 
 <script>
+    import { compute_rest_props } from "svelte/internal";
+
     export let scrollDuration = 400;
     export let currentContent = {component: null, props: {}};
 
@@ -45,9 +47,9 @@
 
 <section>
     <div class=Scroll class:ScrollLeft={isScrollingLeft} class:ScrollRight={isScrollingRight} style={`animation-duration: ${scrollDuration}ms`}>
-        {#each scrollComponents as {component, id} (id)}
+        {#each scrollComponents as {component,props, id} (id)}
             <div class=ScrollComponent>
-                <svelte:component this={component} />
+                <svelte:component this={component} {...props}/>
             </div>
         {/each}
         

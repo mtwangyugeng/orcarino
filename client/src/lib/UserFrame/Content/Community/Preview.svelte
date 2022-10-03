@@ -2,26 +2,28 @@
     import {currPage, getCommunityByPage, isLoadingPreviews, previews} from '$src/api/Community';
     import LoadingOverlay from '$src/assets/Components/LoadingOverlay.svelte';
     import NotePreview from '../NotePreview.svelte';
-
-    getCommunityByPage($currPage)
+    export let curPage;
+    
 </script>
 
 <section>
-    {#if $isLoadingPreviews}
+    {#await getCommunityByPage(curPage)}
       <LoadingOverlay />  
-    {/if}
-
-    {#each $previews as preview (preview.id) }
-    <span>
-        <NotePreview {...preview}/>
-    </span>
-    {/each}
-
-    {#each Array(8) as _}
+    {:then}
+        {#each $previews as preview (preview.id) }
         <span>
-            <div class=Decoy />
+            <NotePreview {...preview}/>
         </span>
-    {/each}
+        {/each}
+
+        {#each Array(8) as _}
+            <span>
+                <div class=Decoy />
+            </span>
+        {/each}
+    {/await}
+
+    
         
 </section>
 

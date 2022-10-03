@@ -12,12 +12,12 @@ export let insertLeft;
 
 function handleRight() {
     toRight();
-    insertRight({component: Preview, props:{}})();
+    insertRight({component: Preview, props:{curPage: $currPage}})();
 }
 
 function handleLeft() {
     toLeft();
-    insertLeft({component: Preview, props:{}})();
+    insertLeft({component: Preview, props:{curPage: $currPage}})();
 }
 
 let prevPage = $currPage;
