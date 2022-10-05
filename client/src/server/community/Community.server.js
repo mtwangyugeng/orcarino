@@ -110,3 +110,8 @@ export async function serverPostNewSheet(title, uId){
     allData.push(neo);
     return {success: true, loadout:neo};
 }
+
+export async function serverGetSheetInfo(id) {
+    const neo = innerGetCommunityById(id)
+    return {success: true, loadout:neo};
+}

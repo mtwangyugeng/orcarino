@@ -1,3 +1,4 @@
+import { serverGetSheetInfo } from "$src/server/community/Community.server";
 import { serverGetNotes, serverSaveNotes } from "$src/server/sheet/MusicSheet.server";
 import { writable, get } from "svelte/store";
 import {currSheetId} from "./UserTabs"
@@ -13,9 +14,8 @@ export const comments = writable([]);
 export const notes = writable([]);
 export const isLoadingNotes = writable(false);
 
-export const score = writable(0);
-export const numberOfVote = writable(0)
-
+export const score = writable('');
+export const numberOfVote = writable('')
 
 currSheetId.subscribe(v => {
     if(v === null) return;
@@ -23,16 +23,11 @@ currSheetId.subscribe(v => {
     id.set(v);
     isEditable.set(false);
     // todo: the async function to get datas from server
-    title.set("A title");
     description.set("Some description");
-    comments.set([
-        {id:1, content: "Cool sheet dude! I wish it is a bit longer.", postTime: "6/28/2022", score: 8, authorId:1},
-        {id:2, content: "Terrible sheet! The notes are off by 10000 miles.", postTime: "6/29/2022",score: null, authorId:1}
-    ]);
 
-    getNotes(v)
-    score.set(8)
-    numberOfVote.set(20000)
+
+    getNotes(v);
+    getCurrSheetInfo(v);
 });
 
 async function getNotes(sheetId) {
@@ -51,3 +46,13 @@ export async function postSaveNotes(sheetId, nts) {
 notes.subscribe(v =>{
     console.log("!!!!!!!!notes: ", v)
 })
+
+async function getCurrSheetInfo(sheetId) {
+    const res = await serverGetSheetInfo(sheetId);
+    if (res.success) {
+
+        title.set(res.loadout.title);
+        score.set(res.loadout.score)
+        numberOfVote.set(res.loadout.votes)
+    } 
+}
