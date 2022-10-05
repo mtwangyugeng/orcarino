@@ -4,23 +4,36 @@ import { picUrl } from "$src/api/UserInfo";
     import { currSheetId } from "$src/api/UserTabs";
 import { isLoggingIn, user } from "$src/api/_User";
 import RippleButton from "$src/assets/Components/Buttons/RippleButton.svelte";
+    import LoadingOverlay from "$src/assets/Components/LoadingOverlay.svelte";
 import StarsScoreEditable from "$src/assets/Components/StarsScore_editable.svelte";
     import { serverPostComment } from "$src/server/sheet/Comments.server";
     import { comments } from "./Comment";
 import CommentorPicture from "./Commentor/CommentorPicture.svelte";
 let score = 0;
 let comment = "";
+
+let isUploading = false;
+
 async function handleSend() {
     // server(comment)
+    isUploading = true;
     console.log("handleSend", $user, $currSheetId, comment, score)
-    if(comment === "") return;
-    const res = await serverPostComment($user, $currSheetId, comment, score)
-    if(res.success) comments.update(v=>[res.loadout, ...v])
-    console.log($comments)
+    if(comment !== "" && score !== 0) {
+        const res = await serverPostComment($user, $currSheetId, comment, score)
+        if(res.success) comments.update(v=>[res.loadout, ...v])
+        console.log($comments)
+
+        comment = "";
+        score = 0;
+    }
+    isUploading = false;
 }
 </script>
 
 <section>
+    {#if isUploading}
+        <LoadingOverlay />
+    {/if}
     <h3>Write a review for {$title}</h3>
     <div class=StatusMessage> Please remember to be nice. </div>
 
