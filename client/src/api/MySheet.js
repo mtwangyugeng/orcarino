@@ -54,8 +54,6 @@ export async function addSheet(title) {
             views: 0,
         }]
     })
-
-    isAddingSheet.set(false);
     
     return null;
 }

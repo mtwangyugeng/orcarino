@@ -18,11 +18,22 @@ import InputForm from "./_InputForm.svelte";
         isAddingSheet.set(false);
         statusMessage = NORMAL_MSG;
     }
+
+    async function handleSubmit() {
+        isLoading = true;
+        let status = await addSheet(sheetTitle)
+
+        if (status === null) {
+            handleClose()
+        }
+        isLoading = false;
+        return status;
+    }
 </script>
 {#if $isAddingSheet}
     <DropdownWindow title="Add Sheet" on:close={handleClose} bind:isShaking={isShaking} isLoading={isLoading}>
         <InputForm 
-            submitFunc={()=>addSheet(sheetTitle)} 
+            submitFunc={handleSubmit} 
             submitButtonText="Add New Sheet" 
             bind:isShaking={isShaking}
             bind:statusMessage={statusMessage}
