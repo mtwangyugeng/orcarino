@@ -12,4 +12,11 @@
     h2 {
         text-align: center;
     }
+
+    @media (min-width: 600px) {
+        h2 {
+            width: 230px;
+            padding: 10px
+        }
+    }
 </style>
