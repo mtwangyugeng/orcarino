@@ -33,7 +33,7 @@ function getArrByPage(arr, pageNumber) {
             {
                 id: c[0],
                 title: c[1],
-                creater: c[2],
+                author: c[2],
                 views: c[3],
                 score: c[4],
                 votes: c[5],
@@ -73,7 +73,7 @@ export async function serverGetMySheets(uid) {
         return {
             id: c[0],
             title: c[1],
-            creater: c[2],
+            author: c[2],
             views: c[3],
             score: c[4],
             votes: c[5],
@@ -90,7 +90,7 @@ export function innerGetCommunityById(id) {
     const finale = {
             id: c[0],
             title: c[1],
-            creater: c[2],
+            author: c[2],
             views: c[3],
             score: c[4],
             votes: c[5],
