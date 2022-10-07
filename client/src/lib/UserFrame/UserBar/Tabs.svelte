@@ -1,14 +1,22 @@
 <script>
+    import { currSheetId } from "$src/api/UserTabs";
     import { isLoggingIn, user } from "$src/api/_User";
 import TabWithIcon from "$src/assets/Components/TabWithIcon.svelte";
     import { TABS } from "../UserFrame.svelte";
     export let activatedTabIndex = 0;
+
+    function handleTabClick(i) {
+        return () => {
+            currSheetId.set(null);
+            activatedTabIndex =i
+        }
+    }
 </script>
 
 <section>
     {#each TABS as {icon, name, isLoginContent},i (name)}
         <div class="TabContainer">
-            <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={()=>activatedTabIndex =i} />
+            <TabWithIcon icon={icon} name={name} i={i} activatedTabIndex={activatedTabIndex} on:click={handleTabClick(i)} />
             {#if isLoginContent && $user === null}
                 <div class=LoginMessage>
                     You need to&nbsp;<button class=LoginButton on:click={()=>isLoggingIn.set(true)}> login </button> &nbsp;to user this feature.
