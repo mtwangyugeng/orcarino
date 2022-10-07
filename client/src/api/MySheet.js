@@ -3,8 +3,6 @@ import { writable, get } from "svelte/store";
 import {searchMySheetsRegex} from "./Search"
 import { user } from "./_User";
 
-let n = 0;
-
 export const previews = writable([]);
 export const isLoading = writable(false);
 
@@ -45,7 +43,7 @@ export async function addSheet(title) {
 
     previews.update(v => {
         return [...v, {
-            id: n++,
+            id: res.loadout[0],
             isPrivate: 'true',
             scores: 0,
             votes: 0,
