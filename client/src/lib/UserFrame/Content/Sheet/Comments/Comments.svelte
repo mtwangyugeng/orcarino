@@ -25,18 +25,31 @@
     
     <NewComment />
 
-    {#await getComment()}
-     <LoadingOverlay />
-    {:then}
-        {#each $comments as comment (comment.id)}
-            <Comment {...comment} />
-        {/each}
-    {/await}
-    
+    <div class=PastComments>
+        {#await getComment()}
+        <LoadingOverlay />
+        {:then}
+            {#each $comments as comment (comment.id)}
+                <Comment {...comment} />
+            {/each}
+        {/await}
+    </div>
 </section>
 
 <style>
     section {
         position: relative;
+        background-color: rgb(255, 255, 255);
+        flex: 1;
+
+        display: flex;
+        flex-direction: column;
     }
+
+    .PastComments {
+        position: relative;
+        flex: 1;
+        overflow: auto;
+    }
+    
 </style>

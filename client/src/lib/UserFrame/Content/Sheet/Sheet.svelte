@@ -54,6 +54,8 @@ let isEditable = false;
     .RightSideContainer {
         width: 300px;
         height: 100%;
+        display: flex;
+        flex-direction: column;
     }
 
     .CloseMinContainer {
