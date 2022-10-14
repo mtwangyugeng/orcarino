@@ -1,3 +1,4 @@
+import { innerGetScoreAndVotes } from "../sheet/Comments.server";
 import { getUsernameByUid } from "../users/users.server";
 import { delay, findInCsvArray } from "../_server";
 
@@ -29,14 +30,16 @@ function getArrByPage(arr, pageNumber) {
     let index = start;
     while (index < end && index < arr.length) {
         const c = arr[index]
+
+        const sv = innerGetScoreAndVotes(c[0])
         finale.push(
             {
                 id: c[0],
                 title: c[1],
                 author: c[2],
                 views: c[3],
-                score: c[4],
-                votes: c[5],
+                score: sv.score,
+                votes: sv.votes,
                 picUrl: c[6],
                 isPrivate: c[7]
             }
@@ -70,16 +73,19 @@ export async function serverGetMySheets(uid) {
     const t = allData.filter(v => targetUsername === v[2]);
 
     const finale = t.map(c => {
-        return {
-            id: c[0],
-            title: c[1],
-            author: c[2],
-            views: c[3],
-            score: c[4],
-            votes: c[5],
-            picUrl: c[6],
-            isPrivate: c[7]
-        }
+        const sv = innerGetScoreAndVotes(c[0])
+        return (
+            {
+                id: c[0],
+                title: c[1],
+                author: c[2],
+                views: c[3],
+                score: sv.score,
+                votes: sv.votes,
+                picUrl: c[6],
+                isPrivate: c[7]
+            }
+        )
     })
     return {success:true, loadout: finale}
 }
@@ -87,16 +93,18 @@ export async function serverGetMySheets(uid) {
 export function innerGetCommunityById(id) {
     const index = findInCsvArray(allData, 'id', id);
     const c = allData[index]
-    const finale = {
-            id: c[0],
-            title: c[1],
-            author: c[2],
-            views: c[3],
-            score: c[4],
-            votes: c[5],
-            picUrl: c[6],
-            isPrivate: c[7]
-        }
+    const sv = innerGetScoreAndVotes(c[0])
+ 
+    const finale =  {
+        id: c[0],
+        title: c[1],
+        author: c[2],
+        views: c[3],
+        score: sv.score,
+        votes: sv.votes,
+        picUrl: c[6],
+        isPrivate: c[7]
+    }
     return finale;
 } 
 

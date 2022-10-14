@@ -27,7 +27,7 @@ export async function serverPostComment(uId, sheetId, comment, score) {
     const neo =  [nextId++, sheetId, uId, comment, postTime, score]
     allData.push(neo);
 
-    return {success: true, loadout: turnObj(allData[0], neo)}
+    return {success: true, loadout: turnObj(allData[0], neo), sv: innerGetScoreAndVotes(sheetId)}
 }
 
 export async function serverGetComments(SheetId) {
@@ -35,4 +35,15 @@ export async function serverGetComments(SheetId) {
     const filteredArr = allData.filter(v => v[1] == SheetId).map(v => turnObj(allData[0], v));
     console.log(filteredArr)
     return {success: true, loadout: filteredArr}
+}
+
+export function innerGetScoreAndVotes(sheetId) {
+    const filteredArr = allData.filter(v => v[1] == sheetId)
+    const res = filteredArr.reduce((cul, v) => {
+        cul.score += (+v[5])
+        cul.votes += 1
+        return cul
+    }, {score: 0, votes: 0})
+    res.score = res.score / res.votes
+    return res;
 }

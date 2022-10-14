@@ -1,5 +1,5 @@
 <script>
-import { title } from "$src/api/Sheet";
+import { numberOfVote, title, score } from "$src/api/Sheet";
 import { picUrl } from "$src/api/UserInfo";
     import { currSheetId } from "$src/api/UserTabs";
 import { isLoggingIn, user } from "$src/api/_User";
@@ -9,7 +9,7 @@ import StarsScoreEditable from "$src/assets/Components/StarsScore_editable.svelt
     import { serverPostComment } from "$src/server/sheet/Comments.server";
     import { comments } from "./Comment";
 import CommentorPicture from "./Commentor/CommentorPicture.svelte";
-let score = 0;
+let tscore = 0;
 let comment = "";
 
 let isUploading = false;
@@ -17,14 +17,20 @@ let isUploading = false;
 async function handleSend() {
     // server(comment)
     isUploading = true;
-    console.log("handleSend", $user, $currSheetId, comment, score)
-    if(comment !== "" && score !== 0) {
-        const res = await serverPostComment($user, $currSheetId, comment, score)
-        if(res.success) comments.update(v=>[res.loadout, ...v])
+    console.log("handleSend", $user, $currSheetId, comment, tscore)
+    if(comment !== "" && tscore !== 0) {
+        const res = await serverPostComment($user, $currSheetId, comment, tscore)
+        if(res.success) {
+            comments.update(v=>[res.loadout, ...v])
+            score.set(res.sv.score+"")
+            numberOfVote.set(res.sv.votes+"")
+        }
+
         console.log($comments)
 
         comment = "";
-        score = 0;
+        tscore = 0;
+
     }
     isUploading = false;
 }
@@ -44,9 +50,9 @@ async function handleSend() {
 
     <div class=BottomContainer>
         <div class=StarScore>
-            <StarsScoreEditable bind:displayedScore={score}/>
+            <StarsScoreEditable bind:displayedScore={tscore}/>
             <span class=Score>
-                ({score})
+                ({tscore})
             </span>
         </div>
 

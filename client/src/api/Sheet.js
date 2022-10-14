@@ -52,7 +52,7 @@ async function getCurrSheetInfo(sheetId) {
     if (res.success) {
 
         title.set(res.loadout.title);
-        score.set(res.loadout.score)
-        numberOfVote.set(res.loadout.votes)
+        score.set(res.loadout.score +"")
+        numberOfVote.set(res.loadout.votes+"")
     } 
 }
