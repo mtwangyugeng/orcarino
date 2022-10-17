@@ -55,65 +55,24 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
 </section>
 
 <style>
-    .Tag {
-        position: absolute;
-        background-color: red;
-        color: white;
-        padding: 5px;
-        border-radius: 5px;
-        right: 4px;
-        top: 4px;
-        font-family: 'Courier New', Courier, monospace;
-        font-weight: bold;
-        z-index: 3;
-    }
-
     section {
         background-color: rgba(201, 201, 201, 0.493);
-        display: flex;
-        flex-direction: column;
+        display: grid;
+        grid-template-areas: 
+        'photo photo title title title'
+        'photo photo author author author'
+        'photo photo views views views'
+        'score score score score score'
+        ;
+        column-gap: 15px;
         align-items: center;
         padding: 10px;
         user-select: none;
         position: relative;
     }
 
-    .Preview:hover{
-        cursor: pointer;
-        opacity: 0.7;
-    }
-
-    .HoverPreview {
-        opacity: 0.7;
-    }
-
-    .Preview {
-        transition: 200ms;
-        background-color: rgb(24, 185, 172);
-        border-radius: 10px;
-        overflow: hidden;
-
-        max-width: 200px;
-        max-height: 200px;
-
-        min-width: 100px;
-        min-height: 100px;
-
-        margin-bottom: 10px;
-        margin-top: 10px;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    .Score {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 5px;
-        color: grey;
-    }
     .Title {
+        grid-area: title;
         transition: 200ms;
         text-align: left;
         width: 100%;
@@ -123,8 +82,10 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         cursor: pointer;
         opacity: 0.7;
     }
-    
+
     .Author {
+        grid-area: author;
+
         text-align: left;
         width: 100%;
         color: grey;
@@ -133,9 +94,45 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         cursor: pointer;
     }
 
+
+    .Preview {
+        grid-area: photo;
+
+        transition: 200ms;
+        background-color: rgb(24, 185, 172);
+        border-radius: 10px;
+        overflow: hidden;
+
+        max-width: 80px;
+        max-height: 80px;
+
+        min-width: 50px;
+        min-height: 50px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .Preview:hover{
+        cursor: pointer;
+        opacity: 0.7;
+    }
+
+    .Score {
+        grid-area: score;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        color: grey;
+    }
+
     .Views {
-        margin-top: 20px;
-        text-align: right;
+        grid-area: views;
+
+        /* margin-top: 20px; */
+        /* text-align: right; */
         width: 100%;
         font-size: 14px;
 
@@ -143,4 +140,47 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         font-family:Arial, Helvetica, sans-serif;
     }
 
+    .Tag {
+            position: absolute;
+            background-color: red;
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            right: 4px;
+            top: 4px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            z-index: 3;
+        }
+
+    @media (min-width: 600px){
+        section {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .HoverPreview {
+            opacity: 0.7;
+        }
+
+        .Preview {
+
+
+            max-width: 200px;
+            max-height: 200px;
+
+            min-width: 100px;
+            min-height: 100px;
+
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+        .Views {
+            margin-top: 20px;
+            text-align: right;
+            width: 100%;
+            font-size: 14px;
+        }
+    }
 </style>

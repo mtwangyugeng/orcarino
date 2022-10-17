@@ -36,8 +36,16 @@ import Sheet from './Sheet/Sheet.svelte';
     }
 
     section :global(.Card) {
-        height: 270px;
-        width: 220px;
+        min-height: 80px;
+        width: 250px;
         border-radius: 10px;
+    }
+
+    @media (min-width: 600px) {
+        section :global(.Card) {
+            height: 270px;
+            width: 220px;
+            border-radius: 10px;
+        }
     }
 </style>
