@@ -48,7 +48,7 @@ import UserBar from "./UserBar/UserBar.svelte";
         background-color: orange;
 
         display: flex;
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 
     .BarContainer {
@@ -57,9 +57,8 @@ import UserBar from "./UserBar/UserBar.svelte";
 
     }
 
-    .ContentContainer {
+    .RightSide {
         flex: 1;
-        overflow: auto;
     }
 
     @media (min-width: 600px) {
@@ -100,6 +99,7 @@ import UserBar from "./UserBar/UserBar.svelte";
 
         .ContentContainer {
             flex: 1;
+            overflow: hidden;
             border-radius: 10px;
             background-color: rgb(122, 86, 19);
         }   
