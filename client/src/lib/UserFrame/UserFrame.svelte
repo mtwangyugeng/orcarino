@@ -23,7 +23,10 @@ import UserBar from "./UserBar/UserBar.svelte";
 </script>
 
 <section>
-    <div class=RightSide>
+    <div class=BarContainer class:BarContainerActive={barActive}>
+        <UserBar bind:barActive={barActive} bind:activatedTabIndex={activatedTabIndex}/>
+    </div>
+    <div class=RightSide class:RightSideHide={barActive}>
         <div class=SearchContainer class:SearchContainerActive={barActive}>
             <Search tabName={TABS[activatedTabIndex]["name"]} tabIcon={TABS[activatedTabIndex]["icon"]} />
         </div>
@@ -31,9 +34,7 @@ import UserBar from "./UserBar/UserBar.svelte";
             <Content currTab={TABS[activatedTabIndex]["content"]}/>
         </div>
     </div>  
-    <div class=BarContainer class:BarContainerActive={barActive}>
-        <UserBar bind:barActive={barActive} bind:activatedTabIndex={activatedTabIndex}/>
-    </div>
+
     
     <Login />
     <LogOut />
@@ -48,13 +49,18 @@ import UserBar from "./UserBar/UserBar.svelte";
         background-color: orange;
 
         display: flex;
-        flex-direction: column-reverse;
+        flex-direction: column;
     }
 
     .BarContainer {
         /* background-color: red; */
-        height: 60px;
+        height: 30px;
+        transition: 200ms;
+    }
 
+    .BarContainerActive {
+        /* position: absolute; */
+        height: 100vh;
     }
 
     .RightSide {
@@ -62,15 +68,18 @@ import UserBar from "./UserBar/UserBar.svelte";
         display: flex;
         flex-direction: column;
     }
-    
+
     .ContentContainer {
         background-color: red;
         flex: 1;
     }
-
+    
+    .RightSideHide {
+        display: none;
+    }
     @media (min-width: 600px) {
         section {
-            flex-direction: row-reverse;
+            flex-direction: row;
             
         }
         .BarContainer {
@@ -78,7 +87,7 @@ import UserBar from "./UserBar/UserBar.svelte";
             width: 50px;
             height: auto;
 
-            transition: width 200ms;
+            
         }
 
         .SearchContainer {
@@ -111,7 +120,8 @@ import UserBar from "./UserBar/UserBar.svelte";
             background-color: rgb(122, 86, 19);
         }   
         .BarContainerActive {
-            width: 300px
+            width: 300px;
+            height: auto;
         }
         .SearchContainerActive {
             height: 100px;

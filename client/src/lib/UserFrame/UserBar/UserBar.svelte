@@ -35,16 +35,41 @@ import UserTabs from "./UserTabs.svelte";
     section {
         width: 100%;
         height: 100%;
-        background-color: yellow;
+        /* background-color: yellow; */
         display: flex;
+
+        overflow: hidden;
+        
     }
     .TabContainer {
-        display: flex;
-        width: 100%;
+        display: none;
     }
+
+    .BarActive .TabContainer {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto 0 auto;
+    }
+
+
+    .ExpandAndRetractButton :global(svg){
+        width: 30px;
+        height: 30px;
+    }
+    .ExpandAndRetractButton{
+        position: absolute;
+        z-index: 2;
+    }
+
+
     .Profile {
         display: none;
     }
+    .BarActive .Profile {
+        display: block;
+    }
+
+
     @media (min-width: 600px) {
         section {
             flex-direction: column;
