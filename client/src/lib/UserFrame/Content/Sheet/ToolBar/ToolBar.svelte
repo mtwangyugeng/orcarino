@@ -67,4 +67,22 @@ import Share from "./Share/Share.svelte";
         height: 15px;
    }
 
+   .TopContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+   @media (max-width: 600px) {
+        section {
+            flex-direction: row;
+        }
+        .TopContainer {
+            flex-direction: row;
+        }
+        .BottomContainer {
+            flex-direction: row;
+        }
+   }
+
 </style>
