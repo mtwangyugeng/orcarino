@@ -128,6 +128,11 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
         color: grey;
     }
 
+    .Score :global(svg) {
+        width: 12px;
+        height: 24px;
+    }
+
     .Views {
         grid-area: views;
 

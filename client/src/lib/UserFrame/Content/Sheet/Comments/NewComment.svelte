@@ -103,6 +103,11 @@ async function handleSend() {
         align-items: center;
     }
 
+    .StarScore :global(svg){
+        height: 24px;
+        width: 12px;
+    }
+
     .SendButton :global(.RippleButton){
         font-family: Arial, Helvetica, sans-serif;
         font-weight: bold;

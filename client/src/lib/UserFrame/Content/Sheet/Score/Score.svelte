@@ -13,7 +13,7 @@
 </script>
 
 <section class=Score>
-    <StarsScore score={$score}/>
+    <StarsScore score={(+$score)}/>
     <p>({numberOfVoteDisplay})</p>
 </section>
 
@@ -27,6 +27,15 @@
 
     section :global(.StarScore) {
         width: 130px;
+    }
+
+    .Score {
+        margin-left: 10px;
+    }
+
+    .Score :global(svg){
+        height: 24px;
+        width: 12px;
     }
     
     p {
