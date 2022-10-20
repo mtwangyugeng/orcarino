@@ -29,4 +29,8 @@ export let picUrl
         padding: 10px;
         gap: 10px;
     }
+    section :global(svg) {
+        height: 24px;
+        width: 12px;
+    }
 </style>
