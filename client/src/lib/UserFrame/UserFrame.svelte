@@ -59,6 +59,13 @@ import UserBar from "./UserBar/UserBar.svelte";
 
     .RightSide {
         flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .ContentContainer {
+        background-color: red;
+        flex: 1;
     }
 
     @media (min-width: 600px) {
