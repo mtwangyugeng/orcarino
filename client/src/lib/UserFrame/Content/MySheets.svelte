@@ -11,7 +11,9 @@ import {flip} from "svelte/animate"
         {#each [...$previews, {id:-1}] as preview (preview.id) }
             <span animate:flip="{{duration: 200}}">
                 {#if preview.id !== -1}
-                    <NotePreview {...preview}/>
+                    <a href = '#/${preview.id}'>
+                        <NotePreview {...preview}/>
+                    </a>
                 {:else}
                     <AddSheet />
                 {/if}

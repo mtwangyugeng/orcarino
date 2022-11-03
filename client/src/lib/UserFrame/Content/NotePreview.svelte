@@ -30,13 +30,13 @@ import StarsScore from "$src/assets/Components/StarsScore.svelte";
     let goToAuthor = () => {}
 </script>
 
+
 <section class=Card>
     {#if isPrivate === 'true'}
         <div class='Tag Private'>
             Private
         </div>
     {/if}
-    
     <div class=Preview class:HoverPreview={isHoveringTitle} on:click={goToSheet}>
         {#if picUrl}
             <ImageWithLoading width=100% height=100% url={picUrl}/>

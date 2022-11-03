@@ -6,8 +6,8 @@ import Community from "./UserFrame/Content/Community/Community.svelte";
 import NotePreview from "./UserFrame/Content/NotePreview.svelte";
 import UserFrame from "./UserFrame/UserFrame.svelte";
 
-
 </script>
+
 
 
 

@@ -19,6 +19,8 @@ export const numberOfVote = writable('')
 
 currSheetId.subscribe(v => {
     if(v === null) return;
+    
+    history.pushState({}, null, v);
 
     id.set(v);
     isEditable.set(false);
