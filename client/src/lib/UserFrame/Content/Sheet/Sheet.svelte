@@ -90,6 +90,7 @@ let isEditable = false;
             'tool music music music comment'
             'tool music music music comment'
             ;
+            grid-template-columns: 120px auto auto auto 300px
         }
         .MusicSheetContainer {
             flex: 1;
@@ -97,7 +98,6 @@ let isEditable = false;
             overflow-y: auto;
         }
         .RightSideContainer {
-            width: 300px;
             height: 100%;
             display: flex;
             flex-direction: column;
@@ -105,8 +105,9 @@ let isEditable = false;
 
         .ToolBarContainer {
             grid-area: tool;
+            width: 120px;
         }
 
-        
+
     }
 </style>
